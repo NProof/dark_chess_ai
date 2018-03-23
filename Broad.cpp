@@ -5,6 +5,7 @@
 Broad::Broad()
 {
 	std::cout << "Broad()." << std::endl;
+	std::string name;
     for(int i=0; i<32; i++)
 	{
 		if(i/4>0)
@@ -15,7 +16,9 @@ Broad::Broad()
 			checks[i].pathsTo[Path::Left] = &checks[i-8];
 		if(i%4<4)
 			checks[i].pathsTo[Path::Right] = &checks[i+8];
-	    checks[i].name = {'a'+(i%4),'8'-(i/4)};
+        name = {char('a'+(i%4)),char('8'-(i/4))};
+	    mapOfName[name] = &checks[i];
+	    checks[i].name = name;
 	}
 }
 

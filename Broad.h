@@ -19,6 +19,7 @@ public:
 //	void initBroad(int [14], char [32]);
 
 //	std::set<Check *> unknownChecks;
+    std::map<std::string, Check *> mapOfName;
 
 //private:
 	Check checks[32];
