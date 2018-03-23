@@ -95,33 +95,25 @@ Chess::Chess(char symbol)
 std::ostream& operator<<(std::ostream& os, const Chess& chess)
 {
     if(chess.type == Type::Unknown)
-        os << 'X' ;
+        return os << 'X' ;
     else
     {
         switch(chess.type)
         {
         case Type::General:
-            os << (chess.color ? 'k' : 'K');
-            break;
+            return os << (chess.color ? 'k' : 'K');
         case Type::Advisor:
-            os << (chess.color ? 'g' : 'G');
-            break;
+            return os << (chess.color ? 'g' : 'G');
         case Type::Elephant:
-            os << (chess.color ? 'm' : 'M');
-            break;
+            return os << (chess.color ? 'm' : 'M');
         case Type::Chariot:
-            os << (chess.color ? 'r' : 'R');
-            break;
+            return os << (chess.color ? 'r' : 'R');
         case Type::Horse:
-            os << (chess.color ? 'n' : 'N');
-            break;
+            return os << (chess.color ? 'n' : 'N');
         case Type::Cannon:
-            os << (chess.color ? 'c' : 'C');
-            break;
+            return os << (chess.color ? 'c' : 'C');
         case Type::Soldier:
-            os << (chess.color ? 'p' : 'P');
-            break;
+            return os << (chess.color ? 'p' : 'P');
         }
     }
-    return os ;
 }
