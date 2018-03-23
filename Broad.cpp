@@ -146,10 +146,13 @@ std::ostream& operator<<(std::ostream& os, const Broad& broad)
 {
     for(int i=0; i<32; i++)
     {
+        if(i%4==0)
+            os << '\n';
+        os << ' ' ;
         if(broad.checks[i].chess)
             os << *broad.checks[i].chess;
         else
             os << '-';
     }
-    return os << '\n';
+    return os << '\n' << "broad out.";
 }
