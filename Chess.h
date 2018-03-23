@@ -13,6 +13,8 @@ public:
 //	Chess();
 	Chess(char);
 
+	friend std::ostream& operator<<(std::ostream& os, const Chess& chess);
+
 private:
 	bool color;
 	Type type;

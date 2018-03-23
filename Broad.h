@@ -28,5 +28,7 @@ public:
 	static int intOfPosition(char);
 	static std::pair<bool, Type> pairOfInt(int);
 	static Type typeOfInt(int);
+
+    friend std::ostream& operator<<(std::ostream&, const Broad&);
 };
 #endif // BROAD_H

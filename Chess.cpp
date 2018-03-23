@@ -90,3 +90,38 @@ Chess::Chess(char symbol)
             exit(1);
 	};
 }
+
+
+std::ostream& operator<<(std::ostream& os, const Chess& chess)
+{
+    if(chess.type == Type::Unknown)
+        os << 'X' ;
+    else
+    {
+        switch(chess.type)
+        {
+        case Type::General:
+            os << (chess.color ? 'k' : 'K');
+            break;
+        case Type::Advisor:
+            os << (chess.color ? 'g' : 'G');
+            break;
+        case Type::Elephant:
+            os << (chess.color ? 'm' : 'M');
+            break;
+        case Type::Chariot:
+            os << (chess.color ? 'r' : 'R');
+            break;
+        case Type::Horse:
+            os << (chess.color ? 'n' : 'N');
+            break;
+        case Type::Cannon:
+            os << (chess.color ? 'c' : 'C');
+            break;
+        case Type::Soldier:
+            os << (chess.color ? 'p' : 'P');
+            break;
+        }
+    }
+    return os ;
+}
