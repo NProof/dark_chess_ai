@@ -1,7 +1,7 @@
 #ifndef SHIFT_H_INCLUDED
 #define SHIFT_H_INCLUDED
-
-#include <iostream>
+//
+//#include <iostream>
 
 class Shift : public Move
 {

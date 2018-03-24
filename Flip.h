@@ -1,7 +1,7 @@
 #ifndef FLIP_H_INCLUDED
 #define FLIP_H_INCLUDED
-
-#include "Move.h"
+//
+//#include "Move.h"
 
 class Flip : public Move
 {
