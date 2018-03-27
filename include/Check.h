@@ -20,6 +20,8 @@ class Check
         Check();
         virtual ~Check();
 
+        Check * jumpTo(Path);
+
         Chess * chess;
         std::map<Path, Check *> pathsTo;
         std::string name;
@@ -28,6 +30,7 @@ class Check
     protected:
 
     private:
+        Check * leavTo(Path);
 };
 
 #endif // CHECK_H

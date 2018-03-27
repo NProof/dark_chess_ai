@@ -22,7 +22,9 @@ class Chess
 
         void init(char);
         friend std::ostream& operator<<(std::ostream& os, const Chess& chess);
-        void update();
+        bool atcCan(Type, Type);
+        void pickon();
+        void pickoff();
 
         bool color;
         Type type;

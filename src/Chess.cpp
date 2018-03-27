@@ -106,7 +106,63 @@ std::ostream& operator<<(std::ostream& os, const Chess& chess)
     }
 }
 
-void Chess::update()
+bool Chess::atcCan(Type atc, Type be)
+{
+    switch(atc)
+    {
+    case Type::General :
+        return be != Type::Soldier;
+    case Type::Advisor :
+        return be != Type::General;
+    case Type::Elephant :
+        return be != Type::General && be != Type::Advisor;
+    case Type::Chariot :
+        return be != Type::General && be != Type::Advisor && be != Type::Elephant;
+    case Type::Horse :
+        return be == Type::Soldier || be == Type::Cannon || be == Type::Horse;
+    case Type::Cannon :
+        return true;
+    case Type::Soldier :
+        return be == Type::Soldier || be == Type::General;
+    };
+}
+
+void Chess::pickon()
+{
+    if(type==Type::Cannon)
+    {
+        for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
+        {
+            if(it->second->chess == nullptr)
+                setOfMoves.insert(new Move(this, it->second));
+            Check * temp = check->jumpTo(it->first);
+            if(temp)
+            {
+                Chess * a = temp->chess;
+                if(a&&(color^a->color))
+                    setOfMoves.insert(new Move(this, temp));
+            }
+        }
+    }
+    else
+    {
+        for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
+        {
+            Chess * chess = it->second->chess;
+            if(chess == nullptr || atcCan(type, chess->type))
+                setOfMoves.insert(new Move(this, it->second));
+            Check * temp = check->jumpTo(it->first);
+            if(temp)
+            {
+                Chess * a = temp->chess;
+                if(a&&(color^a->color))
+                    setOfMoves.insert(new Move(this, temp));
+            }
+        }
+    }
+}
+
+void Chess::pickoff()
 {
 
 }
