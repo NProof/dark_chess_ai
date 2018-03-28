@@ -154,6 +154,7 @@ void Chess::pickon()
             Chess * temp = check->jumpTo(it->first)->chess;
             if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
             {
+				//
 				setOfMoves.insert(new Move(temp, this->check));
             }
         }
