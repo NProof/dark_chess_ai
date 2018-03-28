@@ -1,8 +1,8 @@
 #ifndef MOVE_H
 #define MOVE_H
 //
-#include <Check.h>
-#include <Chess.h>
+#include "Check.h"
+#include "Chess.h"
 #include <cstring>
 
 class Check;

@@ -3,8 +3,8 @@
 
 #include <iostream>
 #include <set>
-#include <Move.h>
-#include <Check.h>
+#include "Move.h"
+#include "Check.h"
 
 class Move;
 class Check;

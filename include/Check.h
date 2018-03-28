@@ -3,8 +3,8 @@
 
 #include <map>
 #include <set>
-#include <Chess.h>
-#include <Move.h>
+#include "Chess.h"
+#include "Move.h"
 
 class Chess;
 class Move;
