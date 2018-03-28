@@ -151,12 +151,10 @@ void Chess::pickon()
             Chess * chess = it->second->chess;
             if(chess == nullptr || atcCan(type, chess->type))
                 setOfMoves.insert(new Move(this, it->second));
-            Check * temp = check->jumpTo(it->first);
-            if(temp)
+            Chess * temp = check->jumpTo(it->first)->chess;
+            if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
             {
-                Chess * a = temp->chess;
-                if(a&&(color^a->color))
-                    setOfMoves.insert(new Move(this, temp));
+				setOfMoves.insert(new Move(temp, this->check));
             }
         }
     }
