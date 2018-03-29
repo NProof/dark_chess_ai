@@ -3,7 +3,8 @@
 #include <set>
 
 #include "Broad.h"
-//#include "Chess.h"
+#include "Chess.h"
+#include "Check.h"
 #include "Move.h"
 
 //class Move;
@@ -13,7 +14,7 @@ using namespace std;
 int main()
 {
     Broad b;
-    char c[35] = "XnXXX-XXXXXXXXXXXM-XXXkXMXXXXXXX";
+    char c[35] = "XnXXC-XXXXXXcXpXM-XXXkXMXXXpXXX";
     b.initBroad(c);
 
 //    cout << b << endl;
@@ -33,18 +34,17 @@ int main()
     cout << op << endl; */
 
     char op[6];
-    Move move(b.checks[10].chess, nullptr);
-    move.generateMove(op);
+    // Move move(b.checks[10].chess, nullptr);
+    // move.generateMove(op);
     cout << op << " and Move ... " << endl;
 	cout << b << endl;
-	cout << *b.checks[1].chess << endl;
-	b.checks[1].chess->pickon();
-	// b.checks[1].chess->showSet();
-	// std::set<Move *> ioo = b.checks[1].chess->setOfMoves;
-	// cout << ioo.size() << endl;
-	// std::set<Move *>::iterator it;
+	cout << *b.checks[4].chess << endl;
+	b.checks[4].chess->pickon();
+	std::map<Path, Move *> ioo = b.checks[4].chess->mapOfMoves;
+	cout << ioo.size() << endl;
+	std::map<Path, Move *>::iterator it;
 	// for(it = ioo.begin(); it != ioo.end(); it++)
-		// std::cout << " " << (*it)->chess->check->name << " , " << (*it)->check->name << std::endl;
+		// std::cout << " " << it->second->chess->check->name << " , " << it->second->check->name << std::endl;
 
 	return 0;
 }

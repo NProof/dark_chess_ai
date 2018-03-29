@@ -161,22 +161,8 @@ void Chess::pickon()
 				Chess * temp = jump->chess;
 				if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
 				{
-					/*switch(it->first)
-					{
-						case Path::Up:
-							
-							break;
-						case Path::Down:
-							
-							break;
-						case Path::Left:
-							
-							break;
-						case Path::Right:
-							
-							break;
-					};
-					*/
+					// if(mapOfMoves.count(it->first))
+						//
 					mapOfMoves[it->first] = new Move(temp, this->check);
 				}
 			}
