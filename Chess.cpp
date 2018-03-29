@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Chess.h"
 
 Chess::Chess(char x)
@@ -124,6 +125,8 @@ bool Chess::atcCan(Type atc, Type be)
         return true;
     case Type::Soldier :
         return be == Type::Soldier || be == Type::General;
+    case Type::Unknown :
+        return false;
     };
 }
 
@@ -144,20 +147,26 @@ void Chess::pickon()
             }
         }
     }
-    else
+    else if(type!=Type::Unknown)
     {
         for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
         {
             Chess * chess = it->second->chess;
             if(chess == nullptr || atcCan(type, chess->type))
                 setOfMoves.insert(new Move(this, it->second));
-            Chess * temp = check->jumpTo(it->first)->chess;
-            if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
-            {
-				//
-				setOfMoves.insert(new Move(temp, this->check));
-            }
-        }
+			// printf("(*) %x\n", check->jumpTo(it->first));
+			// Check * jump = check->jumpTo(it->first);
+         /*   if(jump)
+			{
+				Chess * temp = jump->chess;
+				if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
+				{
+					//
+					setOfMoves.insert(new Move(temp, this->check));
+				}
+			} */
+	std::cout << "pass\n";
+		}
     }
 }
 
