@@ -1,7 +1,9 @@
 #include <iostream>
-//
+
+#include <set>
+
 #include "Broad.h"
-//#include <Chess.h>
+//#include "Chess.h"
 #include "Move.h"
 
 //class Move;
@@ -34,6 +36,15 @@ int main()
     Move move(b.checks[10].chess, nullptr);
     move.generateMove(op);
     cout << op << " and Move ... " << endl;
+	cout << b << endl;
+	cout << *b.checks[1].chess << endl;
+	b.checks[1].chess->pickon();
+	// b.checks[1].chess->showSet();
+	// std::set<Move *> ioo = b.checks[1].chess->setOfMoves;
+	// cout << ioo.size() << endl;
+	// std::set<Move *>::iterator it;
+	// for(it = ioo.begin(); it != ioo.end(); it++)
+		// std::cout << " " << (*it)->chess->check->name << " , " << (*it)->check->name << std::endl;
 
 	return 0;
 }
