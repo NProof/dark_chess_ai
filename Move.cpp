@@ -1,8 +1,9 @@
 #include "Move.h"
 
-Move::Move(Chess * chess, Check * check)
+Move::Move(Chess * chess, Path path, Check * check)
 {
     this->chess = chess;
+	this->path = path;
     this->check = check;
 }
 

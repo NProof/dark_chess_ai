@@ -137,13 +137,13 @@ void Chess::pickon()
         for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
         {
             if(it->second->chess == nullptr)
-				mapOfMoves[it->first] = new Move(this, it->second);
+				mapOfMoves[it->first] = new Move(this, it->first, it->second);
             Check * temp = check->jumpTo(it->first);
             if(temp)
             {
                 Chess * a = temp->chess;
                 if(a&&a->type!=Type::Unknown&&(color^a->color))
-				mapOfMoves[it->first] = new Move(this, temp);
+				mapOfMoves[it->first] = new Move(this, it->first, temp);
             }
         }
     }
@@ -153,7 +153,7 @@ void Chess::pickon()
         {
             Chess * chess = it->second->chess;
             if(chess == nullptr || atcCan(type, chess->type))
-				mapOfMoves[it->first] = new Move(this, it->second);
+				mapOfMoves[it->first] = new Move(this, it->first, it->second);
 			// printf("(*) %x\n", check->jumpTo(it->first));
 			Check * jump = check->jumpTo(it->first);
 			if(jump)
@@ -163,7 +163,7 @@ void Chess::pickon()
 				{
 					// if(mapOfMoves.count(it->first))
 						//
-					mapOfMoves[it->first] = new Move(temp, this->check);
+					mapOfMoves[it->first] = new Move(temp, it->first, this->check);
 				}
 			}
 		}

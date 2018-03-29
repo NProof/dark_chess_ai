@@ -7,11 +7,12 @@
 
 class Check;
 class Chess;
+enum class Path;
 
 class Move
 {
     public:
-        Move(Chess *, Check *);
+        Move(Chess *, Path path, Check *);
         virtual ~Move();
 
         void generateMove(char [6]);
@@ -21,6 +22,7 @@ class Move
 
     private:
         Chess * chess;
+		Path path;
         Check * check;
 };
 
