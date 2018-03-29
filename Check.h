@@ -2,7 +2,7 @@
 #define CHECK_H
 
 #include <map>
-#include <set>
+// #include <set>
 #include "Chess.h"
 #include "Move.h"
 
@@ -25,7 +25,7 @@ class Check
         Chess * chess;
         std::map<Path, Check *> pathsTo;
         std::string name;
-        std::set<Move *> setOfMoves;
+        // std::set<Move *> setOfMoves;
 
     protected:
 
