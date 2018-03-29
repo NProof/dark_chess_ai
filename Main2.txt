@@ -1,0 +1,15 @@
+#include <iostream>
+#include "Main.h"
+
+using namespace std;
+
+int main(int argc, char **argv)
+{
+	string start, endng;
+	while(cin>>start>>endng)
+	{
+		cout << "start is " << start << endl;
+		cout << "endng is " << endng << endl;
+	}
+	return 0;
+}
