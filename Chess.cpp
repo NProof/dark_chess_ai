@@ -122,7 +122,7 @@ bool Chess::atcCan(Type atc, Type be)
     case Type::Horse :
         return be == Type::Soldier || be == Type::Cannon || be == Type::Horse;
     case Type::Cannon :
-        return true;
+        return be == Type::Unknown;
     case Type::Soldier :
         return be == Type::Soldier || be == Type::General;
     case Type::Unknown :
@@ -137,13 +137,13 @@ void Chess::pickon()
         for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
         {
             if(it->second->chess == nullptr)
-                setOfMoves.insert(new Move(this, it->second));
+				mapOfMoves[it->first] = new Move(this, it->second);
             Check * temp = check->jumpTo(it->first);
             if(temp)
             {
                 Chess * a = temp->chess;
-                if(a&&(color^a->color))
-                    setOfMoves.insert(new Move(this, temp));
+                if(a&&a->type!=Type::Unknown&&(color^a->color))
+				mapOfMoves[it->first] = new Move(this, temp);
             }
         }
     }
@@ -153,18 +153,33 @@ void Chess::pickon()
         {
             Chess * chess = it->second->chess;
             if(chess == nullptr || atcCan(type, chess->type))
-                setOfMoves.insert(new Move(this, it->second));
+				mapOfMoves[it->first] = new Move(this, it->second);
 			// printf("(*) %x\n", check->jumpTo(it->first));
-			// Check * jump = check->jumpTo(it->first);
-         /*   if(jump)
+			Check * jump = check->jumpTo(it->first);
+			if(jump)
 			{
 				Chess * temp = jump->chess;
 				if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
 				{
-					//
-					setOfMoves.insert(new Move(temp, this->check));
+					/*switch(it->first)
+					{
+						case Path::Up:
+							
+							break;
+						case Path::Down:
+							
+							break;
+						case Path::Left:
+							
+							break;
+						case Path::Right:
+							
+							break;
+					};
+					*/
+					mapOfMoves[it->first] = new Move(temp, this->check);
 				}
-			} */
+			}
 	std::cout << "pass\n";
 		}
     }

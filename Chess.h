@@ -2,12 +2,13 @@
 #define CHESS_H
 
 #include <iostream>
-#include <set>
+#include <map>
 #include "Move.h"
 #include "Check.h"
 
 class Move;
 class Check;
+enum class Path;
 
 enum class Type
 {
@@ -29,7 +30,7 @@ class Chess
         bool color;
         Type type;
         Check * check;
-        std::set<Move *> setOfMoves;
+        std::map<Path, Move *> mapOfMoves;
 
     protected:
 
