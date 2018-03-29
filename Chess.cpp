@@ -166,7 +166,6 @@ void Chess::pickon()
 					mapOfMoves[it->first] = new Move(temp, this->check);
 				}
 			}
-	std::cout << "pass\n";
 		}
     }
 }
