@@ -8,7 +8,7 @@ Broad::Broad()
 	{
 		if(i/4>0)
 			checks[i].pathsTo[Path::Up] = &checks[i-4];
-		if(i/4<8)
+		if(i/4<7)
 			checks[i].pathsTo[Path::Down] = &checks[i+4];
 		if(i%4>0)
 			checks[i].pathsTo[Path::Left] = &checks[i-1];
