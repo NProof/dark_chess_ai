@@ -16,7 +16,7 @@ class Broad
         void initBroad(char [32]);
         friend std::ostream& operator<<(std::ostream&, const Broad&);
 
-        Check checks[32];
+        Check checks[36];
         std::map<std::string, Check *> mapOfName;
 
     protected:
