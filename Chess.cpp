@@ -132,9 +132,9 @@ bool Chess::atcCan(Type atc, Type be)
 
 void Chess::pickon()
 {
-    if(type==Type::Cannon)
+    for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
     {
-        for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
+        if(type==Type::Cannon)
         {
             if(it->second->chess == nullptr)
 				mapOfMoves[it->first] = new Move(this, it->first, it->second);
@@ -146,10 +146,7 @@ void Chess::pickon()
 				mapOfMoves[it->first] = new Move(this, it->first, temp);
             }
         }
-    }
-    else if(type!=Type::Unknown)
-    {
-        for(std::map<Path, Check *>::iterator it=check->pathsTo.begin(); it !=check->pathsTo.end(); it++)
+        else if(type!=Type::Unknown)
         {
             Chess * chess = it->second->chess;
             if(chess == nullptr || atcCan(type, chess->type))
@@ -162,7 +159,7 @@ void Chess::pickon()
 				if(temp&&(temp->type==Type::Cannon&&(color^temp->color)))
 				{
 					// if(mapOfMoves.count(it->first))
-						//
+						// 
 					mapOfMoves[it->first] = new Move(temp, it->first, this->check);
 				}
 			}
@@ -172,5 +169,5 @@ void Chess::pickon()
 
 void Chess::pickoff()
 {
-
+	
 }
