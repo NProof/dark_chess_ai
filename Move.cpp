@@ -9,7 +9,8 @@ Move::Move(Chess * chess, Path path, Check * check)
 
 Move::~Move()
 {
-    //dtor
+    this->check->setOfMoves.erase(this);
+    this->chess->mapOfMoves.erase(this->path);
 }
 
 void Move::generateMove(char move[6])
