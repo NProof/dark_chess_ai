@@ -137,20 +137,27 @@ void Chess::pickon()
         if(type==Type::Cannon)
         {
             if(it->second->chess == nullptr)
+			{
 				mapOfMoves[it->first] = new Move(this, it->first, it->second);
+				it->second->setOfMoves.insert(mapOfMoves[it->first]);
+			}
             Check * temp = check->jumpTo(it->first);
             if(temp)
             {
                 Chess * a = temp->chess;
                 if(a&&a->type!=Type::Unknown&&(color^a->color))
 				mapOfMoves[it->first] = new Move(this, it->first, temp);
+				temp->setOfMoves.insert(mapOfMoves[it->first]);
             }
         }
         else if(type!=Type::Unknown)
         {
             Chess * chess = it->second->chess;
             if(chess == nullptr || atcCan(type, chess->type))
+			{
 				mapOfMoves[it->first] = new Move(this, it->first, it->second);
+				it->second->setOfMoves.insert(mapOfMoves[it->first]);
+			}
 			// printf("(*) %x\n", check->jumpTo(it->first));
 			Check * jump = check->jumpTo(it->first);
 			if(jump)
@@ -161,6 +168,7 @@ void Chess::pickon()
 					// if(mapOfMoves.count(it->first))
 						// 
 					mapOfMoves[it->first] = new Move(temp, it->first, this->check);
+					this->check->setOfMoves.insert(mapOfMoves[it->first]);
 				}
 			}
 		}
