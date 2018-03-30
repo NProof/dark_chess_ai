@@ -177,5 +177,10 @@ void Chess::pickon()
 
 void Chess::pickoff()
 {
-	
+	std::map<Path, Move *> ioo = this->mapOfMoves;
+	for(std::map<Path, Move *>::iterator it = ioo.begin(); it != ioo.end(); it++)
+		delete it->second;
+	std::set<Move *> df = this->check->setOfMoves;
+	for(std::set<Move *>::iterator it = df.begin(); it != df.end(); it++)
+		delete *it;
 }
