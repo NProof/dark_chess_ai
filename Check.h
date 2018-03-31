@@ -11,10 +11,10 @@ class Move;
 
 enum class Path
 {
-	Up, Down, Left, Right
+	Up, Down, Left, Right, Pick
 };
 
-class Check
+class Check // 盤面位置
 {
     public:
         Check();

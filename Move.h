@@ -7,20 +7,22 @@
 
 class Check;
 class Chess;
+enum class Path;
 
 class Move
 {
     public:
-        Move(Chess *, Check *);
+        Move(Chess *, Path path, Check *);
         virtual ~Move();
 
         void generateMove(char [6]);
         void makeMove(char [6]);
 
-    protected:
+//    protected:
 
-    private:
+//    private:
         Chess * chess;
+		Path path;
         Check * check;
 };
 

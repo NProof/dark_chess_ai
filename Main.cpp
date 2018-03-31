@@ -1,39 +1,56 @@
 #include <iostream>
-//
-#include "Broad.h"
-//#include <Chess.h>
-#include "Move.h"
 
-//class Move;
+#include <vector>
+#include <set>
+
+#include "Broad.h"
+#include "Chess.h"
+#include "Check.h"
+#include "Move.h"
+#include "Ai.h"
+
+#include <cstdlib>
+
+class Check;
 
 using namespace std;
 
 int main()
 {
     Broad b;
-    char c[35] = "XnXXX-XXXXXXXXXXXM-XXXkXMXXXXXXX";
+	Ai ai1, ai2;
+	char move[10] ;
+	
+    char c[35] = "XnXXC-XXXXXXcXpXM-XXRkXMXXXpXXXG";
     b.initBroad(c);
-
-//    cout << b << endl;
-//    cout << &b.checks[3] << endl;
-//    cout << b.checks[3].chess << endl;
-//    cout << b.checks[3].chess->check << endl;
-
-//**//
-//    char op[6];
-    /* Flip * flip = new Flip(b.checks[4].chess) ;
-    cout << *flip->fliped << endl;
-    flip->generateMove(op);
-    cout << op << endl;
-
-    Shift * shift = new Shift(b.checks[15].chess, &b.checks[14]);
-    shift->generateMove(op);
-    cout << op << endl; */
-
-    char op[6];
-    Move move(b.checks[10].chess, nullptr);
-    move.generateMove(op);
-    cout << op << " and Move ... " << endl;
+    cout << b << endl;
+    
+	// ai1.turn = true;
+	// ai2.turn = false;
+	// ai1.colorOfAi = PROTO_CLR::PCLR_UNKNOW;
+	// ai2.colorOfAi = PROTO_CLR::PCLR_UNKNOW;
+	
+	/* for(int i=0; i<32; i++)
+	{
+		if(
+		b.checks[i].chess 
+		&& ( ai1.colorOfAi == PROTO_CLR::PCLR_UNKNOW 
+		? true : ( ai1.colorOfAi == PROTO_CLR::PCLR_RED ) == b.checks[i].chess.color )
+		)
+			
+	} */
+	cout << *b.checks[2].chess << endl;
+	
+	// std::vector<Move *> mainOfMoves;
+	// for(int i=0; i<32; i++)
+	// {
+		// mainOfMoves.insert(b.checks[i].setOfMoves.begin(), b.checks[i].setOfMoves.end());
+		// if(b.checks[i].setOfMoves.begin()!=)
+			
+	// }
+	// cout << mainOfMoves.size() << endl;
+	
+	
 
 	return 0;
 }

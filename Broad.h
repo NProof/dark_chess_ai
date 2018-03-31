@@ -10,13 +10,13 @@ class Check;
 class Broad
 {
     public:
-        Broad();
+        Broad(); // 空的盤面
         virtual ~Broad();
 
-        void initBroad(char [32]);
+        void initBroad(char [32]); //初始盤面
         friend std::ostream& operator<<(std::ostream&, const Broad&);
 
-        Check checks[32];
+        Check checks[36];
         std::map<std::string, Check *> mapOfName;
 
     protected:

@@ -22,6 +22,7 @@ public:
 //	std::map<Type,std::set<Check *>> myChecks;
 //	std::map<Type,std::set<Check *>> matchChecks;
 //private:
+	bool turn;
     PROTO_CLR colorOfAi;
     Broad * broadOfAi ;
 };

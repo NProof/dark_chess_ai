@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1522326759 source:d:\dark_chess_ai\check.cpp
+	"Check.h"
+
+1522431349 d:\dark_chess_ai\check.h
+	<map>
+	<set>
+	"Chess.h"
+	"Move.h"
+
+1522328017 d:\dark_chess_ai\chess.h
+	<iostream>
+	<map>
+	"Move.h"
+	"Check.h"
+
+1522455686 d:\dark_chess_ai\move.h
+	"Check.h"
+	"Chess.h"
+	<cstring>
+
+1522457473 source:d:\dark_chess_ai\chess.cpp
+	<iostream>
+	"Chess.h"
+
+1522457119 source:d:\dark_chess_ai\main.cpp
+	<iostream>
+	<set>
+	"Broad.h"
+	"Chess.h"
+	"Check.h"
+	"Move.h"
+
+1522426329 d:\dark_chess_ai\broad.h
+	<iostream>
+	"Check.h"
+	<map>
+
+1522425917 source:d:\dark_chess_ai\move.cpp
+	"Move.h"
+
+1522457101 source:d:\dark_chess_ai\broad.cpp
+	"Broad.h"
+
