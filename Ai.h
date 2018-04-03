@@ -15,9 +15,9 @@ public:
 	Ai();
 
 	void initBoardState(int [14], char [32]);
-	color(PROTO_CLR);
-	generateMove();
-	MakeMove();
+	void color(PROTO_CLR);
+	bool generateMove(char *);
+	bool MakeMove(char *);
 
 //	std::map<Type,std::set<Check *>> myChecks;
 //	std::map<Type,std::set<Check *>> matchChecks;

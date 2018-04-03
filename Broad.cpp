@@ -22,25 +22,38 @@ Broad::Broad()
 
 void Broad::initBroad(char current_position[32])
 {
-	for(int i=0; i<32; i++)
-	{
-        char ch_po = current_position[i];
-	    if(ch_po != '-')
+    if(current_position)
+    {
+        for(int i=0; i<32; i++)
         {
-            Chess * temp = new Chess(ch_po);
-			checks[i].chess = temp;
-			temp->check = &checks[i];
+            char ch_po = current_position[i];
+            if(ch_po != '-')
+            {
+                Chess * temp = new Chess(ch_po);
+                checks[i].chess = temp;
+                temp->check = &checks[i];
+            }
         }
-	}
-	for(int i=0; i<32; i++)
-	{
-        char ch_po = current_position[i];
-	    if(ch_po != '-')
+        for(int i=0; i<32; i++)
         {
-			checks[i].chess->pickon();
-//			std::cout << *this ;
+            char ch_po = current_position[i];
+            if(ch_po != '-')
+            {
+                checks[i].chess->pickon();
+    //			std::cout << *this ;
+            }
         }
-	}
+    }
+    else
+    {
+        for(int i=0; i<32; i++)
+        {
+            Chess * temp = new Chess('X');
+            checks[i].chess = temp;
+            temp->check = &checks[i];
+            temp->pickon();
+        }
+    }
 }
 
 std::ostream& operator<<(std::ostream& os, const Broad& broad)
