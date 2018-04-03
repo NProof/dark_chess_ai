@@ -31,6 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Ai.cpp" />
+		<Unit filename="Ai.h" />
 		<Unit filename="Broad.cpp" />
 		<Unit filename="Broad.h" />
 		<Unit filename="Check.cpp" />

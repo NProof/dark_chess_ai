@@ -42,6 +42,8 @@ bool Ai::generateMove(char *move)
 
 /* bool Ai::MakeMove(char *move)
 {
-    printf("MakeMove\n");
+    printf("MakeMove ..");
+
+    printf("\n");
     return true;
 } */
