@@ -34,7 +34,7 @@ void Broad::initBroad(char current_position[32])
                 temp->check = &checks[i];
             }
         }
-        for(int i=0; i<32; i++)
+        /* for(int i=0; i<32; i++)
         {
             char ch_po = current_position[i];
             if(ch_po != '-')
@@ -42,7 +42,7 @@ void Broad::initBroad(char current_position[32])
                 checks[i].chess->pickon();
     //			std::cout << *this ;
             }
-        }
+        } */
     }
     else
     {
@@ -51,7 +51,7 @@ void Broad::initBroad(char current_position[32])
             Chess * temp = new Chess('X');
             checks[i].chess = temp;
             temp->check = &checks[i];
-            temp->pickon();
+//            temp->pickon();
         }
     }
 }

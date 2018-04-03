@@ -24,7 +24,7 @@ void Move::generateMove(char move[6])
 
 void Move::makeMove(char move[6])
 {
-	this->chess->pickoff(this);
+//	this->chess->pickoff(this);
     if(path!=Path::Pick)
     {
         this->check->chess = this->chess;
@@ -35,7 +35,7 @@ void Move::makeMove(char move[6])
     {
         this->chess->init(move[3]);
     }
-    Chess * chesstemp = this->chess;
-    delete this;
-	chesstemp->pickon();
+//    Chess * chesstemp = this->chess;
+//    delete this;
+//	chesstemp->pickon();
 }

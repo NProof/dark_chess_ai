@@ -12,7 +12,7 @@ enum class Path;
 
 enum class Type
 {
-	Soldier, Cannon, Horse, Chariot, Elephant, Advisor, General, Unknown
+	Soldier, Cannon, Horse, Chariot, Elephant, Advisor, General
 };
 
 class Chess // 暗棋
@@ -24,9 +24,10 @@ class Chess // 暗棋
         void init(char);
         friend std::ostream& operator<<(std::ostream& os, const Chess& chess);
         bool atcCan(Type, Type);
-        void pickon();
-        void pickoff(Move *);
+//        void pickon();
+//        void pickoff(Move *);
 
+        bool dark;
         bool color;
         Type type;
         Check * check;

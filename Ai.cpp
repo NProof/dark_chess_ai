@@ -40,10 +40,10 @@ bool Ai::generateMove(char *move)
     return true;
 }
 
-/* bool Ai::MakeMove(char *move)
+bool Ai::MakeMove(char *move)
 {
     printf("MakeMove ..");
 
     printf("\n");
     return true;
-} */
+}

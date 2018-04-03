@@ -28,15 +28,15 @@ Check * Check::leavTo(Path path)
 	return NULL;
 }
 
-void Check::pickon()
+/* void Check::pickon()
 {
 
-}
+} */
 
-void Check::pickoff(Move * movep)
+/* void Check::pickoff(Move * movep)
 {
 	std::set<Move *> df = this->setOfMoves;
 	for(std::set<Move *>::iterator it = df.begin(); it != df.end(); it++)
 		if(*it != movep)
             delete *it;
-}
+} */
