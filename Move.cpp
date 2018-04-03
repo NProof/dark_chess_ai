@@ -5,6 +5,8 @@ Move::Move(Chess * chess, Path path, Check * check)
     this->chess = chess;
 	this->path = path;
     this->check = check;
+    this->check->setOfMoves.insert(this);
+    this->chess->mapOfMoves[this->path] = this;
 }
 
 Move::~Move()
