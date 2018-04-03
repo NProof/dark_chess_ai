@@ -25,7 +25,7 @@ class Chess // 暗棋
         friend std::ostream& operator<<(std::ostream& os, const Chess& chess);
         bool atcCan(Type, Type);
         void pickon();
-        void pickoff();
+        void pickoff(Move *);
 
         bool color;
         Type type;

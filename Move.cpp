@@ -16,20 +16,13 @@ Move::~Move()
 void Move::generateMove(char move[6])
 {
     strcpy(move, chess->check->name.c_str());
-    if(path!=Path::Pick)
-    {
-		move[2] = '-';
-		strcpy(move+3, check ? check->name.c_str() : chess->check->name.c_str());
-	}
-	else
-	{
-		scanf("%c", &move[3]);
-	}
+    move[2] = '-';
+    strcpy(move+3, check ? check->name.c_str() : chess->check->name.c_str());
 }
 
 void Move::makeMove(char move[6])
 {
-	this->chess->pickoff();
+	this->chess->pickoff(this);
     if(path!=Path::Pick)
     {
         this->check->chess = this->chess;
@@ -40,5 +33,7 @@ void Move::makeMove(char move[6])
     {
         this->chess->init(move[3]);
     }
-	this->chess->pickon();
+    Chess * chesstemp = this->chess;
+    delete this;
+	chesstemp->pickon();
 }

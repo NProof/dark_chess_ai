@@ -163,7 +163,7 @@ void Chess::pickon()
         else if(type!=Type::Unknown)
         {
             Chess * chess = it->second->chess;
-            if(chess == nullptr || chess != nullptr && atcCan(type, chess->type) && ( color ^ chess->color ))
+            if(chess == nullptr || ( chess != nullptr && atcCan(type, chess->type) && ( color ^ chess->color )))
 			{
 //			    if((!color&&chess->color)||(color&&!(chess->color)))
                 if((!color&&chess->color)||(color&&!(chess->color)));
@@ -191,12 +191,14 @@ void Chess::pickon()
     }
 }
 
-void Chess::pickoff()
+void Chess::pickoff(Move * movep)
 {
 	std::map<Path, Move *> ioo = this->mapOfMoves;
 	for(std::map<Path, Move *>::iterator it = ioo.begin(); it != ioo.end(); it++)
-		delete it->second;
+		if(it->second != movep)
+            delete it->second;
 	std::set<Move *> df = this->check->setOfMoves;
 	for(std::set<Move *>::iterator it = df.begin(); it != df.end(); it++)
-		delete *it;
+		if(*it != movep)
+            delete *it;
 }
