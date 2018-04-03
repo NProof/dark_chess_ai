@@ -25,15 +25,15 @@ void Move::generateMove(char move[6])
 void Move::makeMove(char move[6])
 {
 //	this->chess->pickoff(this);
-    if(path!=Path::Pick)
+    if(chess->dark)
+    {
+        this->chess->init(move[3]);
+    }
+    else
     {
         this->check->chess = this->chess;
         this->chess->check->chess = nullptr;
         this->chess->check = this->check;
-    }
-    else
-    {
-        this->chess->init(move[3]);
     }
 //    Chess * chesstemp = this->chess;
 //    delete this;

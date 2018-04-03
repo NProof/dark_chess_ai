@@ -11,7 +11,7 @@ class Move;
 
 enum class Path
 {
-	Up, Down, Left, Right, Pick
+	Up, Down, Left, Right
 };
 
 class Check // 盤面位置
