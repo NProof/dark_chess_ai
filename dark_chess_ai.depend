@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1522745049 source:d:\dark_chess_ai\check.cpp
+1522746721 source:d:\dark_chess_ai\check.cpp
 	"Check.h"
 
-1522745461 d:\dark_chess_ai\check.h
+1522746577 d:\dark_chess_ai\check.h
 	<map>
 	<set>
 	"Chess.h"
@@ -19,7 +19,7 @@
 	"Chess.h"
 	<cstring>
 
-1522745899 source:d:\dark_chess_ai\chess.cpp
+1522746716 source:d:\dark_chess_ai\chess.cpp
 	<iostream>
 	"Chess.h"
 
