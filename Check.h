@@ -21,6 +21,8 @@ class Check // 盤面位置
         virtual ~Check();
 
         Check * jumpTo(Path);
+        void pickon();
+        void pickoff(Move *);
 
         Chess * chess;
         std::map<Path, Check *> pathsTo;

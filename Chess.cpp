@@ -197,8 +197,4 @@ void Chess::pickoff(Move * movep)
 	for(std::map<Path, Move *>::iterator it = ioo.begin(); it != ioo.end(); it++)
 		if(it->second != movep)
             delete it->second;
-	std::set<Move *> df = this->check->setOfMoves;
-	for(std::set<Move *>::iterator it = df.begin(); it != df.end(); it++)
-		if(*it != movep)
-            delete *it;
 }
