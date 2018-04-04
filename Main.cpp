@@ -15,9 +15,9 @@ int main()
 
 	char move[6] ;
 
-//    char c[64] = "XnXXC-XXXXXXcXpXM-XXRkXMXXXpXXXG";
-    char c[64] = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
-    b.initBroad(c);
+//	int kinds[30] = {1,2,2,2,2,2,5,1,2,2,2,2,2,5};
+//    char curr[64] = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+//    b.initBroad(kinds, curr);
 
 //    while(ai1.generateMove(move)&&ai1.MakeMove(move)&&ai2.generateMove(move)&&ai2.MakeMove(move));
     while(true)

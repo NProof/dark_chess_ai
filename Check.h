@@ -27,7 +27,6 @@ class Check // 盤面位置
         Chess * chess;
         std::map<Path, Check *> pathsTo;
         std::string name;
-        std::set<Move *> setOfMoves;
 
     protected:
 

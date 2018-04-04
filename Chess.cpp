@@ -8,6 +8,7 @@ Chess::Chess(char x)
 
 void Chess::init(char x)
 {
+//    printf("inti %c\n", x);
     if(x == 'X')
         dark = true;
     else
@@ -110,9 +111,9 @@ std::ostream& operator<<(std::ostream& os, const Chess& chess)
     }
 }
 
-bool Chess::atcCan(Type atc, Type be)
+bool Chess::atcCan(Type be)
 {
-    switch(atc)
+    switch(this->type)
     {
     case Type::General :
         return be != Type::Soldier;

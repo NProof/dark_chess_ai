@@ -23,7 +23,7 @@ class Chess // 暗棋
 
         void init(char);
         friend std::ostream& operator<<(std::ostream& os, const Chess& chess);
-        bool atcCan(Type, Type);
+        bool atcCan(Type);
 //        void pickon();
 //        void pickoff(Move *);
 
@@ -31,7 +31,6 @@ class Chess // 暗棋
         bool color;
         Type type;
         Check * check;
-        std::map<Path, Move *> mapOfMoves;
 
     protected:
 

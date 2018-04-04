@@ -1,18 +1,15 @@
 #include "Move.h"
 
-Move::Move(Chess * chess, Path path, Check * check)
+Move::Move(Chess * chess, Check * check)
 {
     this->chess = chess;
-	this->path = path;
     this->check = check;
-    this->check->setOfMoves.insert(this);
-    this->chess->mapOfMoves[this->path] = this;
 }
 
 Move::~Move()
 {
-    this->check->setOfMoves.erase(this);
-    this->chess->mapOfMoves.erase(this->path);
+//    this->check->setOfMoves.erase(this);
+//    this->chess->mapOfMoves.erase(this->path);
 }
 
 void Move::generateMove(char move[6])
@@ -25,16 +22,16 @@ void Move::generateMove(char move[6])
 void Move::makeMove(char move[6])
 {
 //	this->chess->pickoff(this);
-    if(chess->dark)
-    {
-        this->chess->init(move[3]);
-    }
-    else
-    {
+//    if(chess->dark)
+//    {
+//        this->chess->init(move[3]);
+//    }
+//    else
+//    {
         this->check->chess = this->chess;
         this->chess->check->chess = nullptr;
         this->chess->check = this->check;
-    }
+//    }
 //    Chess * chesstemp = this->chess;
 //    delete this;
 //	chesstemp->pickon();

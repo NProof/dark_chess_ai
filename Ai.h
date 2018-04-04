@@ -14,13 +14,15 @@ class Ai
 public:
 	Ai();
 
-	void initBoardState(int [14], char [32]);
+//	void initBoardState(int [14], char [32]);
 	void color(PROTO_CLR);
 	bool generateMove(char *);
 	bool MakeMove(char *);
+	void updateMoves();
 
-//	std::map<Type,std::set<Check *>> myChecks;
-//	std::map<Type,std::set<Check *>> matchChecks;
+	std::set<Chess *> belongs;
+    std::set<Move *> movesNext;
+
 //private:
 	bool turn;
     PROTO_CLR colorOfAi;
