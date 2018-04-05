@@ -8,9 +8,9 @@ Board::Board()
         map_Char[stri] = 'X';
 
 		if(i/4>0)
-			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)}; //
+			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
 		if(i/4<7)
-			pathTo[stri][Path::Down] = std::string{char('a'+i%4),char('8'-i/4-1)}; //
+			pathTo[stri][Path::Down] = std::string{char('a'+i%4),char('8'-i/4-1)};
 		if(i%4>0)
 			pathTo[stri][Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
 		if(i%4<3)
