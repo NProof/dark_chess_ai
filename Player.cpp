@@ -51,7 +51,6 @@ void Player::generateMove(char *move)
                 }
             }
         }
-
     }
     std::set<std::pair<std::string, std::string>>::iterator pairmove;
     pairmove = mValid.begin();
