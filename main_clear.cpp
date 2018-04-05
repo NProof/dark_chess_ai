@@ -15,17 +15,17 @@ int main(int argc , char **argv)
 		break;
 	}
 
-	Player player;
 	char current_position[32], move[6];
 	int  piece_count[14];
 	PROTO_CLR color;
 	History history;
 	bool turn;
-	int time;	//表示剩餘時間 單位為毫秒(ms)
+	int time;
 
 	if(argc==3||argc==2)
 	{
 		protocol.init_board(piece_count, current_position, history,time);
+        Player player(piece_count, current_position, history, time);
 
 		if(history.number_of_moves != 0)
 		{
@@ -36,45 +36,43 @@ int main(int argc , char **argv)
 			}
 		}
 
-		// todo:initBoardState()
 		protocol.get_turn(turn, color);
-		// todo:setColor()
+		player.setColor(color);
 
-		// ply = 0
-		if(turn) // my turn is First
+
+		if(turn)
 		{
-			player.generateMove(move); // todo:generateMove()
-			protocol.send(move);           // my flip = "b6-b6" or move = "a2-a3"
-			protocol.recv(move,time);	   // my flip = "b6(K)" or move = "a2-a3";			time = 剩餘時間(ms)
-			if( color == PCLR_UNKNOW )     // all pieces are unrevealed/hidden
+			player.generateMove(move);
+			protocol.send(move);
+			protocol.recv(move,time);
+			if( color == PCLR_UNKNOW )
 			{
 				color = protocol.get_color(move);
-				// todo:setColor()
+				player.setColor(color);
 			}
-			// todo:makeMove()
-			protocol.recv(move,time);      // opponent flip = "c8(g)" or move = "c4-c5";	time = 剩餘時間(ms)
-			// todo:makeMove()
+			player.makeMove(move);
+			protocol.recv(move,time);
+			player.makeMove(move);
 		}
-		else // my turn is Second
+		else
 		{
-			protocol.recv(move,time);      // opponent flip = "c8(g)" or move = "c4-c5"		time = 剩餘時間(ms)
-			if( color == PCLR_UNKNOW )     // all pieces are unrevealed/hidden
+			protocol.recv(move,time);
+			if( color == PCLR_UNKNOW )
 			{
 				color = (protocol.get_color(move)==PCLR_BLACK)? PCLR_RED : PCLR_BLACK;
-				// todo:setColor()
+				player.setColor(color);
 			}
-			// todo:makeMove()
+			player.makeMove(move);
 		}
 
-		// ply = 1, 2, ...
 		while(1)
 		{
-			player.generateMove(move); // todo:generateMove()
-			protocol.send(move);           // my flip = "b6-b6" or move = "a2-a3"
-			protocol.recv(move,time);      // my flip = "b6(K)" or move = "a2-a3"			time = 剩餘時間(ms)
-			// todo:makeMove()             // ponder
-			protocol.recv(move,time);	   //												time = 剩餘時間(ms)
-			// todo:makeMove()             // opponent flip = "c8(g)" or move = "c4-c5"
+			player.generateMove(move);
+			protocol.send(move);
+			protocol.recv(move,time);
+			player.makeMove(move);
+			protocol.recv(move,time);
+			player.makeMove(move);
 		}
 	}
 	return 0;
