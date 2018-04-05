@@ -8,7 +8,7 @@
 class Player
 {
     public:
-        Player(int [14], char [32], History&, int&);
+        Player();
         virtual ~Player();
 
         void setColor(PROTO_CLR);

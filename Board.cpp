@@ -1,23 +1,21 @@
 #include "Board.h"
 
-Board::Board(char*& current_position)
+Board::Board()
 {
-    map_Char = std::map<std::string, char>();
+//    map_Char = std::map<std::string, char>();
     for(int i=0; i<32; i++)
     {
-        map_Char[std::string{char('a'+i%4),char('8'-i/4)}] = current_position[i];
-        std::map<Path, std::string> temp;
+        std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
+        map_Char[stri] = 'X';
 
 		if(i/4>0)
-			temp[Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)}; //
+			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)}; //
 		if(i/4<7)
-			temp[Path::Down] = std::string{char('a'+i%4),char('8'-i/4-1)}; //
+			pathTo[stri][Path::Down] = std::string{char('a'+i%4),char('8'-i/4-1)}; //
 		if(i%4>0)
-			temp[Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
+			pathTo[stri][Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
 		if(i%4<3)
-			temp[Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
-
-        this->pathTo[std::string{char('a'+i%4),char('8'-i/4)}] = temp;
+			pathTo[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
     }
 }
 
@@ -26,33 +24,33 @@ Board::~Board()
     //dtor
 }
 
-void Board::generateMove(char *)
+void Board::generateMove()
 {
     mValid.clear();
     for(int i=0; i<32; i++)
     {
-        std::string pos = std::string{char('a'+i%4),char('8'-i/4)};
-        char cho = map_Char[pos];
+        std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
+        char cho = map_Char[stri];
         if(cho!='X'&&cho!='-')
         {
             std::map<Path, std::string>::iterator it;
-            for(it=pathTo[pos].begin(); it!=pathTo[pos].end(); it++)
+            for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
             {
                 char vch = map_Char[it->second];
                 if(vch=='-')
                 {
-                    mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(pos, it->second));
+                    mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(stri, it->second));
                 }
                 if(cho=='c'||cho=='C')
                 {
-                    std::string sJump = jumpTo(pos, it->first);
+                    std::string sJump = jumpTo(stri, it->first);
                     if(sJump!="outer"&&momentum(cho, map_Char[sJump]))
-                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(pos, sJump));
+                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(stri, sJump));
                 }
                 else if(vch!='-')
                 {
                     if(momentum(cho, vch))
-                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(pos, it->second));
+                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(stri, it->second));
                 }
             }
         }
@@ -79,10 +77,10 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
     std::set<std::pair<std::string, std::string>> result = mValid[color];
     for(int i=0; i<32; i++)
     {
-        std::string pos = std::string{char('a'+i%4),char('8'-i/4)};
-        if(map_Char[pos]=='X')
+        std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
+        if(map_Char[stri]=='X')
         {
-            result.insert(std::pair<std::string, std::string>(pos, pos));
+            result.insert(std::pair<std::string, std::string>(stri, stri));
         }
     }
     return result ;

@@ -1,8 +1,8 @@
 #include "Player.h"
 
-Player::Player(int [14], char current_position[32], History&, int&)
+Player::Player()
 {
-    this->board = new Board(current_position);
+    this->board = new Board();
 }
 
 Player::~Player()
@@ -17,7 +17,7 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    board->generateMove(move);
+    board->generateMove();
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
     std::set<std::pair<std::string, std::string>>::iterator pairmove;
     pairmove = mValid.begin();

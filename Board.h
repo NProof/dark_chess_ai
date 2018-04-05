@@ -9,10 +9,10 @@ enum class Path{Up, Down, Left, Right};
 class Board
 {
     public:
-        Board(char*&);
+        Board();
         virtual ~Board();
 
-        void generateMove(char *);
+        void generateMove();
         void makeMove(char *move);
 
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);

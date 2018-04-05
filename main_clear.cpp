@@ -25,7 +25,7 @@ int main(int argc , char **argv)
 	if(argc==3||argc==2)
 	{
 		protocol.init_board(piece_count, current_position, history,time);
-        Player player(piece_count, current_position, history, time);
+        Player player;
 
 		if(history.number_of_moves != 0)
 		{
