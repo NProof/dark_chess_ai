@@ -26,6 +26,44 @@ Board::~Board()
     //dtor
 }
 
+void Board::generateMove(char *)
+{
+    mValid.clear();
+    for(int i=0; i<32; i++)
+    {
+        std::string pos = std::string{char('a'+i%4),char('8'-i/4)};
+        char cho = map_Char[pos];
+        if(cho=='X')
+        {
+            mValid[true].insert(std::pair<std::string, std::string>(pos, pos));
+            mValid[false].insert(std::pair<std::string, std::string>(pos, pos));
+        }
+        else if(cho!='-') //&&(bool)islower(cho)==this->color
+        {
+            std::map<Path, std::string>::iterator it;
+            for(it=pathTo[pos].begin(); it!=pathTo[pos].end(); it++)
+            {
+                char vch = map_Char[it->second];
+                if(vch=='-')
+                {
+                    mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(pos, it->second));
+                }
+                if(cho=='c'||cho=='C')
+                {
+                    std::string sJump = jumpTo(pos, it->first);
+                    if(sJump!="outer"&&momentum(cho, map_Char[sJump]))
+                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(pos, sJump));
+                }
+                else if(vch!='-')
+                {
+                    if(momentum(cho, vch))
+                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(pos, it->second));
+                }
+            }
+        }
+    }
+}
+
 void Board::makeMove(char *move)
 {
     std::string src, dst;
@@ -39,6 +77,11 @@ void Board::makeMove(char *move)
     }
     else
         map_Char[src] = move[3] ;
+}
+
+std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
+{
+    return mValid[color];
 }
 
 std::string Board::jumpTo(std::string src, Path path)
@@ -78,14 +121,4 @@ bool Board::momentum(char hig, char low)
 	    (hig=='R'&&(low!='m'&&low!='g'&&low!='k'))||
 	    (hig=='N'&&(low=='n'||low=='c'||low=='p'))||
 	    (hig=='P'&&(low=='k'||low=='p'));
-}
-
-std::map<std::string, char> Board::getMapChar()
-{
-    return this->map_Char ;
-}
-
-std::map<std::string, std::map<Path, std::string>>  Board::getPathTo()
-{
-    return this->pathTo ;
 }
