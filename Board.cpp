@@ -33,12 +33,7 @@ void Board::generateMove(char *)
     {
         std::string pos = std::string{char('a'+i%4),char('8'-i/4)};
         char cho = map_Char[pos];
-        if(cho=='X')
-        {
-            mValid[true].insert(std::pair<std::string, std::string>(pos, pos));
-            mValid[false].insert(std::pair<std::string, std::string>(pos, pos));
-        }
-        else if(cho!='-') //&&(bool)islower(cho)==this->color
+        if(cho!='X'&&cho!='-')
         {
             std::map<Path, std::string>::iterator it;
             for(it=pathTo[pos].begin(); it!=pathTo[pos].end(); it++)
@@ -81,7 +76,16 @@ void Board::makeMove(char *move)
 
 std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
 {
-    return mValid[color];
+    std::set<std::pair<std::string, std::string>> result = mValid[color];
+    for(int i=0; i<32; i++)
+    {
+        std::string pos = std::string{char('a'+i%4),char('8'-i/4)};
+        if(map_Char[pos]=='X')
+        {
+            result.insert(std::pair<std::string, std::string>(pos, pos));
+        }
+    }
+    return result ;
 }
 
 std::string Board::jumpTo(std::string src, Path path)
