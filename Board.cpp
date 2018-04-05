@@ -2,7 +2,6 @@
 
 Board::Board()
 {
-//    map_Char = std::map<std::string, char>();
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
