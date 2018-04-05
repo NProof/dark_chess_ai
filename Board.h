@@ -22,10 +22,10 @@ class Board
         std::string jumpTo(std::string, Path);
 		bool momentum(char, char);
 
-        std::map<std::string, char> map_Char;
-        std::map<std::string, std::map<Path, std::string>> pathTo;
         std::set<std::string> darks;
         std::map<bool, std::set<std::pair<std::string, std::string>>> mValid;
+        std::map<std::string, char> map_Char;
+        std::map<std::string, std::map<Path, std::string>> pathTo;
 };
 
 #endif // BOARD_H
