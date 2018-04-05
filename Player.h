@@ -19,7 +19,6 @@ class Player
     private:
         bool color;
         Board *board;
-        std::set<std::pair<std::string, std::string>> mValid;
 };
 
 #endif // PLAYER_H

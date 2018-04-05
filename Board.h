@@ -12,17 +12,19 @@ class Board
         Board(char*&);
         virtual ~Board();
 
+        void generateMove(char *);
         void makeMove(char *move);
-        std::string jumpTo(std::string, Path);
-		bool momentum(char, char);
 
-        std::map<std::string, char> getMapChar();
-        std::map<std::string, std::map<Path, std::string>> getPathTo();
+        std::set<std::pair<std::string, std::string>> getMoveValid(bool);
     protected:
 
     private:
+        std::string jumpTo(std::string, Path);
+		bool momentum(char, char);
+
         std::map<std::string, char> map_Char;
         std::map<std::string, std::map<Path, std::string>> pathTo;
+        std::map<bool, std::set<std::pair<std::string, std::string>>> mValid;
 };
 
 #endif // BOARD_H
