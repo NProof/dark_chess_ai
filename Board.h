@@ -12,7 +12,7 @@ class Board
         Board();
         virtual ~Board();
 
-        void initMoves();
+        void updateMoves();
         void makeMove(char *move);
 
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);
