@@ -30,34 +30,31 @@ void Board::updateMoves()
     for(light=map_Char.begin(); light!=map_Char.end(); light++)
     {
         std::string stri = light->first;
-//		if(isLight(stri))
-//		{
-			char cho = light->second;
-			if(!isDark(stri))
-			{
-				bool color = islower(cho);
-				std::map<Path, std::string>::iterator it;
-				for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
-				{
-					std::string strj = it->second;
-					if(isEmpty(strj))
-					{
-					    mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
-					}
-                    if(cho=='c'||cho=='C')
-                    {
-                        std::string sJump = jumpTo(stri, it->first);
-                        if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
-                            mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
-                    }
-                    else if(isLight(strj))
-                    {
-                        if(momentum(cho, map_Char[strj]))
-                            mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
-                    }
-				}
-			}
-//		}
+        char cho = light->second;
+//        if(!isDark(stri))
+//        {
+            bool color = islower(cho);
+            std::map<Path, std::string>::iterator it;
+            for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
+            {
+                std::string strj = it->second;
+                if(isEmpty(strj))
+                {
+                    mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
+                }
+                if(cho=='c'||cho=='C')
+                {
+                    std::string sJump = jumpTo(stri, it->first);
+                    if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
+                        mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
+                }
+                else if(isLight(strj))
+                {
+                    if(momentum(cho, map_Char[strj]))
+                        mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
+                }
+            }
+//        }
     }
 }
 
