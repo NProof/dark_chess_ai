@@ -5,7 +5,7 @@ Board::Board()
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-        map_Char[stri] = 'X';
+        darks.insert(stri);
 
 		if(i/4>0)
 			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
@@ -46,7 +46,7 @@ void Board::updateMoves()
                     if(cho=='c'||cho=='C')
                     {
                         std::string sJump = jumpTo(stri, it->first);
-                        if(sJump!="outer"&&!isDark(sJump)&&momentum(cho, map_Char[sJump]))
+                        if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
                             mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
                     }
                     else if(isLight(strj))
@@ -72,7 +72,10 @@ void Board::makeMove(char *move)
         map_Char.erase(src);
     }
     else
+	{
         map_Char[src] = move[3] ;
+		darks.erase(src);
+	}
 }
 
 std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
@@ -130,12 +133,12 @@ bool Board::momentum(char hig, char low)
 
 bool Board::isDark(std::string strp)
 {
-    return map_Char.count(strp)&&map_Char[strp] == 'X';
+    return darks.count(strp) ;
 }
 
 bool Board::isLight(std::string strp)
 {
-    return map_Char.count(strp)&&map_Char[strp] != 'X';
+    return map_Char.count(strp) ;
 }
 
 bool Board::isEmpty(std::string strp)
