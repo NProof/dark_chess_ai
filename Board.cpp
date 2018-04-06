@@ -94,12 +94,12 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
 
 std::string Board::jumpTo(std::string src, Path path)
 {
-    while(this->pathTo[src].count(path)&&isDark(pathTo[src][path]))
+    while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))
         src = this->pathTo[src][path];
     if(this->pathTo[src].count(path))
     {
         src = this->pathTo[src][path];
-        while(this->pathTo[src].count(path)&&isDark(pathTo[src][path]))
+        while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))
             src = this->pathTo[src][path];
         if(this->pathTo[src].count(path))
         {
