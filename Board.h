@@ -21,6 +21,7 @@ class Board
     private:
         std::string jumpTo(std::string, Path);
 		bool momentum(char, char);
+		void doDark(std::string);
 		bool isDark(std::string);
 		void doLight(std::string, char);
 		bool isLight(std::string);
