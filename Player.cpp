@@ -17,7 +17,7 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    board->generateMove();
+    board->initMoves();
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
     std::set<std::pair<std::string, std::string>>::iterator pairmove;
     pairmove = mValid.begin();

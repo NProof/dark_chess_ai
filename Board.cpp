@@ -23,7 +23,7 @@ Board::~Board()
     //dtor
 }
 
-void Board::generateMove()
+void Board::initMoves()
 {
     mValid.clear();
     for(int i=0; i<32; i++)
