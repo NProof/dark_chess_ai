@@ -68,8 +68,7 @@ void Board::makeMove(char *move)
     }
     else
 	{
-        map_Char[src] = move[3] ;
-		darks.erase(src);
+	    doLight(src, move[3]);
 	}
 }
 
@@ -129,6 +128,12 @@ bool Board::momentum(char hig, char low)
 bool Board::isDark(std::string strp)
 {
     return darks.count(strp) ;
+}
+
+void Board::doLight(std::string strp, char cchess)
+{
+    map_Char[strp] = cchess ;
+    darks.erase(strp);
 }
 
 bool Board::isLight(std::string strp)
