@@ -97,7 +97,7 @@ std::string Board::jumpTo(std::string src, Path path)
     if(this->pathTo[src].count(path))
     {
         src = this->pathTo[src][path];
-        while(this->pathTo[src].count(path)&&this->map_Char.count(this->pathTo[src][path]))
+        while(this->pathTo[src].count(path)&&!this->map_Char.count(this->pathTo[src][path]))
             src = this->pathTo[src][path];
         if(this->pathTo[src].count(path))
         {
