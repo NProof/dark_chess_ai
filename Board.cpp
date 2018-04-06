@@ -81,7 +81,7 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-        if(map_Char.count(stri)&&isDark(stri))
+        if(isDark(stri))
         {
             result.insert(std::pair<std::string, std::string>(stri, stri));
         }
@@ -91,12 +91,12 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
 
 std::string Board::jumpTo(std::string src, Path path)
 {
-    while(this->pathTo[src].count(path)&&!this->map_Char.count(this->pathTo[src][path]))
+    while(this->pathTo[src].count(path)&&isDark(pathTo[src][path]))
         src = this->pathTo[src][path];
     if(this->pathTo[src].count(path))
     {
         src = this->pathTo[src][path];
-        while(this->pathTo[src].count(path)&&!this->map_Char.count(this->pathTo[src][path]))
+        while(this->pathTo[src].count(path)&&isDark(pathTo[src][path]))
             src = this->pathTo[src][path];
         if(this->pathTo[src].count(path))
         {
