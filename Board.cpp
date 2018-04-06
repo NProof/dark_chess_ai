@@ -76,9 +76,10 @@ void Board::makeMove(char *move)
 std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
 {
     std::set<std::pair<std::string, std::string>> result = mValid[color];
-    for(int i=0; i<32; i++)
+    std::set<std::string>::iterator darkIt;
+    for(darkIt=darks.begin(); darkIt!=darks.end(); darkIt++)
     {
-        std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
+        std::string stri = *darkIt;
         if(isDark(stri))
         {
             result.insert(std::pair<std::string, std::string>(stri, stri));
