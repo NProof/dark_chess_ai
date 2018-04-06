@@ -29,30 +29,34 @@ void Board::updateMoves()
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-        char cho = map_Char[stri];
-        if(cho!='X'&&cho!='-')
-        {
-            std::map<Path, std::string>::iterator it;
-            for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
-            {
-                char vch = map_Char[it->second];
-                if(vch=='-')
-                {
-                    mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(stri, it->second));
-                }
-                if(cho=='c'||cho=='C')
-                {
-                    std::string sJump = jumpTo(stri, it->first);
-                    if(sJump!="outer"&&momentum(cho, map_Char[sJump]))
-                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(stri, sJump));
-                }
-                else if(vch!='-')
-                {
-                    if(momentum(cho, vch))
-                        mValid[(bool)islower(cho)].insert(std::pair<std::string, std::string>(stri, it->second));
-                }
-            }
-        }
+		if(map_Char.count(stri))
+		{
+			char cho = map_Char[stri];
+			if(cho!='X')
+			{
+				bool color = islower(cho); // (bool)islower(cho)
+				std::map<Path, std::string>::iterator it;
+				for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
+				{
+					if(map_Char.count(it->second))
+					{
+						if(cho=='c'||cho=='C')
+						{
+							std::string sJump = jumpTo(stri, it->first);
+							if(sJump!="outer"&&momentum(cho, map_Char[sJump]))
+								mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
+						}
+						else
+						{
+							if(momentum(cho, map_Char[it->second]))
+								mValid[color].insert(std::pair<std::string, std::string>(stri, it->second));
+						}
+					}
+					else
+						mValid[color].insert(std::pair<std::string, std::string>(stri, it->second));
+				}
+			}
+		}
     }
 }
 
@@ -65,7 +69,8 @@ void Board::makeMove(char *move)
     {
         dst = std::string{move[3],move[4]};
         map_Char[dst] = map_Char[src];
-        map_Char[src] = '-';
+        // map_Char[src] = '-';
+        map_Char.erase(src);
     }
     else
         map_Char[src] = move[3] ;
@@ -87,12 +92,12 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
 
 std::string Board::jumpTo(std::string src, Path path)
 {
-    while(this->pathTo[src].count(path)&&this->map_Char[this->pathTo[src][path]]=='-')
+    while(this->pathTo[src].count(path)&&!this->map_Char.count(this->pathTo[src][path]))
         src = this->pathTo[src][path];
     if(this->pathTo[src].count(path))
     {
         src = this->pathTo[src][path];
-        while(this->pathTo[src].count(path)&&this->map_Char[this->pathTo[src][path]]=='-')
+        while(this->pathTo[src].count(path)&&this->map_Char.count(this->pathTo[src][path]))
             src = this->pathTo[src][path];
         if(this->pathTo[src].count(path))
         {
