@@ -38,9 +38,10 @@ void Board::updateMoves()
 				std::map<Path, std::string>::iterator it;
 				for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
 				{
-					if(!map_Char.count(it->second))
+					std::string strj = it->secondl
+					if(!map_Char.count(strj))
 					{
-					    mValid[color].insert(std::pair<std::string, std::string>(stri, it->second));
+					    mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
 					}
                     if(cho=='c'||cho=='C')
                     {
@@ -48,10 +49,10 @@ void Board::updateMoves()
                         if(sJump!="outer"&&momentum(cho, map_Char[sJump]))
                             mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
                     }
-                    else if(map_Char.count(it->second))
+                    else if(map_Char.count(strj))
                     {
-                        if(momentum(cho, map_Char[it->second]))
-                            mValid[color].insert(std::pair<std::string, std::string>(stri, it->second));
+                        if(momentum(cho, map_Char[strj]))
+                            mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
                     }
 				}
 			}
