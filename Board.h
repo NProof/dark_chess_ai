@@ -21,6 +21,9 @@ class Board
     private:
         std::string jumpTo(std::string, Path);
 		bool momentum(char, char);
+		bool isDark(std::string);
+		bool isLight(std::string);
+		bool isEmpty(std::string);
 
         std::set<std::string> darks;
         std::map<bool, std::set<std::pair<std::string, std::string>>> mValid;

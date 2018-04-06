@@ -29,27 +29,27 @@ void Board::updateMoves()
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-		if(map_Char.count(stri))
+		if(isLight(stri))
 		{
 			char cho = map_Char[stri];
-			if(cho!='X')
+			if(!isDark(stri))
 			{
 				bool color = islower(cho);
 				std::map<Path, std::string>::iterator it;
 				for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
 				{
-					std::string strj = it->secondl
-					if(!map_Char.count(strj))
+					std::string strj = it->second;
+					if(isEmpty(strj))
 					{
 					    mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
 					}
                     if(cho=='c'||cho=='C')
                     {
                         std::string sJump = jumpTo(stri, it->first);
-                        if(sJump!="outer"&&momentum(cho, map_Char[sJump]))
+                        if(sJump!="outer"&&!isDark(sJump)&&momentum(cho, map_Char[sJump]))
                             mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
                     }
-                    else if(map_Char.count(strj))
+                    else if(isLight(strj))
                     {
                         if(momentum(cho, map_Char[strj]))
                             mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
@@ -81,7 +81,7 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-        if(map_Char.count(stri)&&map_Char[stri]=='X')
+        if(map_Char.count(stri)&&isDark(stri))
         {
             result.insert(std::pair<std::string, std::string>(stri, stri));
         }
@@ -96,7 +96,6 @@ std::string Board::jumpTo(std::string src, Path path)
     if(this->pathTo[src].count(path))
     {
         src = this->pathTo[src][path];
-        printf("%s- ", src.c_str());
         while(this->pathTo[src].count(path)&&!this->map_Char.count(this->pathTo[src][path]))
             src = this->pathTo[src][path];
         if(this->pathTo[src].count(path))
@@ -113,8 +112,8 @@ std::string Board::jumpTo(std::string src, Path path)
 
 bool Board::momentum(char hig, char low)
 {
-	return (hig=='X'||low=='X'||islower(hig)==islower(low))
-        ? false : low=='-'||hig=='c'||hig=='C'||
+	return (islower(hig)==islower(low))
+        ? false : hig=='c'||hig=='C'||
 	    (hig=='k'&&low!='P')||
 	    (hig=='g'&&low!='K')||
 	    (hig=='m'&&(low!='G'&&low!='K'))||
@@ -127,4 +126,19 @@ bool Board::momentum(char hig, char low)
 	    (hig=='R'&&(low!='m'&&low!='g'&&low!='k'))||
 	    (hig=='N'&&(low=='n'||low=='c'||low=='p'))||
 	    (hig=='P'&&(low=='k'||low=='p'));
+}
+
+bool Board::isDark(std::string strp)
+{
+    return map_Char.count(strp)&&map_Char[strp] == 'X';
+}
+
+bool Board::isLight(std::string strp)
+{
+    return map_Char.count(strp)&&map_Char[strp] != 'X';
+}
+
+bool Board::isEmpty(std::string strp)
+{
+    return !isDark(strp)&&!isLight(strp); // !map_Char.count(strp)
 }
