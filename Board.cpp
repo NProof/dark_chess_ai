@@ -5,7 +5,6 @@ Board::Board()
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-        darks.insert(stri);
 
 		if(i/4>0)
 			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
@@ -15,6 +14,8 @@ Board::Board()
 			pathTo[stri][Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
 		if(i%4<3)
 			pathTo[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
+
+        doDark(stri);
     }
 }
 
@@ -123,6 +124,10 @@ bool Board::momentum(char hig, char low)
 	    (hig=='R'&&(low!='m'&&low!='g'&&low!='k'))||
 	    (hig=='N'&&(low=='n'||low=='c'||low=='p'))||
 	    (hig=='P'&&(low=='k'||low=='p'));
+}
+void Board::doDark(std::string strp)
+{
+    darks.insert(strp);
 }
 
 bool Board::isDark(std::string strp)
