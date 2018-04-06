@@ -26,12 +26,13 @@ Board::~Board()
 void Board::updateMoves()
 {
     mValid.clear();
-    for(int i=0; i<32; i++)
+    std::map<std::string, char>::iterator light;
+    for(light=map_Char.begin(); light!=map_Char.end(); light++)
     {
-        std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-		if(isLight(stri))
-		{
-			char cho = map_Char[stri];
+        std::string stri = light->first;
+//		if(isLight(stri))
+//		{
+			char cho = light->second;
 			if(!isDark(stri))
 			{
 				bool color = islower(cho);
@@ -56,7 +57,7 @@ void Board::updateMoves()
                     }
 				}
 			}
-		}
+//		}
     }
 }
 
