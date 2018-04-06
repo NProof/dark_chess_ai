@@ -80,10 +80,7 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
     for(darkIt=darks.begin(); darkIt!=darks.end(); darkIt++)
     {
         std::string stri = *darkIt;
-        if(isDark(stri))
-        {
-            result.insert(std::pair<std::string, std::string>(stri, stri));
-        }
+        result.insert(std::pair<std::string, std::string>(stri, stri));
     }
     return result ;
 }
