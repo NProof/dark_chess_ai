@@ -143,5 +143,5 @@ bool Board::isLight(std::string strp)
 
 bool Board::isEmpty(std::string strp)
 {
-    return !isDark(strp)&&!isLight(strp); // !map_Char.count(strp)
+    return !isDark(strp)&&!isLight(strp);
 }
