@@ -23,36 +23,40 @@ Board::~Board()
     //dtor
 }
 
-void Board::updateMoves()
+std::set<std::pair<std::string, std::string>> Board::updateMoves(bool trun)
 {
-    mValid.clear();
+    std::set<std::pair<std::string, std::string>> mValid;
     std::map<std::string, char>::iterator light;
     for(light=map_Char.begin(); light!=map_Char.end(); light++)
     {
         std::string stri = light->first;
         char cho = light->second;
         bool color = islower(cho);
-        std::map<Path, std::string>::iterator it;
-        for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
+        if(trun == color)
         {
-            std::string strj = it->second;
-            if(isEmpty(strj))
+            std::map<Path, std::string>::iterator it;
+            for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
             {
-                mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
-            }
-            if(cho=='c'||cho=='C')
-            {
-                std::string sJump = jumpTo(stri, it->first);
-                if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
-                    mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
-            }
-            else if(isLight(strj))
-            {
-                if(momentum(cho, map_Char[strj]))
-                    mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
+                std::string strj = it->second;
+                if(isEmpty(strj))
+                {
+                    mValid.insert(std::pair<std::string, std::string>(stri, strj));
+                }
+                if(cho=='c'||cho=='C')
+                {
+                    std::string sJump = jumpTo(stri, it->first);
+                    if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
+                        mValid.insert(std::pair<std::string, std::string>(stri, sJump));
+                }
+                else if(isLight(strj))
+                {
+                    if(momentum(cho, map_Char[strj]))
+                        mValid.insert(std::pair<std::string, std::string>(stri, strj));
+                }
             }
         }
     }
+    return mValid;
 }
 
 void Board::makeMove(char *move)
@@ -74,7 +78,7 @@ void Board::makeMove(char *move)
 
 std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
 {
-    std::set<std::pair<std::string, std::string>> result = mValid[color];
+    std::set<std::pair<std::string, std::string>> result = updateMoves(color);
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};

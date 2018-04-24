@@ -13,11 +13,12 @@ Player::~Player()
 void Player::setColor(PROTO_CLR color)
 {
     this->color = color == PROTO_CLR::PCLR_BLACK; // =islower()
+//    board->trunOfBorad = this->color;
 }
 
 void Player::generateMove(char *move)
 {
-    board->updateMoves();
+    board->updateMoves(color);
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
     std::set<std::pair<std::string, std::string>>::iterator pairmove;
     pairmove = mValid.begin();
