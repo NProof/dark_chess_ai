@@ -18,15 +18,23 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    board->updateMoves(color);
+    std::set<std::string> stringMoves;
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
-    std::set<std::pair<std::string, std::string>>::iterator pairmove;
-    pairmove = mValid.begin();
-    int times = rand()%(mValid.size());
-    for(int i=0; i<times; i++) pairmove++;
-    strcpy(move, pairmove->first.c_str());
-    move[2] = '-';
-    strcpy(move+3, pairmove->second.c_str());
+    std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
+    for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
+    {
+        stringMoves.insert(pairmoveIt->first+'-'+pairmoveIt->second);
+    }
+    std::set<std::string> setCheckDark = board->getSetCheckDark();
+    std::set<std::string>::iterator setCheckDarkIt;
+    for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
+    {
+        stringMoves.insert(*setCheckDarkIt+'-'+*setCheckDarkIt);
+    }
+    std::set<std::string>::iterator stringMovesIt = stringMoves.begin();
+    int times = rand()%(stringMoves.size());
+    for(int i=0; i<times; i++) stringMovesIt++;
+    strcpy(move, stringMovesIt->c_str());
 }
 
 void Player::makeMove(char *move)

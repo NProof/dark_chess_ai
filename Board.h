@@ -12,10 +12,10 @@ class Board
         Board();
         virtual ~Board();
 
-        std::set<std::pair<std::string, std::string>> updateMoves(bool);
         void makeMove(char *move);
-
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);
+        std::map<char, int> getMapChessesDark();
+        std::set<std::string> getSetCheckDark();
     protected:
 
     private:
@@ -26,8 +26,8 @@ class Board
 		bool isLight(std::string);
 		bool isEmpty(std::string);
 
-		std::map<char, int> mapchessesdark;
-        std::set<std::string> setcheckdark;
+		std::map<char, int> mapChessesDark;
+        std::set<std::string> setCheckDark;
         std::map<std::string, char> map_Char;
         std::map<std::string, std::map<Path, std::string>> pathTo;
 };

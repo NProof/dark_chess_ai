@@ -5,7 +5,7 @@ Board::Board()
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
-        setcheckdark.insert(stri);
+        setCheckDark.insert(stri);
 
 		if(i/4>0)
 			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
@@ -16,7 +16,7 @@ Board::Board()
 		if(i%4<3)
 			pathTo[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
     }
-    mapchessesdark = std::map<char, int>
+    mapChessesDark = std::map<char, int>
         {{'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
         ,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}};
 }
@@ -26,7 +26,24 @@ Board::~Board()
     //dtor
 }
 
-std::set<std::pair<std::string, std::string>> Board::updateMoves(bool trun)
+void Board::makeMove(char *move)
+{
+    std::string src, dst;
+
+    src = std::string{move[0],move[1]};
+    if(move[2]=='-')
+    {
+        dst = std::string{move[3],move[4]};
+        map_Char[dst] = map_Char[src];
+        map_Char.erase(src);
+    }
+    else
+	{
+	    doLight(src, move[3]);
+	}
+}
+
+std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
 {
     std::set<std::pair<std::string, std::string>> mValid;
     std::map<std::string, char>::iterator light;
@@ -62,34 +79,14 @@ std::set<std::pair<std::string, std::string>> Board::updateMoves(bool trun)
     return mValid;
 }
 
-void Board::makeMove(char *move)
+std::map<char, int> Board::getMapChessesDark()
 {
-    std::string src, dst;
-
-    src = std::string{move[0],move[1]};
-    if(move[2]=='-')
-    {
-        dst = std::string{move[3],move[4]};
-        map_Char[dst] = map_Char[src];
-        map_Char.erase(src);
-    }
-    else
-	{
-	    doLight(src, move[3]);
-	}
+    return mapChessesDark;
 }
 
-std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
+std::set<std::string> Board::getSetCheckDark()
 {
-    std::set<std::pair<std::string, std::string>> result = updateMoves(color);
-    std::string stri;
-    std::set<std::string>::iterator setDarkIt;
-    for(setDarkIt = setcheckdark.begin(); setDarkIt != setcheckdark.end(); setDarkIt++)
-    {
-        stri = *setDarkIt;
-        result.insert(std::pair<std::string, std::string>(stri, stri));
-    }
-    return result ;
+    return setCheckDark;
 }
 
 std::string Board::jumpTo(std::string src, Path path)
@@ -133,14 +130,14 @@ bool Board::momentum(char hig, char low)
 
 bool Board::isDark(std::string strp)
 {
-    return setcheckdark.count(strp) ;
+    return setCheckDark.count(strp) ;
 }
 
 void Board::doLight(std::string strp, char cchess)
 {
     map_Char[strp] = cchess ;
-    setcheckdark.erase(strp);
-    mapchessesdark[cchess] = mapchessesdark[cchess] - 1;
+    setCheckDark.erase(strp);
+    mapChessesDark[cchess] = mapChessesDark[cchess] - 1;
 }
 
 bool Board::isLight(std::string strp)
