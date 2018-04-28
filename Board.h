@@ -26,7 +26,8 @@ class Board
 		bool isLight(std::string);
 		bool isEmpty(std::string);
 
-        std::set<std::string> darks;
+		std::map<char, int> mapchessesdark;
+        std::set<std::string> setcheckdark;
         std::map<std::string, char> map_Char;
         std::map<std::string, std::map<Path, std::string>> pathTo;
 };
