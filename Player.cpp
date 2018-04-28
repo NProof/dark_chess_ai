@@ -13,7 +13,6 @@ Player::~Player()
 void Player::setColor(PROTO_CLR color)
 {
     this->color = color == PROTO_CLR::PCLR_BLACK; // =islower()
-//    board->trunOfBorad = this->color;
 }
 
 void Player::generateMove(char *move)
