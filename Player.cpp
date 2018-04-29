@@ -17,23 +17,42 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::set<std::string> stringMoves;
+    mapGreatMove.clear();
+    Board *newBoard;
+    std::string strMove;
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
     std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
     for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
     {
-        stringMoves.insert(pairmoveIt->first+'-'+pairmoveIt->second);
+        strMove = pairmoveIt->first+'-'+pairmoveIt->second;
+        newBoard = new Board(*board);
+        strcpy(move, strMove.c_str());
+        newBoard->makeMove(move);
+        mapGreatMove[std::map<Board *, double>{{newBoard, 1.0}}] = strMove;
     }
     std::set<std::string> setCheckDark = board->getSetCheckDark();
     std::set<std::string>::iterator setCheckDarkIt;
+    std::map<char, int> mapChessesDark = board->getMapChessesDark();
+    std::map<char, int>::iterator mapChessesDarkIt;
+    int all = 0;
+    for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)
+    {
+        all += mapChessesDarkIt->second;
+    }
     for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
     {
-        stringMoves.insert(*setCheckDarkIt+'-'+*setCheckDarkIt);
+        std::map<Board *, double> newMap;
+        for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)
+        {
+            strMove = *setCheckDarkIt+'('+mapChessesDarkIt->first+')';
+            newBoard = new Board(*board);
+            strcpy(move, strMove.c_str());
+            newBoard->makeMove(move);
+            newMap.insert(std::pair<Board *, double>(newBoard, double(mapChessesDarkIt->second/all)));
+        }
+        mapGreatMove[newMap] = *setCheckDarkIt+'-'+*setCheckDarkIt;;
     }
-    std::set<std::string>::iterator stringMovesIt = stringMoves.begin();
-    int times = rand()%(stringMoves.size());
-    for(int i=0; i<times; i++) stringMovesIt++;
-    strcpy(move, stringMovesIt->c_str());
+    strcpy(move, mapGreatMove.begin()->second.c_str());
 }
 
 void Player::makeMove(char *move)

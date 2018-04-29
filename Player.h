@@ -19,6 +19,7 @@ class Player
     private:
         bool color;
         Board *board;
+        std::map<std::map<Board *, double>, std::string> mapGreatMove;
 };
 
 #endif // PLAYER_H
