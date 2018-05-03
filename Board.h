@@ -20,16 +20,16 @@ class Board
 
     private:
         std::string jumpTo(std::string, Path);
-		bool momentum(char, char);
-		bool isDark(std::string);
-		void doLight(std::string, char);
-		bool isLight(std::string);
-		bool isEmpty(std::string);
+	bool momentum(char, char);
+	bool isDark(std::string);
+	void doLight(std::string, char);
+	bool isLight(std::string);
+	bool isEmpty(std::string);
 
-		std::map<char, int> mapChessesDark;
-		std::set<std::string> setCheckDark;
-		std::map<std::string, char> map_Char;
-		std::map<std::string, std::map<Path, std::string>> pathTo;
+	std::map<char, int> mapChessesDark;
+	std::set<std::string> setCheckDark;
+	std::map<std::string, char> map_Char;
+	std::map<std::string, std::map<Path, std::string>> pathTo;
 };
 
 #endif // BOARD_H
