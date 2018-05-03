@@ -27,9 +27,9 @@ class Board
 		bool isEmpty(std::string);
 
 		std::map<char, int> mapChessesDark;
-        std::set<std::string> setCheckDark;
-        std::map<std::string, char> map_Char;
-        std::map<std::string, std::map<Path, std::string>> pathTo;
+		std::set<std::string> setCheckDark;
+		std::map<std::string, char> map_Char;
+		std::map<std::string, std::map<Path, std::string>> pathTo;
 };
 
 #endif // BOARD_H
