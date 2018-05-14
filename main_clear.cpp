@@ -37,7 +37,7 @@ int main(int argc , char **argv)
 		}
 
 		protocol.get_turn(turn, color);
-		player.setColor(color);
+		// player.setColor(color);
 
 
 		if(turn)

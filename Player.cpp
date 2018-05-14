@@ -17,18 +17,35 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    board->updateMoves();
+    std::set<Move> greaterMove;
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
-    std::set<std::pair<std::string, std::string>>::iterator pairmove;
-    pairmove = mValid.begin();
-    int times = rand()%(mValid.size());
-    for(int i=0; i<times; i++) pairmove++;
-    strcpy(move, pairmove->first.c_str());
-    move[2] = '-';
-    strcpy(move+3, pairmove->second.c_str());
+    std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
+    for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
+    {
+        greaterMove.insert(Move(this, *board, pairmoveIt->first+'-'+pairmoveIt->second));
+    }
+    std::map<char, int> mapChessesDark = board->getMapChessesDark(color);
+    std::map<char, int>::iterator mapChessesDarkIt;
+    int all = 0;
+    for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)
+    {
+        all += mapChessesDarkIt->second;
+    }
+    std::set<std::string> setCheckDark = board->getSetCheckDark();
+    std::set<std::string>::iterator setCheckDarkIt;
+    for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
+    {
+        greaterMove.insert(Move(this, *board, all, mapChessesDark, *setCheckDarkIt));
+    }
+    strcpy(move, greaterMove.begin()->getStringMove().c_str());
 }
 
 void Player::makeMove(char *move)
 {
-    this->board->makeMove(move);
+    this->board->makeMove(std::string(move));
+}
+
+bool Player::getColor()
+{
+    return color;
 }

@@ -5,6 +5,7 @@ Board::Board()
     for(int i=0; i<32; i++)
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
+        setCheckDark.insert(stri);
 
 		if(i/4>0)
 			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
@@ -14,9 +15,10 @@ Board::Board()
 			pathTo[stri][Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
 		if(i%4<3)
 			pathTo[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
-
-        doDark(stri);
     }
+    mapChessesDark = std::map<char, int>
+        {{'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
+        ,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}};
 }
 
 Board::~Board()
@@ -24,46 +26,19 @@ Board::~Board()
     //dtor
 }
 
-void Board::updateMoves()
+bool Board::operator<(const Board& lhs) const
 {
-    mValid.clear();
-    std::map<std::string, char>::iterator light;
-    for(light=map_Char.begin(); light!=map_Char.end(); light++)
-    {
-        std::string stri = light->first;
-        char cho = light->second;
-        bool color = islower(cho);
-        std::map<Path, std::string>::iterator it;
-        for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
-        {
-            std::string strj = it->second;
-            if(isEmpty(strj))
-            {
-                mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
-            }
-            if(cho=='c'||cho=='C')
-            {
-                std::string sJump = jumpTo(stri, it->first);
-                if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
-                    mValid[color].insert(std::pair<std::string, std::string>(stri, sJump));
-            }
-            else if(isLight(strj))
-            {
-                if(momentum(cho, map_Char[strj]))
-                    mValid[color].insert(std::pair<std::string, std::string>(stri, strj));
-            }
-        }
-    }
+    return false;
 }
 
-void Board::makeMove(char *move)
+void Board::makeMove(std::string move)
 {
     std::string src, dst;
 
-    src = std::string{move[0],move[1]};
+    src = move.substr(0, 2);
     if(move[2]=='-')
     {
-        dst = std::string{move[3],move[4]};
+        dst = move.substr(3, 2);;
         map_Char[dst] = map_Char[src];
         map_Char.erase(src);
     }
@@ -73,16 +48,56 @@ void Board::makeMove(char *move)
 	}
 }
 
-std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool color)
+std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
 {
-    std::set<std::pair<std::string, std::string>> result = mValid[color];
-    std::set<std::string>::iterator darkIt;
-    for(darkIt=darks.begin(); darkIt!=darks.end(); darkIt++)
+    std::set<std::pair<std::string, std::string>> mValid;
+    std::map<std::string, char>::iterator light;
+    for(light=map_Char.begin(); light!=map_Char.end(); light++)
     {
-        std::string stri = *darkIt;
-        result.insert(std::pair<std::string, std::string>(stri, stri));
+        std::string stri = light->first;
+        char cho = light->second;
+        bool color = islower(cho);
+        if(trun == color)
+        {
+            std::map<Path, std::string>::iterator it;
+            for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
+            {
+                std::string strj = it->second;
+                if(isEmpty(strj))
+                {
+                    mValid.insert(std::pair<std::string, std::string>(stri, strj));
+                }
+                if(cho=='c'||cho=='C')
+                {
+                    std::string sJump = jumpTo(stri, it->first);
+                    if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
+                        mValid.insert(std::pair<std::string, std::string>(stri, sJump));
+                }
+                else if(isLight(strj))
+                {
+                    if(momentum(cho, map_Char[strj]))
+                        mValid.insert(std::pair<std::string, std::string>(stri, strj));
+                }
+            }
+        }
     }
-    return result ;
+    return mValid;
+}
+
+std::map<char, int> Board::getMapChessesDark(bool trun)
+{
+    std::map<char, int> ret;
+    for(std::map<char, int>::iterator it=mapChessesDark.begin(); it!=mapChessesDark.end(); ++it)
+    {
+        if(islower(it->first) == trun)
+            ret.insert(std::pair<char, int>(it->first, it->second));
+    }
+    return ret;
+}
+
+std::set<std::string> Board::getSetCheckDark()
+{
+    return setCheckDark;
 }
 
 std::string Board::jumpTo(std::string src, Path path)
@@ -123,20 +138,17 @@ bool Board::momentum(char hig, char low)
 	    (hig=='N'&&(low=='n'||low=='c'||low=='p'))||
 	    (hig=='P'&&(low=='k'||low=='p'));
 }
-void Board::doDark(std::string strp)
-{
-    darks.insert(strp);
-}
 
 bool Board::isDark(std::string strp)
 {
-    return darks.count(strp) ;
+    return setCheckDark.count(strp) ;
 }
 
 void Board::doLight(std::string strp, char cchess)
 {
     map_Char[strp] = cchess ;
-    darks.erase(strp);
+    setCheckDark.erase(strp);
+    mapChessesDark[cchess] = mapChessesDark[cchess] - 1;
 }
 
 bool Board::isLight(std::string strp)

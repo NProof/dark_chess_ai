@@ -2,9 +2,11 @@
 #define PLAYER_H
 
 #include <set>
-#include "Board.h"
 #include "Protocol.h"
+#include "Board.h"
+#include "Move.h"
 
+class Move;
 class Player
 {
     public:
@@ -14,11 +16,14 @@ class Player
         void setColor(PROTO_CLR);
         void generateMove(char *);
         void makeMove(char *);
+
+        bool getColor();
     protected:
 
     private:
         bool color;
         Board *board;
+        std::map<Board, std::set<Move>> S;
 };
 
 #endif // PLAYER_H
