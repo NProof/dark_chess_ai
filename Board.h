@@ -12,7 +12,7 @@ class Board
         Board();
         virtual ~Board();
 
-        bool operator<(const Board& lhs) const;
+        bool operator<(const Board&) const;
 
         void makeMove(std::string);
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);

@@ -26,9 +26,21 @@ Board::~Board()
     //dtor
 }
 
-bool Board::operator<(const Board& lhs) const
+bool Board::operator<(const Board& other) const
 {
-    return false;
+    if(mapChessesDark == other.mapChessesDark)
+    {
+        if(setCheckDark == other.setCheckDark)
+        {
+            if(map_Char == other.map_Char)
+            {
+                return false;
+            }
+            else return map_Char < other.map_Char;
+        }
+        else return setCheckDark < other.setCheckDark;
+    }
+    else return mapChessesDark < other.mapChessesDark;
 }
 
 void Board::makeMove(std::string move)
