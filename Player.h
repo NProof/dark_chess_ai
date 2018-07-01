@@ -23,7 +23,8 @@ class Player
     private:
         bool color;
         Board *board;
-        std::map<Board, std::set<Move>> S;
+        std::map<Board *, std::set<Move *>> B2MS;
+        std::map<Move *, std::map<Board *, int>> M2BM;
 };
 
 #endif // PLAYER_H
