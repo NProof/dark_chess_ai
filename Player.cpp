@@ -22,7 +22,7 @@ void Player::generateMove(char *move)
     std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
     for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
     {
-        greaterMove.insert(Move(this, *board, pairmoveIt->first+'-'+pairmoveIt->second));
+        greaterMove.insert(Move(this->color, *board, pairmoveIt->first+'-'+pairmoveIt->second));
     }
     std::map<char, int> mapChessesDark = board->getMapChessesDark(color);
     std::map<char, int>::iterator mapChessesDarkIt;
@@ -35,7 +35,7 @@ void Player::generateMove(char *move)
     std::set<std::string>::iterator setCheckDarkIt;
     for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
     {
-        greaterMove.insert(Move(this, *board, *setCheckDarkIt, all, mapChessesDark));
+        greaterMove.insert(Move(this->color, *board, *setCheckDarkIt, all, mapChessesDark));
     }
     strcpy(move, (greaterMove.size() > 0) ? greaterMove.begin()->getStringMove().c_str() : "NAN");
 }
