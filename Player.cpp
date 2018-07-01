@@ -35,7 +35,7 @@ void Player::generateMove(char *move)
     std::set<std::string>::iterator setCheckDarkIt;
     for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
     {
-        greaterMove.insert(Move(this, *board, all, mapChessesDark, *setCheckDarkIt));
+        greaterMove.insert(Move(this, *board, *setCheckDarkIt, all, mapChessesDark));
     }
     strcpy(move, (greaterMove.size() > 0) ? greaterMove.begin()->getStringMove().c_str() : "NAN");
 }

@@ -9,8 +9,8 @@ class Player;
 class Move
 {
     public:
-        Move(Player *, Board, std::string);
-        Move(Player *, Board, int, std::map<char, int>, std::string);
+        Move(bool, Board, std::string);
+        Move(bool, Board, std::string, int, std::map<char, int>);
         virtual ~Move();
 
         bool operator<(const Move& other) const;
@@ -19,7 +19,7 @@ class Move
     protected:
 
     private:
-        Player *player;
+        bool color;
         std::string strMove;
         int iDark;
         std::map<Board, int> possibleBoards;
