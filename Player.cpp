@@ -37,7 +37,7 @@ void Player::generateMove(char *move)
     {
         greaterMove.insert(Move(this, *board, all, mapChessesDark, *setCheckDarkIt));
     }
-    strcpy(move, greaterMove.begin()->getStringMove().c_str());
+    strcpy(move, (greaterMove.size() > 0) ? greaterMove.begin()->getStringMove().c_str() : "NAN");
 }
 
 void Player::makeMove(char *move)
