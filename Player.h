@@ -21,6 +21,8 @@ class Player
     protected:
 
     private:
+        std::set<Move> betterMoves(Board);
+
         bool color;
         Board *board;
         std::map<Board, std::set<Move *>> B2MS;

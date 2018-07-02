@@ -17,27 +17,9 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::set<Move> greaterMove;
-    std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
-    std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
-    for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
-    {
-        greaterMove.insert(Move(this->color, *board, pairmoveIt->first+'-'+pairmoveIt->second));
-    }
-    std::map<char, int> mapChessesDark = board->getMapChessesDark(color);
-    std::map<char, int>::iterator mapChessesDarkIt;
-    int all = 0;
-    for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)
-    {
-        all += mapChessesDarkIt->second;
-    }
-    std::set<std::string> setCheckDark = board->getSetCheckDark();
-    std::set<std::string>::iterator setCheckDarkIt;
-    for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
-    {
-        greaterMove.insert(Move(this->color, *board, *setCheckDarkIt, all, mapChessesDark));
-    }
-    strcpy(move, (greaterMove.size() > 0) ? greaterMove.begin()->getStringMove().c_str() : "NAN");
+    std::set<Move> moves = betterMoves(*board);
+    strcpy(move, (moves.empty()) ? "NAN" : moves.begin()->getStringMove().c_str());
+//    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
 
 void Player::makeMove(char *move)
@@ -48,4 +30,37 @@ void Player::makeMove(char *move)
 bool Player::getColor()
 {
     return color;
+}
+
+std::set<Move> Player::betterMoves(Board board)
+{
+    std::set<Move *> temp;
+    if(B2MS.find(board)==B2MS.end())
+    {
+        std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid(color);
+        std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
+        for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
+        {
+            temp.insert(new Move(this->color, board, pairmoveIt->first+'-'+pairmoveIt->second));
+        }
+        std::map<char, int> mapChessesDark = board.getMapChessesDark(color);
+        std::map<char, int>::iterator mapChessesDarkIt;
+        int all = 0;
+        for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)
+        {
+            all += mapChessesDarkIt->second;
+        }
+        std::set<std::string> setCheckDark = board.getSetCheckDark();
+        std::set<std::string>::iterator setCheckDarkIt;
+        for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
+        {
+            temp.insert(new Move(this->color, board, *setCheckDarkIt, all, mapChessesDark));
+        }
+        B2MS[board] = temp;
+    }
+    else temp = B2MS[board];
+    std::set<Move> ret;
+    for(std::set<Move *>::iterator it = temp.begin(); it != temp.end(); it++)
+        ret.insert(**it);
+    return ret;
 }
