@@ -29,22 +29,22 @@ Move::~Move()
 
 bool Move::operator<(const Move& other) const
 {
-    int i = 0, j = 0;
+    int scorei = 0, scorej = 0;
     for(auto it : possibleBoards)
     {
         Board temp = it.first;
-        i += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
+        scorei += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
     }
     for(auto it : other.possibleBoards)
     {
         Board temp = it.first;
-        j += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
+        scorej += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
     }
     if(iDark>1)
-        j *= iDark;
+        scorej *= iDark;
     if(other.iDark>1)
-        i *= other.iDark;
-    return i < j;
+        scorei *= other.iDark;
+    return scorei < scorej;
 }
 
 std::string Move::getStringMove() const
