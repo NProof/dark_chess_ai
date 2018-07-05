@@ -17,7 +17,6 @@ class Board
         void makeMove(std::string);
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);
         std::map<char, int> getDarkPieces();
-//        std::map<char, int> getMapChessesDark(bool);
         std::set<std::string> getSetCheckDark();
     protected:
 
@@ -30,8 +29,6 @@ class Board
 		bool isEmpty(std::string);
 
 		std::map<char, int> darkPieces;
-//		std::map<char, int> ownDarkPieces;
-//		std::map<char, int> opponentDarkPieces;
         std::set<std::string> setCheckDark;
         std::map<std::string, char> map_Char;
         std::map<std::string, std::map<Path, std::string>> pathTo;
