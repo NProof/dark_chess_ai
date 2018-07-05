@@ -5,6 +5,5 @@
 *.log
 *.aux
 *.gz
-dark_chess_ai.cbp
-dark_chess_ai.depend
+dark_chess_ai.*
 00-local/*
