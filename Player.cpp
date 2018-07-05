@@ -43,7 +43,7 @@ std::set<Move> Player::betterMoves(Board board)
         {
             temp.insert(new Move(this->color, board, pairmoveIt->first+'-'+pairmoveIt->second));
         }
-        std::map<char, int> mapChessesDark = board.getMapChessesDark(color);
+        std::map<char, int> mapChessesDark = board.getDarkPieces();
         std::map<char, int>::iterator mapChessesDarkIt;
         int all = 0;
         for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)

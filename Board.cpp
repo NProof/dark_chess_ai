@@ -16,8 +16,10 @@ Board::Board()
 		if(i%4<3)
 			pathTo[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
     }
-    ownDarkPieces = std::map<char, int> {{'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}};
-    opponentDarkPieces = std::map<char, int> {{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}};
+    darkPieces = std::map<char, int> {
+        {'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
+        ,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}
+    };
 }
 
 Board::~Board()
@@ -27,23 +29,19 @@ Board::~Board()
 
 bool Board::operator<(const Board& other) const
 {
-    if(ownDarkPieces == other.ownDarkPieces)
+    if(darkPieces == other.darkPieces)
     {
-        if(opponentDarkPieces == other.opponentDarkPieces)
+        if(setCheckDark == other.setCheckDark)
         {
-            if(setCheckDark == other.setCheckDark)
+            if(map_Char == other.map_Char)
             {
-                if(map_Char == other.map_Char)
-                {
-                    return false;
-                }
-                else return map_Char < other.map_Char;
+                return false;
             }
-            else return setCheckDark < other.setCheckDark;
+            else return map_Char < other.map_Char;
         }
-        else return opponentDarkPieces < other.opponentDarkPieces;
+        else return setCheckDark < other.setCheckDark;
     }
-    else return ownDarkPieces < other.ownDarkPieces;
+    else return darkPieces < other.darkPieces;
 }
 
 void Board::makeMove(std::string move)
@@ -99,9 +97,9 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
     return mValid;
 }
 
-std::map<char, int> Board::getMapChessesDark(bool trun)
+std::map<char, int> Board::getDarkPieces()
 {
-    return trun ? ownDarkPieces : opponentDarkPieces;
+    return darkPieces;
 }
 
 std::set<std::string> Board::getSetCheckDark()
@@ -157,9 +155,7 @@ void Board::doLight(std::string strp, char cchess)
 {
     map_Char[strp] = cchess ;
     setCheckDark.erase(strp);
-    islower(cchess)
-    ? ownDarkPieces[cchess] = ownDarkPieces[cchess] - 1
-    : opponentDarkPieces[cchess] = opponentDarkPieces[cchess] - 1;
+    darkPieces[cchess] = darkPieces[cchess] - 1;
 }
 
 bool Board::isLight(std::string strp)
