@@ -14,6 +14,7 @@ Move::Move(bool color, Board board, std::string strMove, int iDark, std::map<cha
     this->color = color;
     this->strMove = strMove+'-'+strMove;
     this->iDark = iDark;
+    possibleChar = board.getDarkPieces();
     for(std::map<char, int>::iterator it=possibleChar.begin(); it!=possibleChar.end(); it++)
     {
         Board possibleBoard(board);
