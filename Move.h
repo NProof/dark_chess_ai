@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include "Board.h"
-#include "Player.h"
 
-class Player;
 class Move
 {
     public:
