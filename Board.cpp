@@ -63,8 +63,6 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
         bool color = islower(cho);
         if(trun == color)
         {
-            std::map<Path, std::string>::iterator it;
-            for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
             std::map<Path, std::string>::const_iterator it;
             for(it = pathTo.at(stri).begin(); it != pathTo.at(stri).end(); it++)
             {
@@ -102,9 +100,8 @@ std::set<std::string> Board::getSetCheckDark()
 
 std::string Board::jumpTo(std::string src, Path path)
 {
-    while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))
-        src = this->pathTo[src][path];
-    if(this->pathTo[src].count(path))
+    while(pathTo.at(src).count(path)&&isEmpty(pathTo.at(src).at(path)))
+        src = pathTo.at(src).at(path);
     if(pathTo.at(src).count(path))
     {
         src = pathTo.at(src).at(path);
