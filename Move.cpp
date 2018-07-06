@@ -1,26 +1,10 @@
 #include "Move.h"
 
-Move::Move(bool color, Board board, std::string strMove)
+Move::Move(Board * srcBoard, std::string srcMove, std::string dstMove)
 {
-    this->color = color;
-    this->strMove = strMove;
-    this->iDark = 0;
-    board.makeMove(strMove);
-    this->possibleBoards[board] = 1;
-}
-
-Move::Move(bool color, Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
-{
-    this->color = color;
-    this->strMove = strMove+'-'+strMove;
-    this->iDark = iDark;
-    possibleChar = board.getDarkPieces();
-    for(std::map<char, int>::iterator it=possibleChar.begin(); it!=possibleChar.end(); it++)
-    {
-        Board possibleBoard(board);
-        possibleBoard.makeMove(strMove+'('+it->first+')');
-        this->possibleBoards[possibleBoard] = it->second;
-    }
+    this->srcBoard = srcBoard;
+    this->srcMove = srcMove;
+    this->dstMove = dstMove;
 }
 
 Move::~Move()
@@ -28,27 +12,17 @@ Move::~Move()
     //dtor
 }
 
-bool Move::operator<(const Move& other) const
+Board * Move::getSrcBoard()
 {
-    int scorei = 0, scorej = 0;
-    for(auto it : possibleBoards)
-    {
-        Board temp = it.first;
-        scorei += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
-    }
-    for(auto it : other.possibleBoards)
-    {
-        Board temp = it.first;
-        scorej += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
-    }
-    if(iDark>1)
-        scorej *= iDark;
-    if(other.iDark>1)
-        scorei *= other.iDark;
-    return scorei < scorej;
+    return srcBoard;
 }
 
-std::string Move::getStringMove() const
+std::string Move::getSrcMove()
 {
-    return strMove;
+    return srcMove;
+}
+
+std::string Move::getDstMove()
+{
+    return dstMove;
 }

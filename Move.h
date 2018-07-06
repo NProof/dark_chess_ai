@@ -7,20 +7,18 @@
 class Move
 {
     public:
-        Move(bool, Board, std::string);
-        Move(bool, Board, std::string, int, std::map<char, int>);
+        Move(Board *, std::string, std::string);
         virtual ~Move();
 
-        bool operator<(const Move& other) const;
-
-        std::string getStringMove() const;
+        Board * getSrcBoard();
+        std::string getSrcMove();
+        std::string getDstMove();
     protected:
 
     private:
-        bool color;
-        std::string strMove;
-        int iDark;
-        std::map<Board, int> possibleBoards;
+        Board * srcBoard;
+        std::string srcMove;
+        std::string dstMove;
 };
 
 #endif // MOVE_H

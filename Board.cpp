@@ -6,15 +6,6 @@ Board::Board()
     {
         std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
         setCheckDark.insert(stri);
-
-		if(i/4>0)
-			pathTo[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
-		if(i/4<7)
-			pathTo[stri][Path::Down] = std::string{char('a'+i%4),char('8'-i/4-1)};
-		if(i%4>0)
-			pathTo[stri][Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
-		if(i%4<3)
-			pathTo[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
     }
     darkPieces = std::map<char, int> {
         {'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
@@ -74,6 +65,8 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
         {
             std::map<Path, std::string>::iterator it;
             for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
+            std::map<Path, std::string>::const_iterator it;
+            for(it = pathTo.at(stri).begin(); it != pathTo.at(stri).end(); it++)
             {
                 std::string strj = it->second;
                 if(isEmpty(strj))
@@ -112,13 +105,14 @@ std::string Board::jumpTo(std::string src, Path path)
     while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))
         src = this->pathTo[src][path];
     if(this->pathTo[src].count(path))
+    if(pathTo.at(src).count(path))
     {
-        src = this->pathTo[src][path];
-        while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))
-            src = this->pathTo[src][path];
-        if(this->pathTo[src].count(path))
+        src = pathTo.at(src).at(path);
+        while(pathTo.at(src).count(path)&&isEmpty(pathTo.at(src).at(path)))
+            src = pathTo.at(src).at(path);
+        if(pathTo.at(src).count(path))
         {
-            src = this->pathTo[src][path];
+            src = pathTo.at(src).at(path);
             return src ;
         }
         else
@@ -166,4 +160,24 @@ bool Board::isLight(std::string strp)
 bool Board::isEmpty(std::string strp)
 {
     return !isDark(strp)&&!isLight(strp);
+}
+
+const std::map<std::string, std::map<Path, std::string>> Board::pathTo = initPathTo();
+
+const std::map<std::string, std::map<Path, std::string>> Board::initPathTo()
+{
+    std::map<std::string, std::map<Path, std::string>> ret;
+    for(int i=0; i<32; i++)
+    {
+        std::string stri = std::string{char('a'+i%4),char('8'-i/4)};
+		if(i/4>0)
+			ret[stri][Path::Up] = std::string{char('a'+i%4),char('8'-i/4+1)};
+		if(i/4<7)
+			ret[stri][Path::Down] = std::string{char('a'+i%4),char('8'-i/4-1)};
+		if(i%4>0)
+			ret[stri][Path::Left] = std::string{char('a'+i%4-1),char('8'-i/4)};
+		if(i%4<3)
+			ret[stri][Path::Right] = std::string{char('a'+i%4+1),char('8'-i/4)};
+    }
+    return ret;
 }
