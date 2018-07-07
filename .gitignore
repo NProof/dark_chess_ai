@@ -1,0 +1,9 @@
+*.o
+*.exe
+*.out
+*.zip
+*.log
+*.aux
+*.gz
+dark_chess_ai.*
+00-local/*
