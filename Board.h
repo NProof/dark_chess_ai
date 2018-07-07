@@ -31,7 +31,9 @@ class Board
 		std::map<char, int> darkPieces;
         std::set<std::string> setCheckDark;
         std::map<std::string, char> map_Char;
-        std::map<std::string, std::map<Path, std::string>> pathTo;
+
+        static const std::map<std::string, std::map<Path, std::string>> pathTo;
+        static const std::map<std::string, std::map<Path, std::string>> initPathTo();
 };
 
 #endif // BOARD_H
