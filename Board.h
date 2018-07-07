@@ -12,25 +12,28 @@ class Board
         Board();
         virtual ~Board();
 
-        void updateMoves();
-        void makeMove(char *move);
+        bool operator<(const Board&) const;
 
+        void makeMove(std::string);
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);
+        std::map<char, int> getDarkPieces();
+        std::set<std::string> getSetCheckDark();
     protected:
 
     private:
         std::string jumpTo(std::string, Path);
 		bool momentum(char, char);
-		void doDark(std::string);
 		bool isDark(std::string);
 		void doLight(std::string, char);
 		bool isLight(std::string);
 		bool isEmpty(std::string);
 
-        std::set<std::string> darks;
-        std::map<bool, std::set<std::pair<std::string, std::string>>> mValid;
+		std::map<char, int> darkPieces;
+        std::set<std::string> setCheckDark;
         std::map<std::string, char> map_Char;
-        std::map<std::string, std::map<Path, std::string>> pathTo;
+
+        static const std::map<std::string, std::map<Path, std::string>> pathTo;
+        static const std::map<std::string, std::map<Path, std::string>> initPathTo();
 };
 
 #endif // BOARD_H
