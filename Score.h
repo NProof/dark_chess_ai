@@ -19,9 +19,14 @@ class Score
          */
         Score& operator=(const Score& other);
 
+        bool operator<(const Score&) const;
+
     protected:
 
     private:
+        double rateWin;
+        double rateDraw;
+        double rateLose;
 };
 
 #endif // SCORE_H
