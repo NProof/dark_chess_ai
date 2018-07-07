@@ -27,7 +27,7 @@ class Player
 
         bool color;
         Board * board;
-//        std::map<std::string, Board *> mapMove;
+
         std::map<Board, Board *> theOne;
 //        std::map<Board *, std::set<Move *>> B2MS;
 //        std::map<Move *, std::map<Board *, int>> M2BM;
