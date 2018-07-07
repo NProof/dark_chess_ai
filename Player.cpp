@@ -64,6 +64,7 @@ std::set<Move *> Player::next(Board * board, bool color)
     std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
     for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
     {
+
         ret.insert(new Move(board, pairmoveIt->first, pairmoveIt->second));
     }
     std::set<std::string> setCheckDark = board->getSetCheckDark();
@@ -95,4 +96,14 @@ std::map<Board *, int> Player::next(Move * move)
         }
     }
     return ret;
+}
+
+Score Player::score(Move * move)
+{
+    return Score();
+}
+
+Score Player::score(Board * board)
+{
+    return Score();
 }

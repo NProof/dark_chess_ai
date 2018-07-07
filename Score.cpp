@@ -22,7 +22,7 @@ Score& Score::operator=(const Score& rhs)
     return *this;
 }
 
-bool Board::operator<(const Score& other) const
+bool Score::operator<(const Score& other) const
 {
     if(rateLose == other.rateLose)
     {

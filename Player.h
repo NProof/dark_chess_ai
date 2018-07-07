@@ -5,6 +5,7 @@
 #include "Protocol.h"
 #include "Board.h"
 #include "Move.h"
+#include "Score.h"
 
 class Move;
 class Player
@@ -24,6 +25,8 @@ class Player
     private:
         std::set<Move *> next(Board *, bool);
         std::map<Board *, int> next(Move *);
+	Score score(Move *);
+	Score score(Board *);
 
         bool color;
         Board * board;
