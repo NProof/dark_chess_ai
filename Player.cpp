@@ -137,11 +137,19 @@ Score Player::score(Board * board, bool color)
     {
         std::set<Move *>::iterator nextSetIt = nextSet.begin();
         bestScore = score(*nextSetIt);
+	if(bsetScore.rateWin == 1.0)
+	{
+		return bestScore;
+	}
         while(++nextSetIt != nextSet.end())
         {
             Score temp = score(*nextSetIt);
             if(bestScore < temp)
             {
+			if(temp.rateWin == 1.0)
+			{
+				return temp;
+			}
                 bestScore = temp;
             }
         }
