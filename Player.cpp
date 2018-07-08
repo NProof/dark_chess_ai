@@ -65,18 +65,18 @@ std::set<Move *> Player::next(Board * board, bool color)
     for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
     {
 
-        ret.insert(new Move(board, pairmoveIt->first, pairmoveIt->second));
+        ret.insert(new Move(board, color, pairmoveIt->first, pairmoveIt->second));
     }
     std::set<std::string> setCheckDark = board->getSetCheckDark();
     std::set<std::string>::iterator setCheckDarkIt;
     for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
     {
-        ret.insert(new Move(board, *setCheckDarkIt, *setCheckDarkIt));
+        ret.insert(new Move(board, color, *setCheckDarkIt, *setCheckDarkIt));
     }
     return ret;
 }
 
-std::map<Board *, int> Player::next(Move * move)
+std::pair<std::map<Board *, int>, bool> Player::next(Move * move)
 {
     std::map<Board *, int> ret;
     Board * board = move->getSrcBoard();
@@ -95,21 +95,22 @@ std::map<Board *, int> Player::next(Move * move)
             ret.at(temp) = it.second;
         }
     }
-    return ret;
+    return std::pair<std::map<Board *, int>, bool>(ret, !move->getColor());
 }
 
 Score Player::score(Move * move)
 {
-    std::map<Board *, int> nextMap = next(move);
+    std::pair<std::map<Board *, int>, bool> nextPair = next(move);
+//    std::map<Board *, int> nextMap = next(move);
 	Score meanScore;
 	double meanRateWin = 0.0;
 	double meanRateDraw = 0.0;
 	double meanRateLose = 0.0;
 	int allWeight;
-	for(auto any : nextMap)
+	for(auto any : nextPair.first)
     {
 		allWeight = allWeight + any.second;
-		Score addScore = score(any.first);
+		Score addScore = score(any.first, nextPair.second);
 		meanRateWin = addScore.rateWin * any.second;
 		meanRateDraw = addScore.rateDraw * any.second;
 		meanRateLose = addScore.rateLose * any.second;
@@ -123,7 +124,27 @@ Score Player::score(Move * move)
 	return meanScore;
 }
 
-Score Player::score(Board * board)
+Score Player::score(Board * board, bool color)
 {
-    return Score();
+    std::set<Move *> nextSet = next(board, color);
+    Score bestScore;
+    if(nextSet.empty())
+    {
+        bestScore.rateLose = 1.0;
+    }
+    else
+    {
+        std::set<Move *>::iterator nextSetIt = nextSet.begin();
+        bestScore = score(*nextSetIt);
+        while(++nextSetIt != nextSet.end())
+        {
+            Score temp = score(*nextSetIt);
+            if(bestScore < temp)
+            {
+                bestScore = temp;
+            }
+        }
+    }
+    return bestScore;
+//    return Score();
 }
