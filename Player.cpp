@@ -100,7 +100,27 @@ std::map<Board *, int> Player::next(Move * move)
 
 Score Player::score(Move * move)
 {
-    return Score();
+    std::map<Board *, int> nextMap = next(move);
+	Score meanScore;
+	double meanRateWin = 0.0;
+	double meanRateDraw = 0.0;
+	double meanRateLose = 0.0;
+	int allWeight;
+	for(auto any : nextMap)
+    {
+		allWeight = allWeight + any.second;
+		Score addScore = score(any.first);
+		meanRateWin = addScore.rateWin * any.second;
+		meanRateDraw = addScore.rateDraw * any.second;
+		meanRateLose = addScore.rateLose * any.second;
+    }
+    meanRateWin /= allWeight;
+    meanRateDraw /= allWeight;
+    meanRateLose /= allWeight;
+    meanScore.rateWin = meanRateWin;
+    meanScore.rateDraw = meanRateDraw;
+    meanScore.rateLose = meanRateLose;
+	return meanScore;
 }
 
 Score Player::score(Board * board)

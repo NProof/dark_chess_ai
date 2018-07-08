@@ -21,9 +21,9 @@ class Score
 
         bool operator<(const Score&) const;
 
-    protected:
+//    protected:
 
-    private:
+//    private:
         double rateWin;
         double rateDraw;
         double rateLose;
