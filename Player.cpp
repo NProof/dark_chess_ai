@@ -118,9 +118,10 @@ Score Player::score(Move * move)
     meanRateWin /= allWeight;
     meanRateDraw /= allWeight;
     meanRateLose /= allWeight;
-    meanScore.rateWin = meanRateWin;
+	/* change the views for player  */
+    meanScore.rateWin = meanRateLose;
     meanScore.rateDraw = meanRateDraw;
-    meanScore.rateLose = meanRateLose;
+    meanScore.rateLose = meanRateWin;
 	return meanScore;
 }
 
