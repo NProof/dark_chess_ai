@@ -1,2 +1,2 @@
 search:
-	g++ -std=c++11 -o Search.exe *.cpp
+	g++ -std=c++11 -o search *.cpp
