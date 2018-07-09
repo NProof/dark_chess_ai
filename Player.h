@@ -25,8 +25,8 @@ class Player
     private:
         std::set<Move *> next(Board *, bool);
         std::pair<std::map<Board *, int>, bool> next(Move *);
-	Score score(Move *);
-	Score score(Board *, bool);
+	Score score(Move *, int);
+	Score score(Board *, bool, int);
 
         bool color;
         Board * board;

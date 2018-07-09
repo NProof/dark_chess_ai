@@ -29,7 +29,7 @@ void Player::generateMove(char *move)
         Move * bestMove = *movesIt;
         while(++movesIt != moves.end())
         {
-            if(score(bestMove) < score(*movesIt))
+            if(score(bestMove, 1) < score(*movesIt, 1))
             {
                 bestMove = *movesIt;
             }
@@ -108,7 +108,7 @@ std::pair<std::map<Board *, int>, bool> Player::next(Move * move)
     return std::pair<std::map<Board *, int>, bool>(ret, !move->getColor());
 }
 
-Score Player::score(Move * move)
+Score Player::score(Move * move, int level)
 {
     std::pair<std::map<Board *, int>, bool> nextPair = next(move);
 //    std::map<Board *, int> nextMap = next(move);
@@ -120,7 +120,7 @@ Score Player::score(Move * move)
 	for(auto any : nextPair.first)
     {
 		allWeight = allWeight + any.second;
-		Score addScore = score(any.first, nextPair.second);
+		Score addScore = score(any.first, nextPair.second, level);
 		meanRateWin = addScore.rateWin * any.second;
 		meanRateDraw = addScore.rateDraw * any.second;
 		meanRateLose = addScore.rateLose * any.second;
@@ -135,7 +135,7 @@ Score Player::score(Move * move)
 	return meanScore;
 }
 
-Score Player::score(Board * board, bool color)
+Score Player::score(Board * board, bool color, int level)
 {
     std::set<Move *> nextSet = next(board, color);
     Score bestScore;
@@ -145,23 +145,30 @@ Score Player::score(Board * board, bool color)
     }
     else
     {
-        std::set<Move *>::iterator nextSetIt = nextSet.begin();
-        bestScore = score(*nextSetIt);
-	if(bestScore.rateWin == 1.0)
-	{
-		return bestScore;
-	}
-        while(++nextSetIt != nextSet.end())
+        if( level > 0 )
         {
-            Score temp = score(*nextSetIt);
-            if(bestScore < temp)
+            std::set<Move *>::iterator nextSetIt = nextSet.begin();
+            bestScore = score(*nextSetIt, level - 1);
+        if(bestScore.rateWin == 1.0)
+        {
+            return bestScore;
+        }
+            while(++nextSetIt != nextSet.end())
             {
-			if(temp.rateWin == 1.0)
-			{
-				return temp;
-			}
-                bestScore = temp;
+                Score temp = score(*nextSetIt, level - 1);
+                if(bestScore < temp)
+                {
+                if(temp.rateWin == 1.0)
+                {
+                    return temp;
+                }
+                    bestScore = temp;
+                }
             }
+        }
+        else
+        {
+            bestScore.opWays = nextSet.size();
         }
     }
     return bestScore;

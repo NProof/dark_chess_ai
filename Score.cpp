@@ -28,7 +28,15 @@ bool Score::operator<(const Score& other) const
     {
         if(rateWin == other.rateWin)
         {
-            return false;
+            if(opWays == other.opWays)
+            {
+                if(myWays == other.myWays)
+                {
+                    return false;
+                }
+                else myWays < other.myWays;
+            }
+            else opWays > other.opWays;
         }
         else return rateWin < other.rateWin;
     }
