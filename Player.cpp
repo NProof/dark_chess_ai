@@ -25,9 +25,19 @@ void Player::generateMove(char *move)
     }
     else
     {
-        int times = rand()%(moves.size());
-        for(int i=0; i<times; i++) moveIt++;
-        strcpy(move, ((*moveIt)->getSrcMove()+"-"+(*moveIt)->getDstMove()).c_str());
+        std::set<Move *>::iterator movesIt = moves.begin();
+        Move * bestMove = *movesIt;
+        while(++movesIt != moves.end())
+        {
+            if(score(bestMove) < score(*movesIt))
+            {
+                bestMove = *movesIt;
+            }
+        }
+        strcpy(move, (bestMove->getSrcMove()+"-"+bestMove->getDstMove()).c_str());
+//        int times = rand()%(moves.size());
+//        for(int i=0; i<times; i++) moveIt++;
+//        strcpy(move, ((*moveIt)->getSrcMove()+"-"+(*moveIt)->getDstMove()).c_str());
     }
 }
 
