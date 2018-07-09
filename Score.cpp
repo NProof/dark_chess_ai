@@ -26,15 +26,11 @@ bool Score::operator<(const Score& other) const
 {
     if(rateLose == other.rateLose)
     {
-        if(rateDraw == other.rateDraw)
+        if(rateWin == other.rateWin)
         {
-            if(rateWin == other.rateWin)
-            {
-                return false;
-            }
-            else return rateWin < other.rateWin;
+            return false;
         }
-        else return rateDraw < other.rateDraw;
+        else return rateWin < other.rateWin;
     }
-    else return rateLose < other.rateLose;
+    else return rateLose > other.rateLose;
 }
