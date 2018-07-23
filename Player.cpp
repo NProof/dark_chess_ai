@@ -74,7 +74,6 @@ std::set<Move *> Player::next(Board * board, bool color)
 	std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
 	for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
 	{
-
 		ret.insert(new Move(board, color, pairmoveIt->first, pairmoveIt->second));
 	}
 	std::set<std::string> setCheckDark = board->getSetCheckDark();
