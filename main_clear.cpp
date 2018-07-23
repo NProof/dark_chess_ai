@@ -21,9 +21,7 @@ int main(int argc , char **argv)
 	History history;
 	bool turn;
 	int time;
-	std::cout<<argc<<std::endl;
-
-
+//	std::cout<<argc<<std::endl;
 
 	if(argc==3||argc==2)
 	{
