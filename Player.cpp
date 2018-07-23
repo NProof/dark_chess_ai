@@ -94,7 +94,7 @@ std::pair<std::map<Board *, int>, bool> Player::next(Move * move)
 	{
 		Board * temp = new Board(*board);
 		makeMove((move->getSrcMove() + "-" + move->getDstMove()).c_str(), temp);
-		ret.at(temp) = 1;
+		ret.insert(std::pair<Board *, int>(temp, 1));
 	}
 	else
 	{
@@ -102,7 +102,7 @@ std::pair<std::map<Board *, int>, bool> Player::next(Move * move)
 		{
 			Board * temp = new Board(*board);
 			makeMove((move->getSrcMove() + "(" + it.first + ")").c_str(), temp);
-			ret.at(temp) = it.second;
+			ret.insert(std::pair<Board *, int>(temp, it.second));
 		}
 	}
 	return std::pair<std::map<Board *, int>, bool>(ret, !move->getColor());
