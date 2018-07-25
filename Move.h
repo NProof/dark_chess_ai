@@ -7,17 +7,19 @@
 class Move
 {
 public:
-	Move(Board *, bool, std::string, std::string);
+	Move(Board, bool, std::string, std::string);
 	virtual ~Move();
 
-	Board * getSrcBoard();
+	bool operator<(const Move&) const;
+
+	Board getSrcBoard();
 	bool getColor();
 	std::string getSrcMove();
 	std::string getDstMove();
 protected:
 
 private:
-	Board * srcBoard;
+	Board srcBoard;
 	bool color;
 	std::string srcMove;
 	std::string dstMove;

@@ -1,6 +1,6 @@
 #include "Move.h"
 
-Move::Move(Board * srcBoard, bool color, std::string srcMove, std::string dstMove)
+Move::Move(Board srcBoard, bool color, std::string srcMove, std::string dstMove)
 {
 	this->srcBoard = srcBoard;
 	this->color = color;
@@ -13,7 +13,35 @@ Move::~Move()
 	//dtor
 }
 
-Board * Move::getSrcBoard()
+bool Move::operator<(const Move& other) const
+{
+	if(this->color == other.color)
+	{
+		if(srcBoard < other.srcBoard)
+		{
+			return true;
+		}
+		else if(other.srcBoard < srcBoard)
+		{
+			return false;
+		}
+		else
+		{
+			if(this->srcMove == other.srcMove)
+			{
+				if(this->dstMove == other.dstMove)
+				{
+					return false;
+				}
+				else return dstMove < other.dstMove;
+			}
+			else return srcMove < other.srcMove;
+		}
+	}
+	else return color < other.color;
+}
+
+Board Move::getSrcBoard()
 {
 	return srcBoard;
 }
