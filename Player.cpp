@@ -35,9 +35,6 @@ void Player::generateMove(char *move)
 			}
 		}
 		strcpy(move, (bestMove.getSrcMove()+"-"+bestMove.getDstMove()).c_str());
-//		int times = rand()%(moves.size());
-//		for(int i=0; i<times; i++) moveIt++;
-//		strcpy(move, ((*moveIt).getSrcMove()+"-"+(*moveIt).getDstMove()).c_str());
 	}
 }
 
@@ -115,7 +112,6 @@ std::pair<std::map<Board , int>, bool> Player::next(Move move)
 Score Player::score(Move move, int level)
 {
 	std::pair<std::map<Board , int>, bool> nextPair = next(move);
-//	  std::map<Board *, int> nextMap = next(move);
 	Score meanScore;
 	double meanRateWin = 0.0;
 	int meanMyWays = 0;
