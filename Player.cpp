@@ -18,7 +18,6 @@ void Player::setColor(PROTO_CLR color)
 void Player::generateMove(char *move)
 {
 	std::set<Move> moves = next(*board, color);
-	std::set<Move>::iterator moveIt = (moves.begin());
 	if(moves.empty())
 	{
 		strcpy(move, "NAN");
