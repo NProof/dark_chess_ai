@@ -24,7 +24,7 @@ void Player::generateMove(char *move)
 	}
 	else
 	{
-		int level = 1;
+		int level = 2;
 		std::set<Move>::iterator movesIt = moves.begin();
 		std::vector<Move> vectorBesterMove = std::vector<Move>();
 		Score bestScore = score(*movesIt, level - 1);
@@ -164,7 +164,7 @@ Score Player::score(Board board, bool color, int level)
 	}
 	else
 	{
-		if( level > 0 )
+		if( level > 1 )
 		{
 			std::set<Move>::iterator nextSetIt = nextSet.begin();
 			bestScore = score(*nextSetIt, level - 1);
@@ -184,6 +184,10 @@ Score Player::score(Board board, bool color, int level)
 					bestScore = temp;
 				}
 			}
+		}
+		else if(level)
+		{
+			bestScore.myWays = nextSet.size();
 		}
 		else
 		{
