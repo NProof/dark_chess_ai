@@ -24,15 +24,27 @@ void Player::generateMove(char *move)
 	}
 	else
 	{
+		int level = 1;
 		std::set<Move>::iterator movesIt = moves.begin();
-		Move bestMove = *movesIt;
+		std::vector<Move> vectorBesterMove = std::vector<Move>();
+		Score bestScore = score(*movesIt, level - 1);
+		vectorBesterMove.push_back(*movesIt);
 		while(++movesIt != moves.end())
 		{
-			if(score(bestMove, 1) < score(*movesIt, 1))
+			Score tryScore = score(*movesIt, level - 1);
+			if(bestScore < tryScore)
 			{
-				bestMove = *movesIt;
+				bestScore = tryScore;
+				vectorBesterMove.clear();
+				vectorBesterMove.push_back(*movesIt);
+			}
+			else if(!(tryScore < bestScore))
+			{
+				vectorBesterMove.push_back(*movesIt);
 			}
 		}
+		int random_t = rand()%vectorBesterMove.size();
+		Move bestMove = vectorBesterMove[random_t];
 		strcpy(move, (bestMove.getSrcMove()+"-"+bestMove.getDstMove()).c_str());
 	}
 }
@@ -86,9 +98,9 @@ std::set<Move> Player::next(Board board, bool color)
 	return ret;
 }
 
-std::pair<std::map<Board , int>, bool> Player::next(Move move)
+std::pair<std::map<Board, int>, bool> Player::next(Move move)
 {
-	std::map<Board , int> ret;
+	std::map<Board, int> ret;
 	Board board = move.getSrcBoard();
 	if(move.getSrcMove().compare(move.getDstMove()))
 	{
@@ -110,35 +122,35 @@ std::pair<std::map<Board , int>, bool> Player::next(Move move)
 
 Score Player::score(Move move, int level)
 {
-	std::pair<std::map<Board , int>, bool> nextPair = next(move);
+	std::pair<std::map<Board, int>, bool> nextPair = next(move);
 	Score meanScore;
-	double meanRateWin = 0.0;
+//	double meanRateWin = 0.0;
 	int meanMyWays = 0;
-	double meanRateDraw = 0.0;
+//	double meanRateDraw = 0.0;
 	int meanOpWays = 0;
-	double meanRateLose = 0.0;
+//	double meanRateLose = 0.0;
 	int allWeight;
 	for(auto any : nextPair.first)
 	{
 		allWeight = allWeight + any.second;
 		Score addScore = score(any.first, nextPair.second, level);
-		meanRateWin = addScore.rateWin * any.second;
+//		meanRateWin = addScore.rateWin * any.second;
 		meanMyWays = addScore.myWays * any.second;
-		meanRateDraw = addScore.rateDraw * any.second;
+//		meanRateDraw = addScore.rateDraw * any.second;
 		meanOpWays = addScore.opWays * any.second;
-		meanRateLose = addScore.rateLose * any.second;
+//		meanRateLose = addScore.rateLose * any.second;
 	}
-	meanRateWin /= allWeight;
+//	meanRateWin /= allWeight;
 	meanMyWays /= allWeight;
-	meanRateDraw /= allWeight;
+//	meanRateDraw /= allWeight;
 	meanOpWays /= allWeight;
-	meanRateLose /= allWeight;
+//	meanRateLose /= allWeight;
 	/* change the views for player	*/
-	meanScore.rateWin = meanRateLose;
+//	meanScore.rateWin = meanRateLose;
 	meanScore.myWays = meanOpWays;
-	meanScore.rateDraw = meanRateDraw;
+//	meanScore.rateDraw = meanRateDraw;
 	meanScore.opWays = meanMyWays;
-	meanScore.rateLose = meanRateWin;
+//	meanScore.rateLose = meanRateWin;
 	return meanScore;
 }
 
