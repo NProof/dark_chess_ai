@@ -14,7 +14,7 @@ public:
 
 	bool operator<(const Board&) const;
 
-	void makeMove(std::string);
+	Board & makeMove(std::string);
 	std::set<std::pair<std::string, std::string>> getMoveValid(bool);
 	std::map<char, int> getDarkPieces();
 	std::set<std::string> getSetCheckDark();

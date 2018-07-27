@@ -18,7 +18,7 @@ public:
 	void setColor(PROTO_CLR);
 	void generateMove(char *);
 	void makeMove(char *);
-	void makeMove(const char *, Board &);
+	Board & makeMove(const char *, Board &);
 
 	bool getColor();
 protected:

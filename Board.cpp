@@ -35,21 +35,23 @@ bool Board::operator<(const Board& other) const
 	else return darkPieces < other.darkPieces;
 }
 
-void Board::makeMove(std::string move)
+Board & Board::makeMove(std::string move)
 {
+	Board * temp = new Board(*this);
 	std::string src, dst;
 
 	src = move.substr(0, 2);
 	if(move[2]=='-')
 	{
 		dst = move.substr(3, 2);;
-		map_Char[dst] = map_Char[src];
-		map_Char.erase(src);
+		temp->map_Char[dst] = temp->map_Char[src];
+		temp->map_Char.erase(src);
 	}
 	else
 	{
-		doLight(src, move[3]);
+		temp->doLight(src, move[3]);
 	}
+	return *temp;
 }
 
 std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)

@@ -24,7 +24,7 @@ void Player::generateMove(char *move)
 	}
 	else
 	{
-		int level = 2;
+		int level = 7;
 		std::set<Move>::iterator movesIt = moves.begin();
 		std::vector<Move> vectorBesterMove = std::vector<Move>();
 		Score bestScore = score(*movesIt, level - 1);
@@ -51,12 +51,12 @@ void Player::generateMove(char *move)
 
 void Player::makeMove(char *move)
 {
-	makeMove(move, *this->board);
+	board = &makeMove(move, *this->board);
 }
 
-void Player::makeMove(const char *move, Board &board)
+Board & Player::makeMove(const char *move, Board &board)
 {
-	board.makeMove(std::string(move));
+	return board.makeMove(std::string(move));
 }
 
 //void Player::makeMove(const char *move, Board *&board)
@@ -104,17 +104,24 @@ std::pair<std::map<Board, int>, bool> Player::next(Move move)
 	Board board = move.getSrcBoard();
 	if(move.getSrcMove().compare(move.getDstMove()))
 	{
-		Board temp(board);
-		makeMove((move.getSrcMove() + "-" + move.getDstMove()).c_str(), temp);
-		ret.insert(std::pair<Board, int>(temp, 1));
+//		Board temp(board);
+//		makeMove((move.getSrcMove() + "-" + move.getDstMove()).c_str(), temp);
+//		ret.insert(std::pair<Board, int>(temp, 1));
+		ret.insert(std::pair<Board, int>
+		(
+			makeMove((move.getSrcMove() + "-" + move.getDstMove()).c_str(), board), 1
+		));
 	}
 	else
 	{
 		for(std::pair<const char, int> it : move.getSrcBoard().getDarkPieces())
 		{
-			Board temp(board);
-			makeMove((move.getSrcMove() + "(" + it.first + ")").c_str(), temp);
-			ret.insert(std::pair<Board, int>(temp, it.second));
+//			Board temp(board);
+//			makeMove((move.getSrcMove() + "(" + it.first + ")").c_str(), temp);
+//			ret.insert(std::pair<Board, int>(temp, it.second));
+			ret.insert(std::pair<Board, int>(
+				makeMove((move.getSrcMove() + "(" + it.first + ")").c_str(), board), it.second
+			));
 		}
 	}
 	return std::pair<std::map<Board, int>, bool>(ret, !move.getColor());
