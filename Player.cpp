@@ -35,6 +35,12 @@ void Player::generateMove(char *move)
 			if(bestScore < tryScore)
 			{
 				bestScore = tryScore;
+//	std::cout << " bestScore := " ;
+//	std::cout << bestScore.rateWin << " ";
+//	std::cout << bestScore.myWays<< " ";
+//	std::cout << bestScore.rateDraw<< " ";
+//	std::cout << bestScore.opWays << " ";
+//	std::cout << bestScore.rateLose << " (::) \n" ;
 				vectorBesterMove.clear();
 				vectorBesterMove.push_back(*movesIt);
 			}
