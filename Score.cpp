@@ -42,3 +42,13 @@ bool Score::operator<(const Score& other) const
 	}
 	else return rateLose > other.rateLose;
 }
+
+bool Score::maxScore()
+{
+	return rateWin==1.0;
+}
+
+bool Score::minScore()
+{
+	return rateLose==1.0;
+}

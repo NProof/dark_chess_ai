@@ -1,7 +1,6 @@
 #ifndef SCORE_H
 #define SCORE_H
 
-
 class Score
 {
 	public:
@@ -20,6 +19,9 @@ class Score
 		Score& operator=(const Score& other);
 
 		bool operator<(const Score&) const;
+
+		bool maxScore();
+		bool minScore();
 
 //    protected:
 
