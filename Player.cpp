@@ -204,5 +204,4 @@ Score Player::score(Board board, bool color, int level)
 		bestScore.rateWin = tempRateWin;
 	}
 	return bestScore;
-//	  return Score();
 }
