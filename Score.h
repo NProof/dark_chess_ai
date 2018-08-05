@@ -27,9 +27,9 @@ class Score
 
 //    private:
 		double rateWin;
-		int myWays;
+		float myWays;
 		double rateDraw;
-		int opWays;
+		float opWays;
 		double rateLose;
 };
 
