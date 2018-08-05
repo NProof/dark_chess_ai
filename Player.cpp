@@ -146,12 +146,11 @@ Score Player::score(Move move, int level)
 	meanRateDraw = meanRateDraw / allWeight;
 	meanOpWays = meanOpWays / allWeight;
 	meanRateLose = meanRateLose / allWeight;
-	/* change the views for player	*/
-	meanScore.rateWin = meanRateLose;
-	meanScore.myWays = meanOpWays;
+	meanScore.rateWin = meanRateWin;
+	meanScore.myWays = meanMyWays;
 	meanScore.rateDraw = meanRateDraw;
-	meanScore.opWays = meanMyWays;
-	meanScore.rateLose = meanRateWin;
+	meanScore.opWays = meanOpWays;
+	meanScore.rateLose = meanRateLose;
 	return meanScore;
 }
 
@@ -165,7 +164,7 @@ Score Player::score(Board board, bool color, int level)
 	}
 	else
 	{
-		if( level > 1 )
+		if( level )
 		{
 			std::set<Move>::iterator nextSetIt = nextSet.begin();
 			bestScore = score(*nextSetIt, level - 1);
@@ -185,15 +184,24 @@ Score Player::score(Board board, bool color, int level)
 					bestScore = temp;
 				}
 			}
-		}
-		else if(level)
-		{
-			bestScore.myWays = nextSet.size();
+			if(level == 1)
+			{
+				bestScore.myWays = nextSet.size();
+			}
 		}
 		else
 		{
-			bestScore.opWays = nextSet.size();
+			bestScore.myWays = nextSet.size();
 		}
+		/* change the views for player */
+		double tempRateWin = bestScore.rateLose;
+		float tempMyWays = bestScore.opWays;
+		float tempOpWays = bestScore.myWays;
+		double tempRateLose = bestScore.rateWin;
+		bestScore.rateLose = tempRateLose;
+		bestScore.opWays = tempOpWays;
+		bestScore.myWays = tempMyWays;
+		bestScore.rateWin = tempRateWin;
 	}
 	return bestScore;
 //	  return Score();
