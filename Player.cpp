@@ -131,8 +131,8 @@ Score Player::score(Move move, int level)
 	double meanRateLose = 0.0;
 	int allWeight;
 	auto any = nextPair.first.begin();
+	for(; any!=nextPair.first.end(); any++)
 	{
-//		meanRateWin = addScore.rateWin * any.second;
 		allWeight = allWeight + any->second;
 		Score addScore = score(any->first, nextPair.second, level);
 		meanRateWin = meanRateWin + addScore.rateWin * any->second;
