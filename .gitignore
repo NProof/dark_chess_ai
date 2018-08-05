@@ -1,9 +1,10 @@
 *.o
-*.exe
+#*.exe
 *.out
 *.zip
 *.log
 *.aux
 *.gz
 dark_chess_ai.*
+#[Ss]earch(.exe)?
 00-local/*
