@@ -124,33 +124,34 @@ Score Player::score(Move move, int level)
 {
 	std::pair<std::map<Board, int>, bool> nextPair = next(move);
 	Score meanScore;
-//	double meanRateWin = 0.0;
-	int meanMyWays = 0;
-//	double meanRateDraw = 0.0;
-	int meanOpWays = 0;
-//	double meanRateLose = 0.0;
+	double meanRateWin = 0.0;
+	float meanMyWays = 0;
+	double meanRateDraw = 0.0;
+	float meanOpWays = 0;
+	double meanRateLose = 0.0;
 	int allWeight;
-	for(auto any : nextPair.first)
+	auto any = nextPair.first.begin();
 	{
-		allWeight = allWeight + any.second;
-		Score addScore = score(any.first, nextPair.second, level);
 //		meanRateWin = addScore.rateWin * any.second;
-		meanMyWays = addScore.myWays * any.second;
-//		meanRateDraw = addScore.rateDraw * any.second;
-		meanOpWays = addScore.opWays * any.second;
-//		meanRateLose = addScore.rateLose * any.second;
+		allWeight = allWeight + any->second;
+		Score addScore = score(any->first, nextPair.second, level);
+		meanRateWin = meanRateWin + addScore.rateWin * any->second;
+		meanMyWays = meanMyWays + addScore.myWays * any->second;
+		meanRateDraw = meanRateDraw + addScore.rateDraw * any->second;
+		meanOpWays = meanOpWays + addScore.opWays * any->second;
+		meanRateLose = meanRateLose + addScore.rateLose * any->second;
 	}
-//	meanRateWin /= allWeight;
-	meanMyWays /= allWeight;
-//	meanRateDraw /= allWeight;
-	meanOpWays /= allWeight;
-//	meanRateLose /= allWeight;
+	meanRateWin = meanRateWin / allWeight;
+	meanMyWays = meanMyWays / allWeight;
+	meanRateDraw = meanRateDraw / allWeight;
+	meanOpWays = meanOpWays / allWeight;
+	meanRateLose = meanRateLose / allWeight;
 	/* change the views for player	*/
-//	meanScore.rateWin = meanRateLose;
+	meanScore.rateWin = meanRateLose;
 	meanScore.myWays = meanOpWays;
-//	meanScore.rateDraw = meanRateDraw;
+	meanScore.rateDraw = meanRateDraw;
 	meanScore.opWays = meanMyWays;
-//	meanScore.rateLose = meanRateWin;
+	meanScore.rateLose = meanRateWin;
 	return meanScore;
 }
 
