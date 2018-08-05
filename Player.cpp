@@ -24,23 +24,19 @@ void Player::generateMove(char *move)
 	}
 	else
 	{
-		int level = 2;
+		int level = 2; Score alpha, beta;
+		alpha.rateLose = 1.0; beta.rateWin = 1.0;
+
 		std::set<Move>::iterator movesIt = moves.begin();
 		std::vector<Move> vectorBesterMove = std::vector<Move>();
-		Score bestScore = score(*movesIt, level - 1);
+		Score bestScore = score(*movesIt, level - 1, Score(), Score());
 		vectorBesterMove.push_back(*movesIt);
 		while(++movesIt != moves.end())
 		{
-			Score tryScore = score(*movesIt, level - 1);
+			Score tryScore = score(*movesIt, level - 1, Score(), Score());
 			if(bestScore < tryScore)
 			{
 				bestScore = tryScore;
-//	std::cout << " bestScore := " ;
-//	std::cout << bestScore.rateWin << " ";
-//	std::cout << bestScore.myWays<< " ";
-//	std::cout << bestScore.rateDraw<< " ";
-//	std::cout << bestScore.opWays << " ";
-//	std::cout << bestScore.rateLose << " (::) \n" ;
 				vectorBesterMove.clear();
 				vectorBesterMove.push_back(*movesIt);
 			}
@@ -64,22 +60,6 @@ void Player::makeMove(const char *move, Board &board)
 {
 	board.makeMove(std::string(move));
 }
-
-//void Player::makeMove(const char *move, Board *&board)
-//{
-//	Board * temp = new Board(*board);
-//	temp->makeMove(std::string(move));
-//	if(theOne.find(*temp)==theOne.end())
-//	{
-//		theOne.insert(std::pair<Board, Board *>(*temp, temp));
-//		board = temp;
-//	}
-//	else
-//	{
-//		board = theOne.at(*temp);
-//		delete temp;
-//	}
-//}
 
 bool Player::getColor()
 {
@@ -126,7 +106,7 @@ std::pair<std::map<Board, int>, bool> Player::next(Move move)
 	return std::pair<std::map<Board, int>, bool>(ret, !move.getColor());
 }
 
-Score Player::score(Move move, int level)
+Score Player::score(Move move, int level, Score alpha, Score beta)
 {
 	std::pair<std::map<Board, int>, bool> nextPair = next(move);
 	Score meanScore;
@@ -140,7 +120,7 @@ Score Player::score(Move move, int level)
 	for(; any!=nextPair.first.end(); any++)
 	{
 		allWeight = allWeight + any->second;
-		Score addScore = score(any->first, nextPair.second, level);
+		Score addScore = score(any->first, nextPair.second, level, alpha, beta);
 		meanRateWin = meanRateWin + addScore.rateWin * any->second;
 		meanMyWays = meanMyWays + addScore.myWays * any->second;
 		meanRateDraw = meanRateDraw + addScore.rateDraw * any->second;
@@ -160,54 +140,68 @@ Score Player::score(Move move, int level)
 	return meanScore;
 }
 
-Score Player::score(Board board, bool color, int level)
+Score Player::score(Board board, bool color, int level, Score alpha, Score beta)
 {
+	double tempRateWin = alpha.rateLose;
+	float tempMyWays = alpha.opWays;
+	float tempOpWays = alpha.myWays;
+	double tempRateLose = alpha.rateWin;
+	alpha.rateLose = tempRateLose;
+	alpha.opWays = tempOpWays;
+	alpha.myWays = tempMyWays;
+	alpha.rateWin = tempRateWin;
+	tempRateWin = beta.rateLose;
+	tempMyWays = beta.opWays;
+	tempOpWays = beta.myWays;
+	tempRateLose = beta.rateWin;
+	beta.rateLose = tempRateLose;
+	beta.opWays = tempOpWays;
+	beta.myWays = tempMyWays;
+	beta.rateWin = tempRateWin;
 	std::set<Move> nextSet = next(board, color);
-	Score bestScore;
 	if(nextSet.empty())
 	{
-		bestScore.rateLose = 1.0;
+		alpha.rateLose = 1.0;
 	}
 	else
 	{
 		if( level )
 		{
 			std::set<Move>::iterator nextSetIt = nextSet.begin();
-			bestScore = score(*nextSetIt, level - 1);
-			if(bestScore.maxScore())
+			for(;nextSetIt != nextSet.end(); nextSetIt++)
 			{
-				return bestScore;
-			}
-			while(++nextSetIt != nextSet.end())
-			{
-				Score temp = score(*nextSetIt, level - 1);
-				if(bestScore < temp)
+				Score temp = score(*nextSetIt, level - 1, beta, alpha);
+				if(!(temp < beta))
+				{
+					return alpha;
+				}
+				if(alpha < temp)
 				{
 					if(temp.maxScore())
 					{
 						return temp;
 					}
-					bestScore = temp;
+					alpha = temp;
 				}
 			}
 			if(level == 1)
 			{
-				bestScore.myWays = nextSet.size();
+				alpha.myWays = nextSet.size();
 			}
 		}
 		else
 		{
-			bestScore.myWays = nextSet.size();
+			alpha.myWays = nextSet.size();
 		}
-		/* change the views for player */
-		double tempRateWin = bestScore.rateLose;
-		float tempMyWays = bestScore.opWays;
-		float tempOpWays = bestScore.myWays;
-		double tempRateLose = bestScore.rateWin;
-		bestScore.rateLose = tempRateLose;
-		bestScore.opWays = tempOpWays;
-		bestScore.myWays = tempMyWays;
-		bestScore.rateWin = tempRateWin;
 	}
-	return bestScore;
+	/* change the views for player */
+	tempRateWin = alpha.rateLose;
+	tempMyWays = alpha.opWays;
+	tempOpWays = alpha.myWays;
+	tempRateLose = alpha.rateWin;
+	alpha.rateLose = tempRateLose;
+	alpha.opWays = tempOpWays;
+	alpha.myWays = tempMyWays;
+	alpha.rateWin = tempRateWin;
+	return alpha;
 }

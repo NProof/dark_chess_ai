@@ -26,8 +26,8 @@ protected:
 private:
 	std::set<Move> next(Board, bool);
 	std::pair<std::map<Board, int>, bool> next(Move);
-	Score score(Move, int);
-	Score score(Board, bool, int);
+	Score score(Move, int, Score, Score);
+	Score score(Board, bool, int, Score, Score);
 
 	bool color;
 	Board * board;

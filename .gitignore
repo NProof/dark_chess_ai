@@ -6,5 +6,5 @@
 *.aux
 *.gz
 dark_chess_ai.*
-[Ss]earch(.exe)?
+#[Ss]earch(.exe)?
 00-local/*
