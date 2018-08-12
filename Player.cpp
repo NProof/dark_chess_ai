@@ -15,7 +15,7 @@ void Player::setColor(PROTO_CLR color)
 	this->color = color == PROTO_CLR::PCLR_BLACK; // =islower()
 }
 
-void Player::generateMove(char *move)
+void Player::generateMove(char *move, int level)
 {
 	std::set<Move> moves = next(*board, color);
 	if(moves.empty())
@@ -24,7 +24,7 @@ void Player::generateMove(char *move)
 	}
 	else
 	{
-		int level = 2; Score alpha, beta;
+		Score alpha, beta;
 		alpha.rateLose = 1.0; beta.rateWin = 1.0;
 
 		std::set<Move>::iterator movesIt = moves.begin();

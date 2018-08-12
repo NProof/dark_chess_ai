@@ -43,7 +43,7 @@ int main(int argc , char **argv)
 
 		if(turn)
 		{
-			player.generateMove(move);
+			player.generateMove(move, 2);
 			protocol.send(move);
 			protocol.recv(move,time);
 			if( color == PCLR_UNKNOW )
@@ -68,7 +68,7 @@ int main(int argc , char **argv)
 
 		while(1)
 		{
-			player.generateMove(move);
+			player.generateMove(move, 2);
 			protocol.send(move);
 			protocol.recv(move,time);
 			player.makeMove(move);

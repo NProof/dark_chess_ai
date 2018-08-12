@@ -16,7 +16,7 @@ public:
 	virtual ~Player();
 
 	void setColor(PROTO_CLR);
-	void generateMove(char *);
+	void generateMove(char *, int);
 	void makeMove(char *);
 	void makeMove(const char *, Board &);
 
