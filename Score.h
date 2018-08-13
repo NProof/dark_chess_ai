@@ -23,6 +23,8 @@ class Score
 		bool maxScore();
 		bool minScore();
 
+		Score& operator-();
+
 //    protected:
 
 //    private:

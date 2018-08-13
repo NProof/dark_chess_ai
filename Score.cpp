@@ -66,3 +66,15 @@ bool Score::minScore()
 {
 	return rateLose==1.0;
 }
+
+Score& Score::operator-()
+{
+	double tempRateWin = rateWin;
+	float tempMyWays = myWays;
+	float tempOpWays = opWays;
+	double tempRateLose = rateLose;
+	rateWin = tempRateLose;
+	myWays = tempOpWays;
+	myWays = tempMyWays;
+	rateWin = tempRateWin;
+}

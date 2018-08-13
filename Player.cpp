@@ -25,24 +25,65 @@ void Player::generateMove(char *move, int level)
 	else
 	{
 		Score alpha, beta;
+//		alpha.rateWin = 1.0; beta.rateLose = 1.0;
 		alpha.rateLose = 1.0; beta.rateWin = 1.0;
+
+		std::cout << " alpha := " ;
+		std::cout << alpha.rateWin << " ";
+		std::cout << alpha.myWays<< " ";
+		std::cout << alpha.rateDraw<< " ";
+		std::cout << alpha.opWays << " ";
+		std::cout << alpha.rateLose << "\n" ;
+
+		std::cout << " beta := " ;
+		std::cout << beta.rateWin << " ";
+		std::cout << beta.myWays<< " ";
+		std::cout << beta.rateDraw<< " ";
+		std::cout << beta.opWays << " ";
+		std::cout << beta.rateLose << "\n" ;
 
 		std::set<Move>::iterator movesIt = moves.begin();
 		std::vector<Move> vectorBesterMove = std::vector<Move>();
-		Score bestScore = score(*movesIt, level - 1, Score(), Score());
+		Score bestScore = score(*movesIt, level - 1, alpha, beta, moves.size());
+//		alpha = -score(*movesIt, level - 1, alpha, beta, moves.size());
+
+		std::cout << " bestScore := " ;
+		std::cout << bestScore.rateWin << " ";
+		std::cout << bestScore.myWays<< " ";
+		std::cout << bestScore.rateDraw<< " ";
+		std::cout << bestScore.opWays << " ";
+		std::cout << bestScore.rateLose << "\n" ;
+
 		vectorBesterMove.push_back(*movesIt);
 		while(++movesIt != moves.end())
 		{
-			Score tryScore = score(*movesIt, level - 1, Score(), Score());
+			Score tryScore = score(*movesIt, level - 1, alpha, beta, moves.size());
 			if(bestScore < tryScore)
+//			if(alpha < tryScore)
 			{
 				bestScore = tryScore;
+//				alpha = tryScore;
 				vectorBesterMove.clear();
 				vectorBesterMove.push_back(*movesIt);
+
+				std::cout << " bestScore := " ;
+				std::cout << bestScore.rateWin << " ";
+				std::cout << bestScore.myWays<< " ";
+				std::cout << bestScore.rateDraw<< " ";
+				std::cout << bestScore.opWays << " ";
+				std::cout << bestScore.rateLose << "\n" ;
 			}
 			else if(!(tryScore < bestScore))
+//			else if(!(tryScore < alpha))
 			{
 				vectorBesterMove.push_back(*movesIt);
+
+				std::cout << " tryScore := " ;
+				std::cout << tryScore.rateWin << " ";
+				std::cout << tryScore.myWays<< " ";
+				std::cout << tryScore.rateDraw<< " ";
+				std::cout << tryScore.opWays << " ";
+				std::cout << tryScore.rateLose << "\n" ;
 			}
 		}
 		int random_t = rand()%vectorBesterMove.size();
@@ -106,7 +147,7 @@ std::pair<std::map<Board, int>, bool> Player::next(Move move)
 	return std::pair<std::map<Board, int>, bool>(ret, !move.getColor());
 }
 
-Score Player::score(Move move, int level, Score alpha, Score beta)
+Score Player::score(Move move, int level, Score alpha, Score beta, const int lastMyWays)
 {
 	std::pair<std::map<Board, int>, bool> nextPair = next(move);
 	Score meanScore;
@@ -120,7 +161,7 @@ Score Player::score(Move move, int level, Score alpha, Score beta)
 	for(; any!=nextPair.first.end(); any++)
 	{
 		allWeight = allWeight + any->second;
-		Score addScore = score(any->first, nextPair.second, level, alpha, beta);
+		Score addScore = score(any->first, nextPair.second, level, alpha, beta, lastMyWays);
 		meanRateWin = meanRateWin + addScore.rateWin * any->second;
 		meanMyWays = meanMyWays + addScore.myWays * any->second;
 		meanRateDraw = meanRateDraw + addScore.rateDraw * any->second;
@@ -140,27 +181,15 @@ Score Player::score(Move move, int level, Score alpha, Score beta)
 	return meanScore;
 }
 
-Score Player::score(Board board, bool color, int level, Score alpha, Score beta)
+Score Player::score(Board board, bool color, int level, Score alpha, Score beta, const int lastMyWays)
 {
-	double tempRateWin = alpha.rateLose;
-	float tempMyWays = alpha.opWays;
-	float tempOpWays = alpha.myWays;
-	double tempRateLose = alpha.rateWin;
-	alpha.rateLose = tempRateLose;
-	alpha.opWays = tempOpWays;
-	alpha.myWays = tempMyWays;
-	alpha.rateWin = tempRateWin;
-	tempRateWin = beta.rateLose;
-	tempMyWays = beta.opWays;
-	tempOpWays = beta.myWays;
-	tempRateLose = beta.rateWin;
-	beta.rateLose = tempRateLose;
-	beta.opWays = tempOpWays;
-	beta.myWays = tempMyWays;
-	beta.rateWin = tempRateWin;
 	std::set<Move> nextSet = next(board, color);
 	if(nextSet.empty())
 	{
+		alpha.rateWin = 0.0;
+		alpha.myWays = 0.0;
+		alpha.rateDraw = 0.0;
+		alpha.opWays = 0.0;
 		alpha.rateLose = 1.0;
 	}
 	else
@@ -170,7 +199,7 @@ Score Player::score(Board board, bool color, int level, Score alpha, Score beta)
 			std::set<Move>::iterator nextSetIt = nextSet.begin();
 			for(;nextSetIt != nextSet.end(); nextSetIt++)
 			{
-				Score temp = score(*nextSetIt, level - 1, beta, alpha);
+				Score temp = -score(*nextSetIt, level - 1, -beta, -alpha, nextSet.size());
 				if(!(temp < beta))
 				{
 					return alpha;
@@ -184,24 +213,15 @@ Score Player::score(Board board, bool color, int level, Score alpha, Score beta)
 					alpha = temp;
 				}
 			}
-			if(level == 1)
-			{
-				alpha.myWays = nextSet.size();
-			}
 		}
 		else
 		{
+			alpha.rateWin = 0.0;
 			alpha.myWays = nextSet.size();
+			alpha.rateDraw = 0.0;
+			alpha.opWays = lastMyWays;
+			alpha.rateLose = 0.0;
 		}
 	}
-	/* change the views for player */
-	tempRateWin = alpha.rateLose;
-	tempMyWays = alpha.opWays;
-	tempOpWays = alpha.myWays;
-	tempRateLose = alpha.rateWin;
-	alpha.rateLose = tempRateLose;
-	alpha.opWays = tempOpWays;
-	alpha.myWays = tempMyWays;
-	alpha.rateWin = tempRateWin;
 	return alpha;
 }
