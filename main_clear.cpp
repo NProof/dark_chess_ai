@@ -3,6 +3,8 @@
 #include "Protocol.h"
 #include "Player.h"
 
+#define level 1
+
 int main(int argc , char **argv)
 {
 	Protocol protocol;
@@ -43,7 +45,7 @@ int main(int argc , char **argv)
 
 		if(turn)
 		{
-			player.generateMove(move, 2);
+			player.generateMove(move, level);
 			protocol.send(move);
 			protocol.recv(move,time);
 			if( color == PCLR_UNKNOW )
@@ -68,7 +70,7 @@ int main(int argc , char **argv)
 
 		while(1)
 		{
-			player.generateMove(move, 2);
+			player.generateMove(move, level);
 			protocol.send(move);
 			protocol.recv(move,time);
 			player.makeMove(move);
