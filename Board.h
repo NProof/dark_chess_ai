@@ -1,10 +1,11 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <cstring>
 #include <set>
 #include <map>
 
-enum class Path{Up, Down, Left, Right};
+typedef __UINT32_TYPE__ U32;
 
 class Board
 {
@@ -19,21 +20,16 @@ public:
 	std::map<char, int> getDarkPieces();
 	std::set<std::string> getSetCheckDark();
 protected:
-
+    std::set<std::pair<int, int>> genEat(bool);
+    std::set<std::pair<int, int>> genMove(bool);
+    int pieceOfIndex(int);
+    U32 CGen(int);
 private:
-	std::string jumpTo(std::string, Path);
-	bool momentum(char, char);
-	bool isDark(std::string);
-	void doLight(std::string, char);
-	bool isLight(std::string);
-	bool isEmpty(std::string);
-
-	std::map<char, int> darkPieces;
-	std::set<std::string> setCheckDark;
-	std::map<std::string, char> map_Char;
-
-	static const std::map<std::string, std::map<Path, std::string>> pathTo;
-	static const std::map<std::string, std::map<Path, std::string>> initPathTo();
+    U32 piece[16];
+    U32 red, black, occupied;
+    U32 moves[32];
+    U32 nk:1, ng:2, nm:2, nr:2, nn:2, nc:2, np:3;
+    U32 nK:1, nG:2, nM:2, nR:2, nN:2, nC:2, nP:3;
 };
 
 #endif // BOARD_H
