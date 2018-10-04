@@ -11,7 +11,7 @@ class Board
 public:
 	Board();
 	virtual ~Board();
-
+	
 	bool operator<(const Board&) const;
 
 	void makeMove(std::string);

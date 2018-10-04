@@ -3,6 +3,8 @@
 
 #include <set>
 #include <vector>
+#include <ostream>
+#include <iomanip>
 #include "Protocol.h"
 #include "Board.h"
 #include "Move.h"

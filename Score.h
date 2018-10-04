@@ -1,6 +1,8 @@
 #ifndef SCORE_H
 #define SCORE_H
 
+#include <ostream>
+
 class Score
 {
 	public:
@@ -16,6 +18,8 @@ class Score
 		 *  \param other Object to assign from
 		 *  \return A reference to this
 		 */
+		friend std::ostream & operator<<(std::ostream &, const Score &);
+		
 		Score& operator=(const Score& other);
 
 		bool operator<(const Score&) const;

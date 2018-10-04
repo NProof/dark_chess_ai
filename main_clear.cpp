@@ -3,13 +3,12 @@
 #include "Protocol.h"
 #include "Player.h"
 
+#define LEVEL 1
+
 int main(int argc , char **argv)
 {
 	Protocol protocol;
 	switch(argc){
-	case 3:
-		if(!protocol.init_protocol(argv[1], atoi(argv[2]))) return 0;
-		break;
 	case 2:
 		if(!protocol.init_protocol(argv[0], atoi(argv[1]))) return 0;
 		break;
@@ -23,7 +22,7 @@ int main(int argc , char **argv)
 	int time;
 //	std::cout<<argc<<std::endl;
 
-	if(argc==3||argc==2)
+	if(argc==2)
 	{
 		protocol.init_board(piece_count, current_position, history,time);
 		Player player;
@@ -43,7 +42,7 @@ int main(int argc , char **argv)
 
 		if(turn)
 		{
-			player.generateMove(move, 2);
+			player.generateMove(move, LEVEL);
 			protocol.send(move);
 			protocol.recv(move,time);
 			if( color == PCLR_UNKNOW )
@@ -68,7 +67,7 @@ int main(int argc , char **argv)
 
 		while(1)
 		{
-			player.generateMove(move, 2);
+			player.generateMove(move, LEVEL);
 			protocol.send(move);
 			protocol.recv(move,time);
 			player.makeMove(move);

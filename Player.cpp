@@ -15,6 +15,17 @@ void Player::setColor(PROTO_CLR color)
 	this->color = color == PROTO_CLR::PCLR_BLACK; // =islower()
 }
 
+std::ostream & operator<<(std::ostream & os, const Score & score)
+{
+	std::cout << std::setprecision(4);
+	return os << " [ " 
+	<< score.rateWin<< " "
+	<< score.myWays<< " "
+	<< score.rateDraw<< " "
+	<< score.opWays << " "
+	<< score.rateLose << " ] " ;
+}
+
 void Player::generateMove(char *move, int level)
 {
 	std::set<Move> moves = next(*board, color);
@@ -28,31 +39,10 @@ void Player::generateMove(char *move, int level)
 //		alpha.rateWin = 1.0; beta.rateLose = 1.0;
 		alpha.rateLose = 1.0; beta.rateWin = 1.0;
 
-		std::cout << " alpha := " ;
-		std::cout << alpha.rateWin << " ";
-		std::cout << alpha.myWays<< " ";
-		std::cout << alpha.rateDraw<< " ";
-		std::cout << alpha.opWays << " ";
-		std::cout << alpha.rateLose << "\n" ;
-
-		std::cout << " beta := " ;
-		std::cout << beta.rateWin << " ";
-		std::cout << beta.myWays<< " ";
-		std::cout << beta.rateDraw<< " ";
-		std::cout << beta.opWays << " ";
-		std::cout << beta.rateLose << "\n" ;
-
 		std::set<Move>::iterator movesIt = moves.begin();
 		std::vector<Move> vectorBesterMove = std::vector<Move>();
 		Score bestScore = score(*movesIt, level - 1, alpha, beta, moves.size());
 //		alpha = -score(*movesIt, level - 1, alpha, beta, moves.size());
-
-		std::cout << " bestScore := " ;
-		std::cout << bestScore.rateWin << " ";
-		std::cout << bestScore.myWays<< " ";
-		std::cout << bestScore.rateDraw<< " ";
-		std::cout << bestScore.opWays << " ";
-		std::cout << bestScore.rateLose << "\n" ;
 
 		vectorBesterMove.push_back(*movesIt);
 		while(++movesIt != moves.end())
@@ -61,29 +51,17 @@ void Player::generateMove(char *move, int level)
 			if(bestScore < tryScore)
 //			if(alpha < tryScore)
 			{
+				std::cout << bestScore << " < " << tryScore << std::endl;
 				bestScore = tryScore;
 //				alpha = tryScore;
 				vectorBesterMove.clear();
 				vectorBesterMove.push_back(*movesIt);
-
-				std::cout << " bestScore := " ;
-				std::cout << bestScore.rateWin << " ";
-				std::cout << bestScore.myWays<< " ";
-				std::cout << bestScore.rateDraw<< " ";
-				std::cout << bestScore.opWays << " ";
-				std::cout << bestScore.rateLose << "\n" ;
 			}
 			else if(!(tryScore < bestScore))
 //			else if(!(tryScore < alpha))
 			{
+				std::cout << tryScore << " !< " << bestScore << std::endl;
 				vectorBesterMove.push_back(*movesIt);
-
-				std::cout << " tryScore := " ;
-				std::cout << tryScore.rateWin << " ";
-				std::cout << tryScore.myWays<< " ";
-				std::cout << tryScore.rateDraw<< " ";
-				std::cout << tryScore.opWays << " ";
-				std::cout << tryScore.rateLose << "\n" ;
 			}
 		}
 		int random_t = rand()%vectorBesterMove.size();
