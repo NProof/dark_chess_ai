@@ -48,9 +48,9 @@ bool Score::operator<(const Score& other) const
 				{
 					return false;
 				}
-				else myWays < other.myWays;
+				else return myWays < other.myWays;
 			}
-			else opWays > other.opWays;
+			else return opWays > other.opWays;
 		}
 		else return rateWin < other.rateWin;
 	}
