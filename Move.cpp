@@ -17,12 +17,14 @@ Board * Move::getSrcBoard()
     return srcBoard;
 }
 
-std::string Move::getSrcMove()
+std::string Move::getStrMove()
 {
-    return srcMove;
+    if(srcMove == dstMove && kind != 'X')
+        return srcMove + "(" + kind + ")";
+    return srcMove + "-" + dstMove;
 }
 
-std::string Move::getDstMove()
+bool Move::srcSamedst()
 {
-    return dstMove;
+    return srcMove == dstMove;
 }

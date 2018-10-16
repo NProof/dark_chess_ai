@@ -25,7 +25,7 @@ void Player::generateMove(char *move)
     else
     {
         int times = rand()%(moves.size());
-        strcpy(move, ((moves[times])->getSrcMove()+"-"+(moves[times])->getDstMove()).c_str());
+        strcpy(move, (moves[times]->getStrMove()).c_str());
     }
 }
 
@@ -77,10 +77,10 @@ std::map<Board *, int> Player::next(Move * move)
 {
     std::map<Board *, int> ret;
     Board * board = move->getSrcBoard();
-    if(move->getSrcMove().compare(move->getDstMove()))
+    if(move->srcSamedst())
     {
         Board * temp = new Board(*board);
-        makeMove((move->getSrcMove() + "-" + move->getDstMove()).c_str(), temp);
+        makeMove(move->getStrMove().c_str(), temp);
         ret.at(temp) = 1;
     }
     else
@@ -88,7 +88,7 @@ std::map<Board *, int> Player::next(Move * move)
         for(std::pair<const char, int> it : move->getSrcBoard()->getDarkPieces())
         {
             Board * temp = new Board(*board);
-            makeMove((move->getSrcMove() + "(" + it.first + ")").c_str(), temp);
+            makeMove(move->getStrMove().c_str(), temp);
             ret.at(temp) = it.second;
         }
     }

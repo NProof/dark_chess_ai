@@ -11,14 +11,15 @@ class Move
         virtual ~Move();
 
         Board * getSrcBoard();
-        std::string getSrcMove();
-        std::string getDstMove();
+        bool srcSamedst();
+        std::string getStrMove();
     protected:
 
     private:
         Board * srcBoard;
         std::string srcMove;
         std::string dstMove;
+        char kind = 'X';
 };
 
 #endif // MOVE_H
