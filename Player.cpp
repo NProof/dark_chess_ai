@@ -17,8 +17,7 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::set<Move *> moves = next(board, color);
-    std::set<Move *>::iterator moveIt = (moves.begin());
+    std::vector<Move *> moves = next(board, color);
     if(moves.empty())
     {
         strcpy(move, "NAN");
@@ -26,8 +25,7 @@ void Player::generateMove(char *move)
     else
     {
         int times = rand()%(moves.size());
-        for(int i=0; i<times; i++) moveIt++;
-        strcpy(move, ((*moveIt)->getSrcMove()+"-"+(*moveIt)->getDstMove()).c_str());
+        strcpy(move, ((moves[times])->getSrcMove()+"-"+(moves[times])->getDstMove()).c_str());
     }
 }
 
@@ -57,20 +55,20 @@ bool Player::getColor()
     return color;
 }
 
-std::set<Move *> Player::next(Board * board, bool color)
+std::vector<Move *> Player::next(Board * board, bool color)
 {
-    std::set<Move *> ret;
+    std::vector<Move *> ret;
     std::set<std::pair<std::string, std::string>> mValid = board->getMoveValid(color);
     std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
     for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
     {
-        ret.insert(new Move(board, pairmoveIt->first, pairmoveIt->second));
+        ret.push_back(new Move(board, pairmoveIt->first, pairmoveIt->second));
     }
     std::set<std::string> setCheckDark = board->getSetCheckDark();
     std::set<std::string>::iterator setCheckDarkIt;
     for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
     {
-        ret.insert(new Move(board, *setCheckDarkIt, *setCheckDarkIt));
+        ret.push_back(new Move(board, *setCheckDarkIt, *setCheckDarkIt));
     }
     return ret;
 }
