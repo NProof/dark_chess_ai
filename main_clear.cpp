@@ -22,8 +22,7 @@ int main(int argc , char **argv)
 	bool turn;
 	int time;
 	std::cout<<argc<<std::endl;
-
-
+	std::cout<<argv[0]<<std::endl;
 
 	if(argc==3||argc==2)
 	{
