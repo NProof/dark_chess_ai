@@ -30,25 +30,35 @@ Move::~Move()
 
 bool Move::operator<(const Move& other) const
 {
-    int scorei = 0, scorej = 0;
-    for(auto it : possibleBoards)
-    {
-        Board temp = it.first;
-        scorei += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
-    }
-    for(auto it : other.possibleBoards)
-    {
-        Board temp = it.first;
-        scorej += (temp.getMoveValid(!color).size()+temp.getSetCheckDark().size())*it.second;
-    }
-    if(iDark>1)
-        scorej *= iDark;
-    if(other.iDark>1)
-        scorei *= other.iDark;
-    return scorei < scorej;
+	if(getStringMove()==other.getStringMove())
+		return GetpossibleBoards()<other.GetpossibleBoards();
+	return getStringMove()<other.getStringMove();
+}
+
+Score * Move::Getscore()
+{
+	if(score == NULL)
+		// const_cast<Move *>(this)->score = new Score(*this);
+		this->score = new Score(*this);
+	return score;
+}
+
+bool Move::Getcolor() const
+{
+	return color;
 }
 
 std::string Move::getStringMove() const
 {
     return strMove;
+}
+
+int Move::GetiDark() const
+{
+	return iDark;
+}
+
+std::map<Board, int> Move::GetpossibleBoards() const
+{
+	return possibleBoards;
 }
