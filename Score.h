@@ -14,6 +14,8 @@ class Score
 
 		bool operator <(const Score) const;
 
+		int powerOfBoard(bool, Board);
+
 		int Getnumerator() { return numerator; }
 		void Setnumerator(int val) { numerator = val; }
 		int Getdenominator() { return denominator; }

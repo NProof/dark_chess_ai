@@ -20,4 +20,23 @@ Score::~Score()
 bool Score::operator<(const Score other) const
 {
 	return numerator * other.denominator < other.numerator * denominator;
+
+int Score::powerOfBoard(bool color, Board board)
+{
+    auto light = board.getLightPieces();
+    auto dark = board.getDarkPieces();
+    for(auto x : dark){
+        light[x.first] += x.second;
+    }
+    int val =
+    (
+        light['k']*(light['G']+light['M']+light['R']+light['N']+light['C']-light['P'])
+        +light['g']*(light['M']+light['R']+light['N']+light['C']+light['P']-light['K'])
+        +light['m']*(light['R']+light['N']+light['C']+light['P']-light['K']-light['G'])
+        +light['r']*(light['N']+light['C']+light['P']-light['K']-light['G']-light['M'])
+        +light['n']*(light['C']+light['P']-light['K']-light['G']-light['M']-light['R'])
+        +light['c']*(light['P']) // -light['K']-light['G']-light['M']-light['R']-light['N'])
+        +light['p']*(light['K']-light['G']-light['M']-light['R']-light['N']-light['C'])
+    );
+    return color ? -val : val;
 }
