@@ -3,10 +3,12 @@
 Score::Score(Move mov)
 {
 	numerator = 0;
+	powerchessman = 0;
 	for(auto it : mov.GetpossibleBoards())
     {
         Board temp = it.first;
         numerator += (temp.getMoveValid(!mov.Getcolor()).size()+temp.getSetCheckDark().size())*it.second;
+        powerchessman += powerOfBoard(mov.Getcolor(), it.first);
     }
     int iDark = mov.GetiDark();
 	denominator = (iDark > 0) ? iDark : 1 ;

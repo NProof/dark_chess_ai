@@ -26,6 +26,7 @@ class Score
 	private:
 		int numerator;
 		int denominator;
+		int powerchessman;
 };
 
 #endif // SCORE_H
