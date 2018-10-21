@@ -21,7 +21,9 @@ Score::~Score()
 
 bool Score::operator<(const Score other) const
 {
-	return numerator * other.denominator < other.numerator * denominator;
+    return ( 5 * numerator + powerchessman ) * other.denominator
+        < ( 5 * other.numerator + other.powerchessman ) * denominator;
+}
 
 int Score::powerOfBoard(bool color, Board board)
 {
