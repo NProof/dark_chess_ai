@@ -107,6 +107,14 @@ std::set<std::string> Board::getSetCheckDark()
     return setCheckDark;
 }
 
+std::map<char, int> Board::getLightPieces()
+{
+    std::map<char, int> lightPieces;
+    for(auto ch : map_Char)
+        lightPieces[ch.second]++;
+    return lightPieces;
+}
+
 std::string Board::jumpTo(std::string src, Path path)
 {
     while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))

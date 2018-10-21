@@ -18,6 +18,7 @@ class Board
         std::set<std::pair<std::string, std::string>> getMoveValid(bool);
         std::map<char, int> getDarkPieces();
         std::set<std::string> getSetCheckDark();
+        std::map<char, int> getLightPieces();
     protected:
 
     private:
