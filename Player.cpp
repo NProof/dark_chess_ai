@@ -17,7 +17,7 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::set<Move> moves = betterMoves(*board);
+    std::vector<Move> moves = betterMoves(*board);
     strcpy(move, (moves.empty()) ? "NAN" : moves.begin()->getStringMove().c_str());
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
@@ -32,7 +32,7 @@ bool Player::getColor()
     return color;
 }
 
-std::set<Move> Player::betterMoves(Board board)
+std::vector<Move> Player::betterMoves(Board board)
 {
     std::set<Move *> temp;
     if(B2MS.find(board)==B2MS.end())
@@ -59,8 +59,8 @@ std::set<Move> Player::betterMoves(Board board)
         B2MS[board] = temp;
     }
     else temp = B2MS[board];
-    std::set<Move> ret;
+    std::vector<Move> ret;
     for(std::set<Move *>::iterator it = temp.begin(); it != temp.end(); it++)
-        ret.insert(**it);
+        ret.push_back(**it);
     return ret;
 }

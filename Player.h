@@ -1,6 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <vector>
 #include <set>
 #include "Protocol.h"
 #include "Board.h"
@@ -21,7 +22,7 @@ class Player
     protected:
 
     private:
-        std::set<Move> betterMoves(Board);
+        std::vector<Move> betterMoves(Board);
 
         bool color;
         Board *board;
