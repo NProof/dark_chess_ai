@@ -18,7 +18,7 @@ void Player::setColor(PROTO_CLR color)
 std::ostream & operator<<(std::ostream & os, const Score & score)
 {
 	std::cout << std::setprecision(4);
-	return os << " [ " 
+	return os << " [ "
 	<< score.rateWin<< " "
 	<< score.myWays<< " "
 	<< score.rateDraw<< " "
@@ -51,7 +51,7 @@ void Player::generateMove(char *move, int level)
 			if(bestScore < tryScore)
 //			if(alpha < tryScore)
 			{
-				std::cout << bestScore << " < " << tryScore << std::endl;
+		//		std::cout << bestScore << " < " << tryScore << std::endl;
 				bestScore = tryScore;
 //				alpha = tryScore;
 				vectorBesterMove.clear();
@@ -60,7 +60,7 @@ void Player::generateMove(char *move, int level)
 			else if(!(tryScore < bestScore))
 //			else if(!(tryScore < alpha))
 			{
-				std::cout << tryScore << " !< " << bestScore << std::endl;
+		//		std::cout << tryScore << " !< " << bestScore << std::endl;
 				vectorBesterMove.push_back(*movesIt);
 			}
 		}
