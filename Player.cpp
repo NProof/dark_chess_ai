@@ -18,7 +18,7 @@ void Player::setColor(PROTO_CLR color)
 void Player::generateMove(char *move)
 {
     std::vector<Move> moves = betterMoves(*board);
-    strcpy(move, (moves.empty()) ? "NAN" : moves.begin()->getStringMove().c_str());
+    strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
 
