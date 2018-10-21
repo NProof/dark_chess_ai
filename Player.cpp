@@ -59,8 +59,8 @@ std::vector<Move> Player::betterMoves(Board board)
         B2MS[board] = temp;
     }
     else temp = B2MS[board];
-    std::vector<Move> ret;
+    std::map<Score, std::vector<Move> > mapRank;
     for(std::set<Move *>::iterator it = temp.begin(); it != temp.end(); it++)
-        ret.push_back(**it);
-    return ret;
+        mapRank[Score(**it)].push_back(**it);
+    return mapRank.begin()->second;
 }
