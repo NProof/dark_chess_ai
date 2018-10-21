@@ -8,7 +8,7 @@ Score::Score(Move mov)
         Board temp = it.first;
         numerator += (temp.getMoveValid(!mov.Getcolor()).size()+temp.getSetCheckDark().size())*it.second;
     }
-    int iDark = move.GetiDark();
+    int iDark = mov.GetiDark();
 	denominator = (iDark > 0) ? iDark : 1 ;
 }
 
