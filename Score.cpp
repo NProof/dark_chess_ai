@@ -1,12 +1,12 @@
 #include "Score.h"
 
-Score::Score(Move move)
+Score::Score(Move mov)
 {
 	numerator = 0;
-	for(auto it : move.GetpossibleBoards())
+	for(auto it : mov.GetpossibleBoards())
     {
         Board temp = it.first;
-        numerator += (temp.getMoveValid(!move.Getcolor()).size()+temp.getSetCheckDark().size())*it.second;
+        numerator += (temp.getMoveValid(!mov.Getcolor()).size()+temp.getSetCheckDark().size())*it.second;
     }
     int iDark = move.GetiDark();
 	denominator = (iDark > 0) ? iDark : 1 ;
