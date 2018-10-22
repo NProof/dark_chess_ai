@@ -17,7 +17,11 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::vector<Move> moves = betterMoves(*board);
+    std::set<Move *> temp = next(*board);
+    std::map<Score, std::vector<Move> > mapRank;
+    for(std::set<Move *>::iterator it = temp.begin(); it != temp.end(); it++)
+        mapRank[Score(**it)].push_back(**it);
+    std::vector<Move> moves = mapRank.begin()->second;
     strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
@@ -32,11 +36,11 @@ bool Player::getColor()
     return color;
 }
 
-std::vector<Move> Player::betterMoves(Board board)
+std::set<Move *> Player::next(Board board)
 {
-    std::set<Move *> temp;
     if(B2MS.find(board)==B2MS.end())
     {
+        std::set<Move *> temp;
         std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid(color);
         std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
         for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
@@ -57,10 +61,7 @@ std::vector<Move> Player::betterMoves(Board board)
             temp.insert(new Move(this->color, board, *setCheckDarkIt, all, mapChessesDark));
         }
         B2MS[board] = temp;
+        return temp;
     }
-    else temp = B2MS[board];
-    std::map<Score, std::vector<Move> > mapRank;
-    for(std::set<Move *>::iterator it = temp.begin(); it != temp.end(); it++)
-        mapRank[Score(**it)].push_back(**it);
-    return mapRank.begin()->second;
+    return B2MS[board];
 }

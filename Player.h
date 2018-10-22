@@ -22,7 +22,7 @@ class Player
     protected:
 
     private:
-        std::vector<Move> betterMoves(Board);
+        std::set<Move *> next(Board);
 
         bool color;
         Board *board;
