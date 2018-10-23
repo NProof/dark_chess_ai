@@ -19,7 +19,7 @@ void Player::generateMove(char *move)
 {
     std::map<Score, std::vector<Move> > mapRank;
     for(Move * ptrMove : next(*board))
-        mapRank[Score(*ptrMove)].push_back(*ptrMove);
+        mapRank[score(ptrMove)].push_back(*ptrMove);
     std::vector<Move> moves = mapRank.begin()->second;
     strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
@@ -63,4 +63,9 @@ std::set<Move *> Player::next(Board board)
         return temp;
     }
     return B2MS[board];
+}
+
+Score Player::score(Move * mov)
+{
+    return Score(*mov);
 }

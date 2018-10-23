@@ -23,6 +23,7 @@ class Player
 
     private:
         std::set<Move *> next(Board);
+        Score score(Move *);
 
         bool color;
         Board *board;
