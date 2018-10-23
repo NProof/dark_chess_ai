@@ -57,24 +57,34 @@ void Board::makeMove(std::string move)
         dst = move.substr(3, 2);;
         map_Char[dst] = map_Char[src];
         map_Char.erase(src);
-        if(trun == PROTO_CLR::PCLR_UNKNOW)
+
+        switch(trun){
+        case PROTO_CLR::PCLR_RED :
+            trun = PROTO_CLR::PCLR_BLACK;
+            break;
+        case PROTO_CLR::PCLR_BLACK :
+            trun = PROTO_CLR::PCLR_RED;
+            break;
+        case PROTO_CLR::PCLR_UNKNOW :
             exit(9);
+        };
     }
     else
 	{
 	    doLight(src, move[3]);
-	    if(trun == PROTO_CLR::PCLR_UNKNOW){
+
+	    switch(trun){
+        case PROTO_CLR::PCLR_RED :
+            trun = PROTO_CLR::PCLR_BLACK;
+            break;
+        case PROTO_CLR::PCLR_BLACK :
+            trun = PROTO_CLR::PCLR_RED;
+            break;
+        case PROTO_CLR::PCLR_UNKNOW :
             trun = islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
-	    }
+            break;
+        };
 	}
-	switch(trun){
-    case PROTO_CLR::PCLR_RED :
-        trun = PROTO_CLR::PCLR_BLACK;
-        break;
-    case PROTO_CLR::PCLR_BLACK :
-        trun = PROTO_CLR::PCLR_RED;
-        break;
-    };
 }
 
 std::set<std::pair<std::string, std::string>> Board::getMoveValid()
