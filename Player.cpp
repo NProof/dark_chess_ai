@@ -40,7 +40,7 @@ std::set<Move *> Player::next(Board board)
     if(B2MS.find(board)==B2MS.end())
     {
         std::set<Move *> temp;
-        std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid(color);
+        std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
         std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
         for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
         {

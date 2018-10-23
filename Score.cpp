@@ -7,7 +7,7 @@ Score::Score(Move mov)
 	for(auto it : mov.GetpossibleBoards())
     {
         Board temp = it.first;
-        numerator += (temp.getMoveValid(!mov.Getcolor()).size()+temp.getSetCheckDark().size())*it.second;
+        numerator += (temp.getMoveValid().size()+temp.getSetCheckDark().size())*it.second;
         powerchessman += powerOfBoard(mov.Getcolor(), temp);
     }
     int iDark = mov.GetiDark();

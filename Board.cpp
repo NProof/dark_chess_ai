@@ -29,19 +29,22 @@ Board::~Board()
 
 bool Board::operator<(const Board& other) const
 {
-    if(darkPieces == other.darkPieces)
-    {
-        if(setCheckDark == other.setCheckDark)
+    if(trun == other.trun){
+        if(darkPieces == other.darkPieces)
         {
-            if(map_Char == other.map_Char)
+            if(setCheckDark == other.setCheckDark)
             {
-                return false;
+                if(map_Char == other.map_Char)
+                {
+                    return false;
+                }
+                else return map_Char < other.map_Char;
             }
-            else return map_Char < other.map_Char;
+            else return setCheckDark < other.setCheckDark;
         }
-        else return setCheckDark < other.setCheckDark;
+        else return darkPieces < other.darkPieces;
     }
-    else return darkPieces < other.darkPieces;
+    else return trun < other.trun;
 }
 
 void Board::makeMove(std::string move)
@@ -54,14 +57,27 @@ void Board::makeMove(std::string move)
         dst = move.substr(3, 2);;
         map_Char[dst] = map_Char[src];
         map_Char.erase(src);
+        if(trun == PROTO_CLR::PCLR_UNKNOW)
+            exit(9);
     }
     else
 	{
 	    doLight(src, move[3]);
+	    if(trun == PROTO_CLR::PCLR_UNKNOW){
+            trun = islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
+	    }
 	}
+	switch(trun){
+    case PROTO_CLR::PCLR_RED :
+        trun = PROTO_CLR::PCLR_BLACK;
+        break;
+    case PROTO_CLR::PCLR_BLACK :
+        trun = PROTO_CLR::PCLR_RED;
+        break;
+    };
 }
 
-std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
+std::set<std::pair<std::string, std::string>> Board::getMoveValid()
 {
     std::set<std::pair<std::string, std::string>> mValid;
     std::map<std::string, char>::iterator light;
@@ -70,7 +86,7 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid(bool trun)
         std::string stri = light->first;
         char cho = light->second;
         bool color = islower(cho);
-        if(trun == color)
+        if( (trun == PROTO_CLR::PCLR_UNKNOW) ? false : ((trun == PROTO_CLR::PCLR_RED) == color) )
         {
             std::map<Path, std::string>::iterator it;
             for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)

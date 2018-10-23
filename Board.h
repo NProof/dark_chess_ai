@@ -3,6 +3,7 @@
 
 #include <set>
 #include <map>
+#include "Protocol.h"
 
 enum class Path{Up, Down, Left, Right};
 
@@ -15,7 +16,7 @@ class Board
         bool operator<(const Board&) const;
 
         void makeMove(std::string);
-        std::set<std::pair<std::string, std::string>> getMoveValid(bool);
+        std::set<std::pair<std::string, std::string>> getMoveValid();
         std::map<char, int> getDarkPieces();
         std::set<std::string> getSetCheckDark();
         std::map<char, int> getLightPieces();
@@ -29,6 +30,8 @@ class Board
 		bool isLight(std::string);
 		bool isEmpty(std::string);
 
+
+		PROTO_CLR trun = PROTO_CLR::PCLR_UNKNOW;
 		std::map<char, int> darkPieces;
         std::set<std::string> setCheckDark;
         std::map<std::string, char> map_Char;
