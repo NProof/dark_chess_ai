@@ -96,7 +96,7 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid()
         std::string stri = light->first;
         char cho = light->second;
         bool color = islower(cho);
-        if( (trun == PROTO_CLR::PCLR_UNKNOW) ? false : ((trun == PROTO_CLR::PCLR_RED) == color) )
+        if( (trun == PROTO_CLR::PCLR_UNKNOW) ? false : ((trun == PROTO_CLR::PCLR_RED) != color) )
         {
             std::map<Path, std::string>::iterator it;
             for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
