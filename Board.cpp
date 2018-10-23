@@ -81,7 +81,7 @@ void Board::makeMove(std::string move)
             trun = PROTO_CLR::PCLR_RED;
             break;
         case PROTO_CLR::PCLR_UNKNOW :
-            trun = islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
+            trun = !islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
             break;
         };
 	}
