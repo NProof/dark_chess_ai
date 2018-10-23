@@ -8,7 +8,7 @@ Score::Score(Move mov)
     {
         Board temp = it.first;
         numerator += (temp.getMoveValid().size()+temp.getSetCheckDark().size())*it.second;
-        powerchessman += powerOfBoard(mov.Getcolor(), temp);
+        powerchessman += powerOfBoard(mov.Getcolor(), temp)*it.second;
     }
     int iDark = mov.GetiDark();
 	denominator = (iDark > 0) ? iDark : 1 ;
