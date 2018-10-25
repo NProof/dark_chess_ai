@@ -25,7 +25,7 @@ class Player
         std::set<Move *> next(Board);
         Score score(Move *);
 
-        bool color;
+        PROTO_CLR color;
         Board *board;
         std::map<Board, std::set<Move *>> B2MS;
         std::map<Move, std::map<Board *, int>> M2BM;

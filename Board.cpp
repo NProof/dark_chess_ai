@@ -87,6 +87,11 @@ void Board::makeMove(std::string move)
 	}
 }
 
+PROTO_CLR Board::getTrun()
+{
+    return trun;
+}
+
 std::set<std::pair<std::string, std::string>> Board::getMoveValid()
 {
     std::set<std::pair<std::string, std::string>> mValid;

@@ -10,8 +10,8 @@ class Score;
 class Move
 {
     public:
-        Move(bool, Board, std::string);
-        Move(bool, Board, std::string, int, std::map<char, int>);
+        Move(Board, std::string);
+        Move(Board, std::string, int, std::map<char, int>);
         virtual ~Move();
 
         bool operator<(const Move& other) const;

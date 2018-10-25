@@ -8,7 +8,7 @@ Score::Score(Move mov)
     {
         Board temp = it.first;
         numerator += (temp.getMoveValid().size()+temp.getSetCheckDark().size())*it.second;
-        powerchessman += powerOfBoard(mov.Getcolor(), temp)*it.second;
+        powerchessman += powerOfBoard(temp)*it.second;
     }
     int iDark = mov.GetiDark();
 	denominator = (iDark > 0) ? iDark : 1 ;
@@ -25,7 +25,7 @@ bool Score::operator<(const Score other) const
         < ( 5 * other.numerator + other.powerchessman ) * denominator;
 }
 
-int Score::powerOfBoard(bool color, Board board)
+int Score::powerOfBoard(Board board)
 {
     auto light = board.getLightPieces();
     auto dark = board.getDarkPieces();
@@ -42,5 +42,12 @@ int Score::powerOfBoard(bool color, Board board)
         +light['c']*(light['P']) // -light['K']-light['G']-light['M']-light['R']-light['N'])
         +light['p']*(light['K']-light['G']-light['M']-light['R']-light['N']-light['C'])
     );
-    return color ? -val : val;
+    switch(board.getTrun()){
+    case PROTO_CLR::PCLR_RED:
+        return val;
+    case PROTO_CLR::PCLR_BLACK:
+        return val;
+    default:
+        exit(25);
+    };
 }

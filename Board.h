@@ -16,6 +16,7 @@ class Board
         bool operator<(const Board&) const;
 
         void makeMove(std::string);
+        PROTO_CLR getTrun();
         std::set<std::pair<std::string, std::string>> getMoveValid();
         std::map<char, int> getDarkPieces();
         std::set<std::string> getSetCheckDark();

@@ -12,7 +12,7 @@ Player::~Player()
 
 void Player::setColor(PROTO_CLR color)
 {
-    this->color = color == PROTO_CLR::PCLR_BLACK; // =islower()
+    this->color = color ; // =islower()
 }
 
 void Player::generateMove(char *move)
@@ -44,7 +44,7 @@ std::set<Move *> Player::next(Board board)
         std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
         for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
         {
-            temp.insert(new Move(this->color, board, pairmoveIt->first+'-'+pairmoveIt->second));
+            temp.insert(new Move(board, pairmoveIt->first+'-'+pairmoveIt->second));
         }
         std::map<char, int> mapChessesDark = board.getDarkPieces();
         std::map<char, int>::iterator mapChessesDarkIt;
@@ -57,7 +57,7 @@ std::set<Move *> Player::next(Board board)
         std::set<std::string>::iterator setCheckDarkIt;
         for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
         {
-            temp.insert(new Move(this->color, board, *setCheckDarkIt, all, mapChessesDark));
+            temp.insert(new Move(board, *setCheckDarkIt, all, mapChessesDark));
         }
         B2MS[board] = temp;
         return temp;

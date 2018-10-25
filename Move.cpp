@@ -1,17 +1,17 @@
 #include "Move.h"
 
-Move::Move(bool color, Board board, std::string strMove)
+Move::Move(Board board, std::string strMove)
 {
-    this->color = color;
+    this->color = board.getTrun();
     this->strMove = strMove;
     this->iDark = 0;
     board.makeMove(strMove);
     this->possibleBoards[board] = 1;
 }
 
-Move::Move(bool color, Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
+Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
 {
-    this->color = color;
+    this->color = board.getTrun();
     this->strMove = strMove+'-'+strMove;
     this->iDark = iDark;
     possibleChar = board.getDarkPieces();
