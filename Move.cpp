@@ -34,9 +34,11 @@ Board::Move::~Move()
 
 bool Board::Move::operator<(const Move& other) const
 {
-	if(getStringMove()==other.getStringMove())
-		return GetpossibleBoards()<other.GetpossibleBoards();
-	return getStringMove()<other.getStringMove();
+	if(iDark == other.iDark)
+		if(possibleKinds == other.possibleKinds)
+            return originB < other.originB;
+        return possibleKinds < other.possibleKinds;
+	return iDark < other.iDark;
 }
 
 Board Board::Move::GetOringinB()
