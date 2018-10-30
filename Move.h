@@ -20,7 +20,7 @@ class Board::Move
     protected:
 
     private:
-        PROTO_CLR color;
+        bool color;
         std::string strMove;
         int iDark;
         std::map<Board, int> possibleBoards;
