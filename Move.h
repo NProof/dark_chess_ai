@@ -25,7 +25,7 @@ class Board::Move
         std::string strMove;
         int iDark;
         std::map<char, int> possibleKinds;
-        std::map<Board, int> possibleBoards;
+//        std::map<Board, int> possibleBoards;
 };
 
 #endif // MOVE_H
