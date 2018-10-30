@@ -44,12 +44,12 @@ Board Board::Move::GetOringinB()
     return originB;
 }
 
-std::string Board::Move::getStringMove() const
+std::string Board::Move::getStringMove()
 {
     return strMove;
 }
 
-int Board::Move::GetiDark() const
+int Board::Move::GetiDark()
 {
 	return iDark;
 }
@@ -59,7 +59,7 @@ std::map<char, int> Board::Move::GetpossibleKinds()
     return possibleKinds;
 }
 
-std::map<Board, int> Board::Move::GetpossibleBoards() const
+std::map<Board, int> Board::Move::GetpossibleBoards()
 {
 	return possibleBoards;
 }

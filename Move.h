@@ -14,10 +14,10 @@ class Board::Move
         bool operator<(const Move& other) const;
 
         Board GetOringinB();
-        std::string getStringMove() const;
-        int GetiDark() const;
+        std::string getStringMove();
+        int GetiDark();
 		std::map<char, int> GetpossibleKinds();
-		std::map<Board, int> GetpossibleBoards() const;
+		std::map<Board, int> GetpossibleBoards();
     protected:
 
     private:
