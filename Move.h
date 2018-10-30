@@ -13,14 +13,14 @@ class Board::Move
 
         bool operator<(const Move& other) const;
 
-        bool Getcolor() const;
+        PROTO_CLR Getcolor() const;
         std::string getStringMove() const;
         int GetiDark() const;
 		std::map<Board, int> GetpossibleBoards() const;
     protected:
 
     private:
-        bool color;
+        PROTO_CLR color;
         std::string strMove;
         int iDark;
         std::map<Board, int> possibleBoards;
