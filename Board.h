@@ -15,6 +15,8 @@ class Board
 
         bool operator<(const Board&) const;
 
+        class Move;
+
         void makeMove(std::string);
         PROTO_CLR getTrun();
         std::set<std::pair<std::string, std::string>> getMoveValid();

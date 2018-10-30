@@ -17,10 +17,10 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::map<Score, std::vector<Move> > mapRank;
-    for(Move * ptrMove : next(*board))
+    std::map<Score, std::vector<Board::Move> > mapRank;
+    for(Board::Move * ptrMove : next(*board))
         mapRank[score(ptrMove)].push_back(*ptrMove);
-    std::vector<Move> moves = mapRank.begin()->second;
+    std::vector<Board::Move> moves = mapRank.begin()->second;
     strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
@@ -35,16 +35,16 @@ bool Player::getColor()
     return color;
 }
 
-std::set<Move *> Player::next(Board board)
+std::set<Board::Move *> Player::next(Board board)
 {
     if(B2MS.find(board)==B2MS.end())
     {
-        std::set<Move *> temp;
+        std::set<Board::Move *> temp;
         std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
         std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
         for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
         {
-            temp.insert(new Move(board, pairmoveIt->first+'-'+pairmoveIt->second));
+            temp.insert(new Board::Move(board, pairmoveIt->first+'-'+pairmoveIt->second));
         }
         std::map<char, int> mapChessesDark = board.getDarkPieces();
         std::map<char, int>::iterator mapChessesDarkIt;
@@ -57,7 +57,7 @@ std::set<Move *> Player::next(Board board)
         std::set<std::string>::iterator setCheckDarkIt;
         for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
         {
-            temp.insert(new Move(board, *setCheckDarkIt, all, mapChessesDark));
+            temp.insert(new Board::Move(board, *setCheckDarkIt, all, mapChessesDark));
         }
         B2MS[board] = temp;
         return temp;
@@ -65,7 +65,7 @@ std::set<Move *> Player::next(Board board)
     return B2MS[board];
 }
 
-Score Player::score(Move * mov)
+Score Player::score(Board::Move * mov)
 {
     return Score(*mov);
 }

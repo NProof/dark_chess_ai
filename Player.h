@@ -7,7 +7,7 @@
 #include "Board.h"
 #include "Score.h"
 
-class Move;
+class Board::Move;
 class Player
 {
     public:
@@ -22,13 +22,13 @@ class Player
     protected:
 
     private:
-        std::set<Move *> next(Board);
-        Score score(Move *);
+        std::set<Board::Move *> next(Board);
+        Score score(Board::Move *);
 
         PROTO_CLR color;
         Board *board;
-        std::map<Board, std::set<Move *>> B2MS;
-        std::map<Move, std::map<Board *, int>> M2BM;
+        std::map<Board, std::set<Board::Move *>> B2MS;
+        std::map<Board::Move, std::map<Board *, int>> M2BM;
 };
 
 #endif // PLAYER_H

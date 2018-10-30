@@ -4,12 +4,10 @@
 #include <iostream>
 #include "Move.h"
 
-class Move;
-
 class Score
 {
 	public:
-		Score(Move);
+		Score(Board::Move);
 		~Score();
 
 		bool operator <(const Score) const;

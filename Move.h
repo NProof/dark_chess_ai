@@ -7,7 +7,7 @@
 
 class Score;
 
-class Move
+class Board::Move
 {
     public:
         Move(Board, std::string);

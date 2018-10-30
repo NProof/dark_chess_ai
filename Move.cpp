@@ -1,6 +1,6 @@
 #include "Move.h"
 
-Move::Move(Board board, std::string strMove)
+Board::Move::Move(Board board, std::string strMove)
 {
     this->color = board.getTrun();
     this->strMove = strMove;
@@ -9,7 +9,7 @@ Move::Move(Board board, std::string strMove)
     this->possibleBoards[board] = 1;
 }
 
-Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
+Board::Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
 {
     this->color = board.getTrun();
     this->strMove = strMove+'-'+strMove;
@@ -23,19 +23,19 @@ Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> poss
     }
 }
 
-Move::~Move()
+Board::Move::~Move()
 {
     //dtor
 }
 
-bool Move::operator<(const Move& other) const
+bool Board::Move::operator<(const Move& other) const
 {
 	if(getStringMove()==other.getStringMove())
 		return GetpossibleBoards()<other.GetpossibleBoards();
 	return getStringMove()<other.getStringMove();
 }
 
-Score * Move::Getscore()
+Score * Board::Move::Getscore()
 {
 	if(score == NULL)
 		// const_cast<Move *>(this)->score = new Score(*this);
@@ -43,22 +43,22 @@ Score * Move::Getscore()
 	return score;
 }
 
-bool Move::Getcolor() const
+bool Board::Move::Getcolor() const
 {
 	return color;
 }
 
-std::string Move::getStringMove() const
+std::string Board::Move::getStringMove() const
 {
     return strMove;
 }
 
-int Move::GetiDark() const
+int Board::Move::GetiDark() const
 {
 	return iDark;
 }
 
-std::map<Board, int> Move::GetpossibleBoards() const
+std::map<Board, int> Board::Move::GetpossibleBoards() const
 {
 	return possibleBoards;
 }

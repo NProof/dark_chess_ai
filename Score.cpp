@@ -1,6 +1,6 @@
 #include "Score.h"
 
-Score::Score(Move mov)
+Score::Score(Board::Move mov)
 {
 	numerator = 0;
 	powerchessman = 0;
