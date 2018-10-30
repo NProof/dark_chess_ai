@@ -5,7 +5,7 @@
 #include <set>
 #include "Protocol.h"
 #include "Board.h"
-#include "Move.h"
+#include "Score.h"
 
 class Move;
 class Player
