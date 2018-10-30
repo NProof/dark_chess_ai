@@ -14,7 +14,6 @@ class Board::Move
         bool operator<(const Move& other) const;
 
         Board GetOringinB();
-        PROTO_CLR Getcolor() const;
         std::string getStringMove() const;
         int GetiDark() const;
 		std::map<char, int> GetpossibleKinds();
@@ -23,7 +22,6 @@ class Board::Move
 
     private:
         Board originB;
-        PROTO_CLR color;
         std::string strMove;
         int iDark;
         std::map<char, int> possibleKinds;

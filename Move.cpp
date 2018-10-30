@@ -3,7 +3,6 @@
 Board::Move::Move(Board board, std::string strMove)
 {
     originB = board;
-    this->color = board.getTrun();
     this->strMove = strMove;
     this->iDark = 0;
     possibleKinds = std::map<char, int>();
@@ -14,7 +13,6 @@ Board::Move::Move(Board board, std::string strMove)
 Board::Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
 {
     originB = board;
-    this->color = board.getTrun();
     this->strMove = strMove+'-'+strMove;
     this->iDark = iDark;
     possibleKinds = possibleChar;
@@ -44,11 +42,6 @@ bool Board::Move::operator<(const Move& other) const
 Board Board::Move::GetOringinB()
 {
     return originB;
-}
-
-PROTO_CLR Board::Move::Getcolor() const
-{
-	return color;
 }
 
 std::string Board::Move::getStringMove() const
