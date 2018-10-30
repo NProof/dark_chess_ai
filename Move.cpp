@@ -35,7 +35,7 @@ bool Board::Move::operator<(const Move& other) const
 	return getStringMove()<other.getStringMove();
 }
 
-bool Board::Move::Getcolor() const
+PROTO_CLR Board::Move::Getcolor() const
 {
 	return color;
 }
