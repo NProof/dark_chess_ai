@@ -3,9 +3,6 @@
 
 #include <iostream>
 #include "Board.h"
-#include "Score.h"
-
-class Score;
 
 class Board::Move
 {
@@ -20,7 +17,6 @@ class Board::Move
         std::string getStringMove() const;
         int GetiDark() const;
 		std::map<Board, int> GetpossibleBoards() const;
-		Score * Getscore();
     protected:
 
     private:
@@ -28,7 +24,6 @@ class Board::Move
         std::string strMove;
         int iDark;
         std::map<Board, int> possibleBoards;
-		Score * score;
 };
 
 #endif // MOVE_H

@@ -35,14 +35,6 @@ bool Board::Move::operator<(const Move& other) const
 	return getStringMove()<other.getStringMove();
 }
 
-Score * Board::Move::Getscore()
-{
-	if(score == NULL)
-		// const_cast<Move *>(this)->score = new Score(*this);
-		this->score = new Score(*this);
-	return score;
-}
-
 bool Board::Move::Getcolor() const
 {
 	return color;
