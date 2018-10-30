@@ -56,10 +56,11 @@ std::map<Board, int> Board::Move::GetpossibleBoards()
     Board board = originB;
     if(iDark)
     {
+        std::string strPos = strMove.substr(0,2);
         for(std::map<char, int>::iterator it=possibleKinds.begin(); it!=possibleKinds.end(); it++)
         {
             Board possibleBoard(board);
-            possibleBoard.makeMove(strMove+'('+it->first+')');
+            possibleBoard.makeMove(strPos+'('+it->first+')');
             pos[possibleBoard] = it->second;
         }
     }
