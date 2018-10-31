@@ -5,9 +5,9 @@
 #include <set>
 #include "Protocol.h"
 #include "Board.h"
+#include "Move.h"
 #include "Score.h"
 
-class Board::Move;
 class Player
 {
     public:
