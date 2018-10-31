@@ -78,7 +78,7 @@ Score Player::score(Board::Move * mov)
 {
 	int n_method = 0;
 	int n_powers = 0;
-	for(auto it : mov->GetpossibleBoards())
+	for(auto it : next(*mov))
     {
         Board temp = it.first;
         n_method += Score::method(temp)*it.second;
