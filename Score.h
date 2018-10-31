@@ -11,6 +11,7 @@ class Score
 		~Score();
 
 		bool operator <(const Score) const;
+		bool operator >(const Score) const;
 
 		static int powers(Board);
 		static int method(Board);
@@ -21,6 +22,8 @@ class Score
 		void Setn_Powers(int val) { n_powers = val; }
 		int Getdenominator() { return denominator; }
 		void Setdenominator(int val) { denominator = (val > 0) ? val : 1 ; }
+
+        static const Score minScore;
 
 	protected:
 

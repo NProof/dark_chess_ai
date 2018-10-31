@@ -1,5 +1,12 @@
 #include "Score.h"
 
+Score::Score(double win, double draw, double lose)
+{
+    this->win = win;
+    this->draw = draw;
+    this->lose = lose;
+}
+
 Score::Score(int n_method, int n_powers, int iDark)
 {
     Setn_Method(n_method);
@@ -16,6 +23,12 @@ bool Score::operator<(const Score other) const
 {
     return ( 5 * n_method + n_powers ) * other.denominator
         < ( 5 * other.n_method + other.n_powers ) * denominator;
+}
+
+bool Score::operator>(const Score other) const
+{
+    return ( 5 * n_method + n_powers ) * other.denominator
+        > ( 5 * other.n_method + other.n_powers ) * denominator;
 }
 
 int Score::method(Board board)
@@ -49,3 +62,5 @@ int Score::powers(Board board)
         exit(25);
     };
 }
+
+const Score Score::minScore = Score(0.0 ,0.0 ,DBL_MAX);
