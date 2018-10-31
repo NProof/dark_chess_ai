@@ -70,5 +70,4 @@ std::map<Board, int> Board::Move::GetpossibleBoards()
         pos[board] = 1;
     }
     return pos;
-//	return possibleBoards;
 }
