@@ -67,7 +67,11 @@ std::set<Board::Move *> Player::next(Board board)
 
 std::map<Board, int> Player::next(Board::Move mov)
 {
-    return mov.GetpossibleBoards();
+    if(M2BM.find(mov) == M2BM.end())
+    {
+        M2BM[mov] = mov.GetpossibleBoards();
+    }
+    return M2BM[mov];
 }
 
 Score Player::score(Board::Move * mov)
