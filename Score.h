@@ -7,7 +7,7 @@
 class Score
 {
 	public:
-		Score();
+		Score(int, int, int);
 		~Score();
 
 		bool operator <(const Score) const;

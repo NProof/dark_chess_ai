@@ -1,8 +1,10 @@
 #include "Score.h"
 
-Score::Score()
+Score::Score(int n_method, int n_powers, int iDark)
 {
-	//ctor
+    Setn_Method(n_method);
+    Setn_Powers(n_powers);
+    Setdenominator(iDark);
 }
 
 Score::~Score()
