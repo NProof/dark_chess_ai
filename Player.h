@@ -29,7 +29,7 @@ class Player
         PROTO_CLR color;
         Board *board;
         std::map<Board, std::set<Board::Move *>> B2MS;
-        std::map<Board::Move, std::map<Board *, int>> M2BM;
+        std::map<Board::Move, std::map<Board , int>> M2BM;
 };
 
 #endif // PLAYER_H
