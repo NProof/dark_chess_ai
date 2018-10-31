@@ -2,11 +2,13 @@
 #define SCORE_H
 
 #include <iostream>
+//#include <cfloat>
 #include "Board.h"
 
 class Score
 {
 	public:
+		Score(double, double, double);
 		Score(int, int, int);
 		~Score();
 
@@ -16,6 +18,12 @@ class Score
 		static int powers(Board);
 		static int method(Board);
 
+		int GetWin() { return win; }
+		void SetWin(int val) { win = val; }
+		int GetDraw() { return draw; }
+		void SetDraw(int val) { draw = val; }
+		int GetLose() { return lose; }
+		void SetLose(int val) { lose = val; }
 		int Getn_Method() { return n_method; }
 		void Setn_Method(int val) { n_method = val; }
 		int Getn_Powers() { return n_powers; }
@@ -28,6 +36,9 @@ class Score
 	protected:
 
 	private:
+	    double win;
+	    double draw;
+	    double lose;
 		int n_method;
 		int n_powers;
 		int denominator;
