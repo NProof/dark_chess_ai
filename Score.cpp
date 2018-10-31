@@ -2,16 +2,15 @@
 
 Score::Score(Board::Move mov)
 {
-	numerator = 0;
-	powerchessman = 0;
+	n_method = 0;
+	n_powers = 0;
 	for(auto it : mov.GetpossibleBoards())
     {
         Board temp = it.first;
-        numerator += (temp.getMoveValid().size()+temp.getSetCheckDark().size())*it.second;
-        powerchessman += powerOfBoard(temp)*it.second;
+        n_method += method(temp)*it.second;
+        n_powers += powers(temp)*it.second;
     }
-    int iDark = mov.GetiDark();
-	denominator = (iDark > 0) ? iDark : 1 ;
+    Setdenominator(mov.GetiDark());
 }
 
 Score::~Score()
@@ -21,11 +20,16 @@ Score::~Score()
 
 bool Score::operator<(const Score other) const
 {
-    return ( 5 * numerator + powerchessman ) * other.denominator
-        < ( 5 * other.numerator + other.powerchessman ) * denominator;
+    return ( 5 * n_method + n_powers ) * other.denominator
+        < ( 5 * other.n_method + other.n_powers ) * denominator;
 }
 
-int Score::powerOfBoard(Board board)
+int Score::method(Board board)
+{
+    return board.getMoveValid().size() + board.getSetCheckDark().size();
+}
+
+int Score::powers(Board board)
 {
     auto light = board.getLightPieces();
     auto dark = board.getDarkPieces();
