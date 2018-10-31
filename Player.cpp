@@ -65,7 +65,7 @@ std::set<Board::Move *> Player::next(Board board)
     return B2MS[board];
 }
 
-std::map<Board, int> next(Board::Move mov)
+std::map<Board, int> Player::next(Board::Move mov)
 {
     return mov.GetpossibleBoards();
 }
