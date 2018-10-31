@@ -76,5 +76,17 @@ std::map<Board, int> Player::next(Board::Move mov)
 
 Score Player::score(Board::Move * mov)
 {
-    return Score(*mov);
+    Score score;
+	int n_method = 0;
+	int n_powers = 0;
+	for(auto it : mov->GetpossibleBoards())
+    {
+        Board temp = it.first;
+        n_method += Score::method(temp)*it.second;
+        n_powers += Score::powers(temp)*it.second;
+    }
+    score.Setn_Method(n_method);
+    score.Setn_Powers(n_powers);
+    score.Setdenominator(mov->GetiDark());
+    return score;
 }

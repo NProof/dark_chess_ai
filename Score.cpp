@@ -1,16 +1,8 @@
 #include "Score.h"
 
-Score::Score(Board::Move mov)
+Score::Score()
 {
-	n_method = 0;
-	n_powers = 0;
-	for(auto it : mov.GetpossibleBoards())
-    {
-        Board temp = it.first;
-        n_method += method(temp)*it.second;
-        n_powers += powers(temp)*it.second;
-    }
-    Setdenominator(mov.GetiDark());
+	//ctor
 }
 
 Score::~Score()

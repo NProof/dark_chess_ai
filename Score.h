@@ -2,12 +2,12 @@
 #define SCORE_H
 
 #include <iostream>
-#include "Move.h"
+#include "Board.h"
 
 class Score
 {
 	public:
-		Score(Board::Move);
+		Score();
 		~Score();
 
 		bool operator <(const Score) const;
@@ -17,17 +17,17 @@ class Score
 
 		int Getn_Method() { return n_method; }
 		void Setn_Method(int val) { n_method = val; }
-		int Getdenominator() { return denominator; }
-		void Setdenominator(int val) { denominator = (val > 0) ? val : 1 ; }
 		int Getn_Powers() { return n_powers; }
 		void Setn_Powers(int val) { n_powers = val; }
+		int Getdenominator() { return denominator; }
+		void Setdenominator(int val) { denominator = (val > 0) ? val : 1 ; }
 
 	protected:
 
 	private:
 		int n_method;
-		int denominator;
 		int n_powers;
+		int denominator;
 };
 
 #endif // SCORE_H
