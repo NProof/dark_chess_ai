@@ -1,17 +1,17 @@
 #include "Score.h"
 
-Score::Score(Board::Move mov)
+Score::Score(double win, double draw, double lose)
 {
-	numerator = 0;
-	powerchessman = 0;
-	for(auto it : mov.GetpossibleBoards())
-    {
-        Board temp = it.first;
-        numerator += (temp.getMoveValid().size()+temp.getSetCheckDark().size())*it.second;
-        powerchessman += powerOfBoard(temp)*it.second;
-    }
-    int iDark = mov.GetiDark();
-	denominator = (iDark > 0) ? iDark : 1 ;
+    this->win = win;
+    this->draw = draw;
+    this->lose = lose;
+}
+
+Score::Score(int n_method, int n_powers, int iDark)
+{
+    Setn_Method(n_method);
+    Setn_Powers(n_powers);
+    Setdenominator(iDark);
 }
 
 Score::~Score()
@@ -21,11 +21,34 @@ Score::~Score()
 
 bool Score::operator<(const Score other) const
 {
-    return ( 5 * numerator + powerchessman ) * other.denominator
-        < ( 5 * other.numerator + other.powerchessman ) * denominator;
+    return ( 5 * n_method + n_powers ) * other.denominator
+        < ( 5 * other.n_method + other.n_powers ) * denominator;
 }
 
-int Score::powerOfBoard(Board board)
+bool Score::operator>(const Score other) const
+{
+    return ( 5 * n_method + n_powers ) * other.denominator
+        > ( 5 * other.n_method + other.n_powers ) * denominator;
+}
+
+Score Score::operator *(int mul) const
+{
+    Score score(*this);
+    score.SetWin(win * mul);
+    score.SetDraw(draw * mul);
+    score.SetLose(lose * mul);
+    score.Setn_Method(n_method * mul);
+    score.Setn_Powers(n_powers * mul);
+    score.Setdenominator(denominator * mul);
+    return score;
+}
+
+int Score::method(Board board)
+{
+    return board.getMoveValid().size() + board.getSetCheckDark().size();
+}
+
+int Score::powers(Board board)
 {
     auto light = board.getLightPieces();
     auto dark = board.getDarkPieces();
@@ -51,3 +74,5 @@ int Score::powerOfBoard(Board board)
         exit(25);
     };
 }
+
+const Score Score::minScore = Score(0.0 ,0.0 ,DBL_MAX);

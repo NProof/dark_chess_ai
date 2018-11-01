@@ -5,9 +5,9 @@
 #include <set>
 #include "Protocol.h"
 #include "Board.h"
+#include "Move.h"
 #include "Score.h"
 
-class Board::Move;
 class Player
 {
     public:
@@ -23,12 +23,13 @@ class Player
 
     private:
         std::set<Board::Move *> next(Board);
+        std::map<Board, int> next(Board::Move);
         Score score(Board::Move *);
 
         PROTO_CLR color;
         Board *board;
         std::map<Board, std::set<Board::Move *>> B2MS;
-        std::map<Board::Move, std::map<Board *, int>> M2BM;
+        std::map<Board::Move, std::map<Board , int>> M2BM;
 };
 
 #endif // PLAYER_H

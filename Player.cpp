@@ -65,7 +65,24 @@ std::set<Board::Move *> Player::next(Board board)
     return B2MS[board];
 }
 
+std::map<Board, int> Player::next(Board::Move mov)
+{
+    if(M2BM.find(mov) == M2BM.end())
+    {
+        M2BM[mov] = mov.GetpossibleBoards();
+    }
+    return M2BM[mov];
+}
+
 Score Player::score(Board::Move * mov)
 {
-    return Score(*mov);
+	int n_method = 0;
+	int n_powers = 0;
+	for(auto it : next(*mov))
+    {
+        Board temp = it.first;
+        n_method += Score::method(temp)*it.second;
+        n_powers += Score::powers(temp)*it.second;
+    }
+    return Score(n_method, n_powers, mov->GetiDark());
 }
