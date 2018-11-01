@@ -25,6 +25,10 @@ class Player
     private:
         std::set<Board::Move *> next(Board);
         std::map<Board, int> next(Board::Move);
+<<<<<<< HEAD
+=======
+        Score score(Board *);
+>>>>>>> 535cf2036fc1390d7d99685fb18b2e3a0a82ef3d
         Score score(Board::Move *);
 
         PROTO_CLR color;

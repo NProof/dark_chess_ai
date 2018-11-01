@@ -1,5 +1,13 @@
 #include "Score.h"
 
+<<<<<<< HEAD
+=======
+//Score::Score()
+//{
+//
+//}
+
+>>>>>>> 535cf2036fc1390d7d99685fb18b2e3a0a82ef3d
 Score::Score(double win, double draw, double lose)
 {
     this->win = win;
@@ -29,6 +37,7 @@ bool Score::operator>(const Score other) const
 {
     return ( 5 * n_method + n_powers ) * other.denominator
         > ( 5 * other.n_method + other.n_powers ) * denominator;
+<<<<<<< HEAD
 }
 
 Score Score::operator *(int mul) const
@@ -43,6 +52,9 @@ Score Score::operator *(int mul) const
     return score;
 }
 
+=======
+}
+
 Score Score::operator *(int mul) const
 {
     Score score(*this);
@@ -55,6 +67,22 @@ Score Score::operator *(int mul) const
     return score;
 }
 
+<<<<<<< HEAD
+Score Score::operator *(int mul) const
+{
+    Score score(*this);
+    score.SetWin(win * mul);
+    score.SetDraw(draw * mul);
+    score.SetLose(lose * mul);
+    score.Setn_Method(n_method * mul);
+    score.Setn_Powers(n_powers * mul);
+    score.Setdenominator(denominator * mul);
+    return score;
+}
+
+=======
+>>>>>>> 535cf2036fc1390d7d99685fb18b2e3a0a82ef3d
+>>>>>>> 5c592bb0556ea38a2ea3180b1e30fab1ba137b03
 int Score::method(Board board)
 {
     return board.getMoveValid().size() + board.getSetCheckDark().size();
