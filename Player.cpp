@@ -74,6 +74,18 @@ std::map<Board, int> Player::next(Board::Move mov)
     return M2BM[mov];
 }
 
+Score Player::score(Board * board)
+{
+    Score bestScore = Score::minScore;
+    for(auto mov : next(*board))
+    {
+        Score temp = score(mov);
+        if(temp > bestScore)
+            bestScore = temp;
+    }
+    return bestScore;
+}
+
 Score Player::score(Board::Move * mov)
 {
 	int n_method = 0;

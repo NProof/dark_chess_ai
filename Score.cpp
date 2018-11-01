@@ -43,6 +43,18 @@ Score Score::operator *(int mul) const
     return score;
 }
 
+Score Score::operator *(int mul) const
+{
+    Score score(*this);
+    score.SetWin(win * mul);
+    score.SetDraw(draw * mul);
+    score.SetLose(lose * mul);
+    score.Setn_Method(n_method * mul);
+    score.Setn_Powers(n_powers * mul);
+    score.Setdenominator(denominator * mul);
+    return score;
+}
+
 int Score::method(Board board)
 {
     return board.getMoveValid().size() + board.getSetCheckDark().size();

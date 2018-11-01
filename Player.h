@@ -19,6 +19,7 @@ class Player
         void makeMove(char *);
 
         bool getColor();
+
     protected:
 
     private:
