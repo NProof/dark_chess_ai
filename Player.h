@@ -23,14 +23,14 @@ class Player
     protected:
 
     private:
-        std::set<Board::Move *> next(Board);
+        std::set<Board::Move> next(Board);
         std::map<Board, int> next(Board::Move);
         Score score(Board);
-        Score score(Board::Move *);
+        Score score(Board::Move);
 
         PROTO_CLR color;
         Board board;
-        std::map<Board, std::set<Board::Move *>> B2MS;
+        std::map<Board, std::set<Board::Move>> B2MS;
         std::map<Board::Move, std::map<Board , int>> M2BM;
 };
 

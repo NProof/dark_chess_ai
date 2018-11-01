@@ -18,8 +18,8 @@ void Player::setColor(PROTO_CLR color)
 void Player::generateMove(char *move)
 {
     std::map<Score, std::vector<Board::Move> > mapRank;
-    for(Board::Move * ptrMove : next(board))
-        mapRank[score(ptrMove)].push_back(*ptrMove);
+    for(Board::Move ptrMove : next(board))
+        mapRank[score(ptrMove)].push_back(ptrMove);
     std::vector<Board::Move> moves = mapRank.begin()->second;
     strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
@@ -35,16 +35,23 @@ bool Player::getColor()
     return color;
 }
 
-std::set<Board::Move *> Player::next(Board board)
+std::set<Board::Move> Player::next(Board board)
 {
     if(B2MS.find(board)==B2MS.end())
     {
-        std::set<Board::Move *> temp;
+        std::set<Board::Move> temp;
         std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
         std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
         for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
         {
-            temp.insert(new Board::Move(board, pairmoveIt->first+'-'+pairmoveIt->second));
+            Board::Move mov(board, pairmoveIt->first+'-'+pairmoveIt->second);
+            std::cout << mov.getStringMove();
+            for(auto movi : temp)
+            {
+                std::cout << movi.getStringMove() << ", ";
+            }
+            std::cout << " . " << std::endl;
+            temp.insert(mov);
         }
         std::map<char, int> mapChessesDark = board.getDarkPieces();
         std::map<char, int>::iterator mapChessesDarkIt;
@@ -57,7 +64,7 @@ std::set<Board::Move *> Player::next(Board board)
         std::set<std::string>::iterator setCheckDarkIt;
         for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
         {
-            temp.insert(new Board::Move(board, *setCheckDarkIt, all, mapChessesDark));
+            temp.insert(Board::Move(board, *setCheckDarkIt, all, mapChessesDark));
         }
         B2MS[board] = temp;
         return temp;
@@ -86,15 +93,15 @@ Score Player::score(Board board)
     return bestScore;
 }
 
-Score Player::score(Board::Move * mov)
+Score Player::score(Board::Move mov)
 {
 	int n_method = 0;
 	int n_powers = 0;
-	for(auto it : next(*mov))
+	for(auto it : next(mov))
     {
         Board temp = it.first;
         n_method += Score::method(temp)*it.second;
         n_powers += Score::powers(temp)*it.second;
     }
-    return Score(n_method, n_powers, mov->GetiDark());
+    return Score(n_method, n_powers, mov.GetiDark());
 }
