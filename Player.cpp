@@ -44,14 +44,7 @@ std::set<Board::Move> Player::next(Board board)
         std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
         for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
         {
-            Board::Move mov(board, pairmoveIt->first+'-'+pairmoveIt->second);
-            std::cout << mov.getStringMove();
-            for(auto movi : temp)
-            {
-                std::cout << movi.getStringMove() << ", ";
-            }
-            std::cout << " . " << std::endl;
-            temp.insert(mov);
+            temp.insert(Board::Move(board, pairmoveIt->first+'-'+pairmoveIt->second));
         }
         std::map<char, int> mapChessesDark = board.getDarkPieces();
         std::map<char, int>::iterator mapChessesDarkIt;
