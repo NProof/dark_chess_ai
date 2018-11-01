@@ -31,6 +31,18 @@ bool Score::operator>(const Score other) const
         > ( 5 * other.n_method + other.n_powers ) * denominator;
 }
 
+Score Score::operator *(int mul) const
+{
+    Score score(*this);
+    score.SetWin(win * mul);
+    score.SetDraw(draw * mul);
+    score.SetLose(lose * mul);
+    score.Setn_Method(n_method * mul);
+    score.Setn_Powers(n_powers * mul);
+    score.Setdenominator(denominator * mul);
+    return score;
+}
+
 int Score::method(Board board)
 {
     return board.getMoveValid().size() + board.getSetCheckDark().size();

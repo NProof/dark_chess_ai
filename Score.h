@@ -14,6 +14,7 @@ class Score
 
 		bool operator <(const Score) const;
 		bool operator >(const Score) const;
+		Score operator *(int) const;
 
 		static int powers(Board);
 		static int method(Board);
