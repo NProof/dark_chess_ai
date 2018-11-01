@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-    this->board = new Board();
+    this->board = Board();
 }
 
 Player::~Player()
@@ -18,7 +18,7 @@ void Player::setColor(PROTO_CLR color)
 void Player::generateMove(char *move)
 {
     std::map<Score, std::vector<Board::Move> > mapRank;
-    for(Board::Move * ptrMove : next(*board))
+    for(Board::Move * ptrMove : next(board))
         mapRank[score(ptrMove)].push_back(*ptrMove);
     std::vector<Board::Move> moves = mapRank.begin()->second;
     strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
@@ -27,7 +27,7 @@ void Player::generateMove(char *move)
 
 void Player::makeMove(char *move)
 {
-    this->board->makeMove(std::string(move));
+    this->board.makeMove(std::string(move));
 }
 
 bool Player::getColor()

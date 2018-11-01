@@ -29,7 +29,7 @@ class Player
         Score score(Board::Move *);
 
         PROTO_CLR color;
-        Board *board;
+        Board board;
         std::map<Board, std::set<Board::Move *>> B2MS;
         std::map<Board::Move, std::map<Board , int>> M2BM;
 };
