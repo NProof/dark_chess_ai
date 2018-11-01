@@ -19,11 +19,13 @@ class Player
         void makeMove(char *);
 
         bool getColor();
+
     protected:
 
     private:
         std::set<Board::Move *> next(Board);
         std::map<Board, int> next(Board::Move);
+        Score score(Board *);
         Score score(Board::Move *);
 
         PROTO_CLR color;

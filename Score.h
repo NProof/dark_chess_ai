@@ -8,6 +8,7 @@
 class Score
 {
 	public:
+//	    Score();
 		Score(double, double, double);
 		Score(int, int, int);
 		~Score();

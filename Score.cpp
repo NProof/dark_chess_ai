@@ -1,5 +1,10 @@
 #include "Score.h"
 
+//Score::Score()
+//{
+//
+//}
+
 Score::Score(double win, double draw, double lose)
 {
     this->win = win;
