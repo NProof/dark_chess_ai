@@ -8,10 +8,6 @@
 class Score
 {
 	public:
-<<<<<<< HEAD
-=======
-//	    Score();
->>>>>>> 535cf2036fc1390d7d99685fb18b2e3a0a82ef3d
 		Score(double, double, double);
 		Score(int, int, int);
 		~Score();
