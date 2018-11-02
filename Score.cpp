@@ -31,6 +31,15 @@ bool Score::operator>(const Score other) const
         > ( 5 * other.n_method + other.n_powers ) * denominator;
 }
 
+void Score::operator+=(const Score other)
+{
+    SetWin( GetWin() + other.GetWin());
+    SetDraw( GetDraw() + other.GetDraw());
+    SetLose( GetLose() + other.GetLose());
+    Setn_Method( Getn_Method() + other.Getn_Method());
+    Setn_Powers( Getn_Powers() + other.Getn_Powers());
+}
+
 Score Score::operator *(int mul) const
 {
     Score score(*this);
@@ -40,6 +49,15 @@ Score Score::operator *(int mul) const
     score.Setn_Method(n_method * mul);
     score.Setn_Powers(n_powers * mul);
     score.Setdenominator(denominator * mul);
+    return score;
+}
+
+Score Score::operator /(int div) const
+{
+    Score score(*this);
+    if(div > 1){
+        score.Setdenominator(denominator * div);
+    }
     return score;
 }
 
