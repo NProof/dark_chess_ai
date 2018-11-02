@@ -74,27 +74,32 @@ std::map<Board, int> Player::next(Board::Move mov)
     return M2BM[mov];
 }
 
-Score Player::score(Board board)
+Score Player::score(Board board, int level)
 {
-    Score bestScore = Score::minScore;
-    for(auto mov : next(board))
-    {
-        Score temp = score(mov);
-        if(temp > bestScore)
-            bestScore = temp;
+    if(level){
+        Score bestScore = Score::minScore;
+        for(auto mov : next(board))
+        {
+            Score temp = score(mov, level-1);
+            if(temp > bestScore)
+                bestScore = temp;
+        }
+        return bestScore;
     }
-    return bestScore;
+    else{
+        std::cout << (double)(clock()-timer)/CLOCKS_PER_SEC << " , " << endconuter++ << std::endl;
+        return Score(Score::method(board), Score::powers(board), 1);
+    }
 }
 
-Score Player::score(Board::Move mov)
+Score Player::score(Board::Move mov, int level)
 {
-	int n_method = 0;
-	int n_powers = 0;
-	for(auto it : next(mov))
+	std::map<Board, int> nextMov = next(mov);
+	std::map<Board, int>::iterator it = nextMov.begin();
+	Score mean = score(it->first, level) * it->second;
+	for(; it != nextMov.end(); it++)
     {
-        Board temp = it.first;
-        n_method += Score::method(temp)*it.second;
-        n_powers += Score::powers(temp)*it.second;
+        mean += score(it->first, level) * it->second;
     }
-    return Score(n_method, n_powers, mov.GetiDark());
+    return mean / mov.GetiDark();
 }
