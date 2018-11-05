@@ -93,7 +93,6 @@ Score Player::score(Board board, int level)
         return bestScore;
     }
     else{
-        std::cout << (double)(clock()-timer)/CLOCKS_PER_SEC << " , " << endconuter++ << std::endl;
         return Score(Score::method(board), Score::powers(board), 1);
     }
 }
