@@ -23,6 +23,8 @@ class Player
     protected:
 
     private:
+        std::vector<Board::Move> one_level();
+
         std::set<Board::Move> next(Board);
         std::map<Board, int> next(Board::Move);
         Score score(Board, int);
