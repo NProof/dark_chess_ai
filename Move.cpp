@@ -6,6 +6,8 @@ Board::Move::Move(Board board, std::string strMove)
     this->strMove = strMove;
     this->iDark = 0;
     possibleKinds = std::map<char, int>();
+    board.makeMove(strMove);
+    possibleBoards[board] = 1;
 }
 
 Board::Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
@@ -14,6 +16,13 @@ Board::Move::Move(Board board, std::string strMove, int iDark, std::map<char, in
     this->strMove = strMove+'-'+strMove;
     this->iDark = iDark;
     possibleKinds = possibleChar;
+    std::string strPos = strMove.substr(0,2);
+    for(std::map<char, int>::iterator it=possibleKinds.begin(); it!=possibleKinds.end(); it++)
+    {
+        Board possibleBoard(board);
+        possibleBoard.makeMove(strPos+'('+it->first+')');
+        possibleBoards[possibleBoard] = it->second;
+    }
 }
 
 Board::Move::~Move()
@@ -54,22 +63,5 @@ std::map<char, int> Board::Move::GetpossibleKinds()
 
 std::map<Board, int> Board::Move::GetpossibleBoards()
 {
-    std::map<Board, int> pos;
-    Board board = originB;
-    if(iDark)
-    {
-        std::string strPos = strMove.substr(0,2);
-        for(std::map<char, int>::iterator it=possibleKinds.begin(); it!=possibleKinds.end(); it++)
-        {
-            Board possibleBoard(board);
-            possibleBoard.makeMove(strPos+'('+it->first+')');
-            pos[possibleBoard] = it->second;
-        }
-    }
-    else
-    {
-        board.makeMove(strMove);
-        pos[board] = 1;
-    }
-    return pos;
+    return possibleBoards;
 }
