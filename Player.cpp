@@ -47,23 +47,15 @@ std::set<Board::Move> Player::next(Board board)
     {
         std::set<Board::Move> temp;
         std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
-        std::set<std::pair<std::string, std::string>>::iterator pairmoveIt;
-        for(pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end();pairmoveIt++)
+        for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
         {
             temp.insert(Board::Move(board, pairmoveIt->first+'-'+pairmoveIt->second));
         }
         std::map<char, int> mapChessesDark = board.getDarkPieces();
-        std::map<char, int>::iterator mapChessesDarkIt;
-        int all = 0;
-        for(mapChessesDarkIt=mapChessesDark.begin(); mapChessesDarkIt!=mapChessesDark.end(); mapChessesDarkIt++)
-        {
-            all += mapChessesDarkIt->second;
-        }
         std::set<std::string> setCheckDark = board.getSetCheckDark();
-        std::set<std::string>::iterator setCheckDarkIt;
-        for(setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
+        for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
         {
-            temp.insert(Board::Move(board, *setCheckDarkIt, all, mapChessesDark));
+            temp.insert(Board::Move(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark));
         }
         B2MS[board] = temp;
         return temp;
