@@ -29,7 +29,8 @@ Board::~Board()
 
 bool Board::operator<(const Board& other) const
 {
-    if(trun == other.trun){
+    if(trun == other.trun)
+    {
         if(darkPieces == other.darkPieces)
         {
             if(setCheckDark == other.setCheckDark)
@@ -45,6 +46,11 @@ bool Board::operator<(const Board& other) const
         else return darkPieces < other.darkPieces;
     }
     else return trun < other.trun;
+}
+
+bool Board::operator==(const Board& other) const
+{
+    return !this->operator<(other) && !other.operator<(*this);
 }
 
 void Board::makeMove(std::string move)

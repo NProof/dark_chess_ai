@@ -25,7 +25,7 @@ bool Board::Move::operator<(const Move& other) const
 {
 	if(iDark == other.iDark)
 		if(possibleKinds == other.possibleKinds)
-            if(!(originB < other.originB) && !(other.originB < originB))
+            if(originB == other.originB)
                 return strMove < other.strMove;
             return originB < other.originB;
         return possibleKinds < other.possibleKinds;
