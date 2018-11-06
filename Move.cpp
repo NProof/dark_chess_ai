@@ -27,9 +27,9 @@ bool Board::Move::operator<(const Move& other) const
         return iDark < other.iDark;
     if(possibleKinds != other.possibleKinds)
         return possibleKinds < other.possibleKinds;
-    if(originB == other.originB)
-    return strMove < other.strMove;
+    if(originB != other.originB)
         return originB < other.originB;
+    return strMove < other.strMove;
 }
 
 Board Board::Move::GetOringinB()
