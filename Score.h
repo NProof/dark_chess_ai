@@ -11,11 +11,11 @@ class Score
 		Score(int, int, int);
 		~Score();
 
-		bool operator <(const Score) const;
-		bool operator >(const Score) const;
-		void operator +=(const Score);
-		Score operator *(int) const;
-		Score operator /(int) const;
+		bool operator< (const Score) const;
+		bool operator> (const Score) const;
+		Score & operator+= (const Score &);
+		Score & operator*= (const int);
+		Score & operator/= (const int);
 
 		int GetWin() const { return win; }
 		void SetWin(int val) { win = val; }

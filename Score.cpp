@@ -19,19 +19,19 @@ Score::~Score()
 	//dtor
 }
 
-bool Score::operator<(const Score other) const
+bool Score::operator< (const Score other) const
 {
     return ( n_method ) * other.denominator
         < ( other.n_method ) * denominator;
 }
 
-bool Score::operator>(const Score other) const
+bool Score::operator> (const Score other) const
 {
     return ( n_method ) * other.denominator
         > ( other.n_method ) * denominator;
 }
 
-void Score::operator+=(const Score other)
+Score & Score::operator+= (const Score & other)
 {
     SetWin( GetWin() + other.GetWin());
     SetDraw( GetDraw() + other.GetDraw());
@@ -39,26 +39,22 @@ void Score::operator+=(const Score other)
     Setn_Method( Getn_Method() + other.Getn_Method());
     Setn_Powers( Getn_Powers() + other.Getn_Powers());
 }
-
-Score Score::operator *(int mul) const
+Score & Score::operator*= (const int mul)
 {
-    Score score(*this);
-    score.SetWin(win * mul);
-    score.SetDraw(draw * mul);
-    score.SetLose(lose * mul);
-    score.Setn_Method(n_method * mul);
-    score.Setn_Powers(n_powers * mul);
-    score.Setdenominator(denominator * mul);
-    return score;
+    SetWin(win * mul);
+    SetDraw(draw * mul);
+    SetLose(lose * mul);
+    Setn_Method(n_method * mul);
+    Setn_Powers(n_powers * mul);
+    Setdenominator(denominator * mul);
+    return (*this);
 }
-
-Score Score::operator /(int div) const
+Score & Score::operator/= (const int div)
 {
-    Score score(*this);
     if(div > 1){
-        score.Setdenominator(denominator * div);
+        Setdenominator(denominator * div);
     }
-    return score;
+    return (*this);
 }
 
 const Score Score::minScore = Score(0.0 ,0.0 ,DBL_MAX);

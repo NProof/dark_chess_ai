@@ -93,10 +93,10 @@ Score Player::score(Board::Move mov, int level)
 {
 	std::map<Board, int> nextMov = next(mov);
 	std::map<Board, int>::iterator it = nextMov.begin();
-	Score mean = score(it->first, level) * it->second;
+	Score mean = (score(it->first, level) *= it->second);
 	for(; it != nextMov.end(); it++)
     {
-        mean += score(it->first, level) * it->second;
+        mean += (score(it->first, level) *= it->second);
     }
-    return mean / mov.GetiDark();
+    return mean /= mov.GetiDark();
 }
