@@ -38,6 +38,7 @@ Score & Score::operator+= (const Score & other)
     SetLose( GetLose() + other.GetLose());
     Setn_Method( Getn_Method() + other.Getn_Method());
     Setn_Powers( Getn_Powers() + other.Getn_Powers());
+    return (*this);
 }
 Score & Score::operator*= (const int mul)
 {
