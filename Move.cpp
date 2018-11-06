@@ -23,7 +23,6 @@ Board::Move::~Move()
 
 bool Board::Move::operator<(const Move& other) const
 {
-                return strMove < other.strMove;
 	if(iDark != other.iDark)
         return iDark < other.iDark;
     if(possibleKinds != other.possibleKinds)
