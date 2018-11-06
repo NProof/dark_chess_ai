@@ -23,13 +23,14 @@ Board::Move::~Move()
 
 bool Board::Move::operator<(const Move& other) const
 {
-	if(iDark == other.iDark)
-		if(possibleKinds == other.possibleKinds)
-            if(originB == other.originB)
                 return strMove < other.strMove;
-            return originB < other.originB;
+	if(iDark != other.iDark)
+        return iDark < other.iDark;
+    if(possibleKinds != other.possibleKinds)
         return possibleKinds < other.possibleKinds;
-	return iDark < other.iDark;
+    if(originB == other.originB)
+    return strMove < other.strMove;
+        return originB < other.originB;
 }
 
 Board Board::Move::GetOringinB()

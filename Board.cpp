@@ -29,28 +29,25 @@ Board::~Board()
 
 bool Board::operator<(const Board& other) const
 {
-    if(trun == other.trun)
-    {
-        if(darkPieces == other.darkPieces)
-        {
-            if(setCheckDark == other.setCheckDark)
-            {
-                if(map_Char == other.map_Char)
-                {
-                    return false;
-                }
-                else return map_Char < other.map_Char;
-            }
-            else return setCheckDark < other.setCheckDark;
-        }
-        else return darkPieces < other.darkPieces;
-    }
-    else return trun < other.trun;
+    if(trun != other.trun)
+        return trun < other.trun;
+    if(darkPieces != other.darkPieces)
+        return darkPieces < other.darkPieces;
+    if(setCheckDark != other.setCheckDark)
+        return setCheckDark < other.setCheckDark;
+    if(map_Char != other.map_Char)
+        return map_Char < other.map_Char;
+    return false;
 }
 
 bool Board::operator==(const Board& other) const
 {
     return !this->operator<(other) && !other.operator<(*this);
+}
+
+bool Board::operator!=(const Board& other) const
+{
+    return this->operator<(other) || other.operator<(*this);
 }
 
 void Board::makeMove(std::string move)
