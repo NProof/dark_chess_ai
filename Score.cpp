@@ -21,14 +21,14 @@ Score::~Score()
 
 bool Score::operator<(const Score other) const
 {
-    return ( 5 * n_method + n_powers ) * other.denominator
-        < ( 5 * other.n_method + other.n_powers ) * denominator;
+    return ( n_method ) * other.denominator
+        < ( other.n_method ) * denominator;
 }
 
 bool Score::operator>(const Score other) const
 {
-    return ( 5 * n_method + n_powers ) * other.denominator
-        > ( 5 * other.n_method + other.n_powers ) * denominator;
+    return ( n_method ) * other.denominator
+        > ( other.n_method ) * denominator;
 }
 
 void Score::operator+=(const Score other)
