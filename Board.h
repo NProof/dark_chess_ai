@@ -42,6 +42,7 @@ class Board
 		std::map<char, int> darkPieces;
         std::set<std::string> setCheckDark;
         std::map<std::string, char> map_Char;
+        std::set<std::pair<std::string, std::string>> moveValid;
         std::map<std::string, std::map<Path, std::string>> pathTo;
 };
 
