@@ -209,3 +209,35 @@ bool Board::isEmpty(std::string strp)
 {
     return !isDark(strp)&&!isLight(strp);
 }
+
+int Board::method()
+{
+    return getMoveValid().size() + setCheckDark.size();
+}
+
+int Board::powers()
+{
+    auto light = getLightPieces();
+    auto dark = darkPieces;
+    for(auto x : dark){
+        light[x.first] += x.second;
+    }
+    int val =
+    (
+        light['k']*(light['G']+light['M']+light['R']+light['N']+light['C']-light['P'])
+        +light['g']*(light['M']+light['R']+light['N']+light['C']+light['P']-light['K'])
+        +light['m']*(light['R']+light['N']+light['C']+light['P']-light['K']-light['G'])
+        +light['r']*(light['N']+light['C']+light['P']-light['K']-light['G']-light['M'])
+        +light['n']*(light['C']+light['P']-light['K']-light['G']-light['M']-light['R'])
+        +light['c']*(light['P']) // -light['K']-light['G']-light['M']-light['R']-light['N'])
+        +light['p']*(light['K']-light['G']-light['M']-light['R']-light['N']-light['C'])
+    );
+    switch(getTrun()){
+    case PROTO_CLR::PCLR_RED:
+        return val;
+    case PROTO_CLR::PCLR_BLACK:
+        return val;
+    default:
+        exit(25);
+    };
+}

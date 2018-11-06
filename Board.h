@@ -35,6 +35,8 @@ class Board
 		bool isLight(std::string);
 		bool isEmpty(std::string);
 
+		int powers();
+		int method();
 
 		PROTO_CLR trun = PROTO_CLR::PCLR_UNKNOW;
 		std::map<char, int> darkPieces;
