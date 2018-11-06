@@ -4,6 +4,7 @@
 #include <set>
 #include <map>
 #include "Protocol.h"
+#include "Score.h"
 
 enum class Path{Up, Down, Left, Right};
 
@@ -18,6 +19,8 @@ class Board
         bool operator!=(const Board&) const;
 
         class Move;
+
+        Score * getScore();
 
         void makeMove(std::string);
         PROTO_CLR getTrun();
@@ -37,6 +40,8 @@ class Board
 
 		int powers();
 		int method();
+
+		Score * score = NULL;
 
 		PROTO_CLR trun = PROTO_CLR::PCLR_UNKNOW;
 		std::map<char, int> darkPieces;

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <cfloat>
-#include "Board.h"
 
 class Score
 {
@@ -17,9 +16,6 @@ class Score
 		void operator +=(const Score);
 		Score operator *(int) const;
 		Score operator /(int) const;
-
-		static int powers(Board);
-		static int method(Board);
 
 		int GetWin() const { return win; }
 		void SetWin(int val) { win = val; }

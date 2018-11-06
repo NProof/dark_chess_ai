@@ -85,7 +85,7 @@ Score Player::score(Board board, int level)
         return bestScore;
     }
     else{
-        return Score(Score::method(board), Score::powers(board), 1);
+        return *board.getScore();
     }
 }
 

@@ -25,7 +25,7 @@ Board::Board()
 
 Board::~Board()
 {
-    //dtor
+    delete score;
 }
 
 bool Board::operator<(const Board& other) const
@@ -49,6 +49,13 @@ bool Board::operator==(const Board& other) const
 bool Board::operator!=(const Board& other) const
 {
     return this->operator<(other) || other.operator<(*this);
+}
+
+Score * Board::getScore()
+{
+    if(score == NULL)
+        score = new Score(method(), powers(), 1);
+    return score;
 }
 
 void Board::makeMove(std::string move)
