@@ -78,7 +78,7 @@ Score Player::score(Board board, int level)
         Score bestScore = Score::minScore;
         for(auto mov : next(board))
         {
-            Score temp = score(mov, level-1);
+            Score temp = -score(mov, level-1);
             if(temp > bestScore)
                 bestScore = temp;
         }

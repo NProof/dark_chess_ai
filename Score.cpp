@@ -14,9 +14,24 @@ Score::Score(int n_method, int n_powers, int iDark)
     Setdenominator(iDark);
 }
 
+Score::Score(int n_method, int n_powers, int iDark, double win, double draw, double lose)
+{
+    this->win = win;
+    this->draw = draw;
+    this->lose = lose;
+    Setn_Method(n_method);
+    Setn_Powers(n_powers);
+    Setdenominator(iDark);
+}
+
 Score::~Score()
 {
 	//dtor
+}
+
+Score Score::operator- () const
+{
+    return Score(-n_method, -n_powers, denominator, lose, draw, win);
 }
 
 bool Score::operator< (const Score other) const

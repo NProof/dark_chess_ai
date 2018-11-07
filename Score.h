@@ -9,10 +9,12 @@ class Score
 	public:
 		Score(double, double, double);
 		Score(int, int, int);
+		Score(int, int, int, double, double, double);
 		~Score();
 
 		bool operator< (const Score) const;
 		bool operator> (const Score) const;
+		Score operator- () const;
 		Score & operator+= (const Score &);
 		Score & operator*= (const int);
 		Score & operator/= (const int);
