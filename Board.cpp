@@ -20,7 +20,7 @@ Board::Board()
         {'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
         ,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}
     };
-	moveValid = getMoveValid();
+	moveValid = std::set<std::pair<std::string, std::string>>();
 }
 
 Board::~Board()
