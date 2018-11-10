@@ -1,24 +1,7 @@
 #include "Score.h"
 
-Score::Score(double win, double draw, double lose)
-{
-    this->win = win;
-    this->draw = draw;
-    this->lose = lose;
-}
-
 Score::Score(int n_method, int n_powers, int iDark)
 {
-    Setn_Method(n_method);
-    Setn_Powers(n_powers);
-    Setdenominator(iDark);
-}
-
-Score::Score(int n_method, int n_powers, int iDark, double win, double draw, double lose)
-{
-    this->win = win;
-    this->draw = draw;
-    this->lose = lose;
     Setn_Method(n_method);
     Setn_Powers(n_powers);
     Setdenominator(iDark);
@@ -31,7 +14,7 @@ Score::~Score()
 
 Score Score::operator- () const
 {
-    return Score(-n_method, -n_powers, denominator, lose, draw, win);
+    return Score(-n_method, -n_powers, denominator);
 }
 
 bool Score::operator< (const Score other) const
@@ -48,18 +31,12 @@ bool Score::operator> (const Score other) const
 
 Score & Score::operator+= (const Score & other)
 {
-    SetWin( GetWin() + other.GetWin());
-    SetDraw( GetDraw() + other.GetDraw());
-    SetLose( GetLose() + other.GetLose());
     Setn_Method( Getn_Method() + other.Getn_Method());
     Setn_Powers( Getn_Powers() + other.Getn_Powers());
     return (*this);
 }
 Score & Score::operator*= (const int mul)
 {
-    SetWin(win * mul);
-    SetDraw(draw * mul);
-    SetLose(lose * mul);
     Setn_Method(n_method * mul);
     Setn_Powers(n_powers * mul);
     Setdenominator(denominator * mul);
