@@ -245,7 +245,7 @@ int Board::powers()
     case PROTO_CLR::PCLR_RED:
         return val;
     case PROTO_CLR::PCLR_BLACK:
-        return val;
+        return -val;
     default:
         exit(25);
     };
