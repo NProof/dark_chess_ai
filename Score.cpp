@@ -50,4 +50,6 @@ Score & Score::operator/= (const int div)
     return (*this);
 }
 
-const Score Score::minScore = Score(0.0 ,0.0 ,DBL_MAX);
+const Score Score::minScore = Score(-64,-48,1);
+
+const Score Score::maxScore = Score(64,48,1);

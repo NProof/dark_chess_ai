@@ -25,6 +25,7 @@ class Score
 		void Setdenominator(int val) { denominator = (val > 0) ? val : 1 ; }
 
         static const Score minScore;
+        static const Score maxScore;
 
 	protected:
 
