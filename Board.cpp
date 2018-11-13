@@ -25,7 +25,8 @@ Board::Board()
 
 Board::~Board()
 {
-    delete score;
+    if(score)
+        delete score;
 }
 
 bool Board::operator<(const Board& other) const
