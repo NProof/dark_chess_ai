@@ -66,7 +66,7 @@ void Board::makeMove(std::string move)
     src = move.substr(0, 2);
     if(move[2]=='-')
     {
-        dst = move.substr(3, 2);;
+        dst = move.substr(3, 2);
         map_Char[dst] = map_Char[src];
         map_Char.erase(src);
 
