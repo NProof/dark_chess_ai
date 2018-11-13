@@ -28,6 +28,8 @@ class Board
         std::map<char, int> getDarkPieces();
         std::set<std::string> getSetCheckDark();
         std::map<char, int> getLightPieces();
+		int n_red;
+		int n_black;
     protected:
 
     private:

@@ -1,6 +1,7 @@
 #include "Board.h"
 
 Board::Board()
+:n_red(16), n_black(16)
 {
     for(int i=0; i<32; i++)
     {
@@ -33,6 +34,10 @@ bool Board::operator<(const Board& other) const
 {
     if(trun != other.trun)
         return trun < other.trun;
+    if(n_red != other.n_red)
+        return n_red < other.n_red;
+    if(n_black != other.n_black)
+        return n_black < other.n_black;
     if(darkPieces != other.darkPieces)
         return darkPieces < other.darkPieces;
     if(setCheckDark != other.setCheckDark)
@@ -67,6 +72,13 @@ void Board::makeMove(std::string move)
     if(move[2]=='-')
     {
         dst = move.substr(3, 2);
+        if(map_Char.count(dst))
+        {
+            if(islower(map_Char[dst]))
+                n_red--;
+            else n_black--;
+        }
+
         map_Char[dst] = map_Char[src];
         map_Char.erase(src);
 
