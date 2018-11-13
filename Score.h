@@ -2,7 +2,7 @@
 #define SCORE_H
 
 #include <iostream>
-#include <cfloat>
+//#include <cfloat>
 
 class Score
 {
