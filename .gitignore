@@ -1,5 +1,5 @@
 *.o
-*.exe
+
 *.out
 *.zip
 *.log
