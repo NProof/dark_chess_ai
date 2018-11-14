@@ -19,6 +19,7 @@ void Player::generateMove(char *move)
 {
     std::vector<Board::Move> moves = one_level();
     strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
+    std::cout << board.nD_red << " and Black : " << board.nD_black << endl;
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
 
