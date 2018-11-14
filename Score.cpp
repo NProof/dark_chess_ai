@@ -23,8 +23,8 @@ bool Score::operator< (const Score other) const
 {
     if(( n_method ) * other.denominator != ( other.n_method ) * denominator)
         return ( n_method ) * other.denominator < ( other.n_method ) * denominator;
-    if( n_powers * (other.n_opp+1) * other.denominator != other.n_powers * (n_opp+1) * denominator)
-        return n_powers * (other.n_opp+1) * other.denominator < other.n_powers * (n_opp+1) * denominator;
+    if(n_powers*n_own*(other.n_opp+1)*other.denominator != other.n_powers*other.n_own*(n_opp+1)*denominator)
+        return n_powers*n_own*(other.n_opp+1)*other.denominator < other.n_powers*other.n_own*(n_opp+1)*denominator;
     return false;
 }
 
@@ -32,8 +32,8 @@ bool Score::operator> (const Score other) const
 {
     if(( n_method ) * other.denominator != ( other.n_method ) * denominator)
         return ( n_method ) * other.denominator > ( other.n_method ) * denominator;
-    if( n_powers * (other.n_opp+1) * other.denominator != other.n_powers * (n_opp+1) * denominator)
-        return n_powers * (other.n_opp+1) * other.denominator > other.n_powers * (n_opp+1) * denominator;
+    if(n_powers*n_own*(other.n_opp+1)*other.denominator != other.n_powers*other.n_own*(n_opp+1)*denominator)
+        return n_powers*n_own*(other.n_opp+1)*other.denominator > other.n_powers*other.n_own*(n_opp+1)*denominator;
     return false;
 }
 
