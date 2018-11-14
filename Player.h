@@ -23,7 +23,7 @@ class Player
     protected:
 
     private:
-        std::vector<Board::Move> one_level();
+        std::vector<Board::Move> multi_level(int); //one layer : level is 0
 
         std::set<Board::Move> next(Board);
         std::map<Board, int> next(Board::Move);

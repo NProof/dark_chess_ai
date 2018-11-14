@@ -20,7 +20,7 @@ void Player::generateMove(char *move)
     std::cout << board.nD_red << " and Black : " << board.nD_black << std::endl;
     if(board.nD_red+board.nD_black>0)
     {
-        std::vector<Board::Move> moves = one_level();
+        std::vector<Board::Move> moves = multi_level(0);
         strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
     }
     else
@@ -40,11 +40,11 @@ bool Player::getColor()
     return color;
 }
 
-std::vector<Board::Move> Player::one_level()
+std::vector<Board::Move> Player::multi_level(int level)
 {
     std::map<Score, std::vector<Board::Move> > mapRank;
     for(Board::Move ptrMove : next(board)){
-        mapRank[score(ptrMove, 0)].push_back(ptrMove);
+        mapRank[score(ptrMove, level)].push_back(ptrMove);
     }
     return mapRank.begin()->second;
 }
