@@ -7,7 +7,7 @@
 class Score
 {
 	public:
-		Score(int, int, int);
+		Score(int, int, int, int, int);
 		~Score();
 
 		bool operator< (const Score) const;
@@ -23,6 +23,9 @@ class Score
 		void Setn_Powers(int val) { n_powers = val; }
 		int Getdenominator() const { return denominator; }
 		void Setdenominator(int val) { denominator = (val > 0) ? val : 1 ; }
+
+	    int n_own;
+	    int n_opp;
 
         static const Score minScore;
         static const Score maxScore;

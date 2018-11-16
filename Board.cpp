@@ -60,7 +60,12 @@ bool Board::operator!=(const Board& other) const
 Score * Board::getScore()
 {
     if(score == NULL)
-        score = new Score(method(), powers(), 1);
+    {
+        if(trun == PROTO_CLR::PCLR_RED)
+           score = new Score(n_red, n_black, method(), powers(), 1);
+        else
+           score = new Score(n_black, n_red, method(), powers(), 1);
+    }
     return score;
 }
 
