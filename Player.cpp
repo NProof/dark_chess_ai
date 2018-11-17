@@ -17,8 +17,20 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-    std::vector<Board::Move> moves = one_level();
-    strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
+    std::cout << board.nD_red << " and Black : " << board.nD_black << std::endl;
+    if(board.nD_red+board.nD_black>0)
+    {
+    	std::vector<Board::Move> moves;
+    	for(Board::Move ptrMove : next(board)){
+			moves.push_back(ptrMove);
+		}
+    	strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
+    }
+    else
+    {
+        std::vector<Board::Move> moves = multi_level(1);
+        strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
+    }
 //    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
 
@@ -32,11 +44,11 @@ bool Player::getColor()
     return color;
 }
 
-std::vector<Board::Move> Player::one_level()
+std::vector<Board::Move> Player::multi_level(int level)
 {
     std::map<Score, std::vector<Board::Move> > mapRank;
     for(Board::Move ptrMove : next(board)){
-        mapRank[score(ptrMove, 0)].push_back(ptrMove);
+        mapRank[score(ptrMove, level)].push_back(ptrMove);
     }
     return mapRank.begin()->second;
 }
