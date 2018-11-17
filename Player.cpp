@@ -31,7 +31,6 @@ void Player::generateMove(char *move)
         std::vector<Board::Move> moves = multi_level(1);
         strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
     }
-//    printf("%s\n", moves.begin()->getStringMove().c_str());
 }
 
 void Player::makeMove(char *move)
