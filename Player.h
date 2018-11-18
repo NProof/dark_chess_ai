@@ -10,30 +10,30 @@
 
 class Player
 {
-    public:
-        Player();
-        virtual ~Player();
+	public:
+		Player();
+		virtual ~Player();
 
-        void setColor(PROTO_CLR);
-        void generateMove(char *);
-        void makeMove(char *);
+		void setColor(PROTO_CLR);
+		void generateMove(char *);
+		void makeMove(char *);
 
-        bool getColor();
+		bool getColor();
 
-    protected:
+	protected:
 
-    private:
-        std::vector<Board::Move> multi_level(int); //one layer : level is 0
+	private:
+		std::vector<Board::Move> multi_level(int); //one layer : level is 0
 
-        std::set<Board::Move> next(Board);
-        std::map<Board, int> next(Board::Move);
-        Score score(Board, int);
-        Score score(Board::Move, int);
+		std::set<Board::Move> next(Board);
+		std::map<Board, int> next(Board::Move);
+		Score score(Board, int);
+		Score score(Board::Move, int);
 
-        PROTO_CLR color;
-        Board board;
-        std::map<Board, std::set<Board::Move>> B2MS;
-        std::map<Board::Move, std::map<Board , int>> M2BM;
+		PROTO_CLR color;
+		Board board;
+		std::map<Board, std::set<Board::Move> > B2MS;
+		std::map<Board::Move, std::map<Board , int> > M2BM;
 };
 
 #endif // PLAYER_H

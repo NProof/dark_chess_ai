@@ -27,8 +27,8 @@ class Score
 	    int n_own;
 	    int n_opp;
 
-        static const Score minScore;
-        static const Score maxScore;
+		static const Score minScore;
+		static const Score maxScore;
 
 	protected:
 

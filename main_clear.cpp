@@ -10,7 +10,7 @@ int main(int argc , char **argv)
 	case 3:
 		if(!protocol.init_protocol(argv[1], atoi(argv[2]))) return 0;
 		break;
-    case 2:
+	case 2:
 		if(!protocol.init_protocol(argv[0], atoi(argv[1]))) return 0;
 		break;
 	}
@@ -27,7 +27,7 @@ int main(int argc , char **argv)
 	if(argc==3||argc==2)
 	{
 		protocol.init_board(piece_count, current_position, history,time);
-        Player player;
+		Player player;
 
 		if(history.number_of_moves != 0)
 		{
@@ -39,7 +39,7 @@ int main(int argc , char **argv)
 		}
 
 		protocol.get_turn(turn, color);
-        player.setColor(color);
+		player.setColor(color);
 
 
 		if(turn)

@@ -20,10 +20,10 @@ ClientSocket::~ClientSocket(void)
 void ClientSocket::CloseSocket()
 {
 #ifdef _WIN32
-     closesocket(this->m_Socket);
-     WSACleanup();
+	 closesocket(this->m_Socket);
+	 WSACleanup();
 #else
-     close(m_Socket);
+	 close(m_Socket);
 #endif
 }
 
