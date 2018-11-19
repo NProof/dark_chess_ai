@@ -54,8 +54,6 @@ std::vector<Board::Move> Player::multi_level(int level)
 
 std::set<Board::Move> Player::next(Board board)
 {
-	if(B2MS.find(board)==B2MS.end())
-	{
 		std::set<Board::Move> temp;
 		std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
 		for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
@@ -68,19 +66,12 @@ std::set<Board::Move> Player::next(Board board)
 		{
 			temp.insert(Board::Move(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark));
 		}
-		B2MS[board] = temp;
 		return temp;
-	}
-	return B2MS[board];
 }
 
 std::map<Board, int> Player::next(Board::Move mov)
 {
-	if(M2BM.find(mov) == M2BM.end())
-	{
-		M2BM[mov] = mov.GetpossibleBoards();
-	}
-	return M2BM[mov];
+	return mov.GetpossibleBoards();
 }
 
 Score Player::score(Board board, int level)
