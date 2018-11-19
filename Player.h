@@ -16,10 +16,10 @@ class Player
 
 		void setColor(PROTO_CLR);
 		void generateMove(char *);
-		void makeMove(char *);
 
 		bool getColor();
 
+		Board board;
 	protected:
 
 	private:
@@ -31,7 +31,6 @@ class Player
 		Score score(SetBoard, int);
 
 		PROTO_CLR color;
-		Board board;
 };
 
 #endif // PLAYER_H

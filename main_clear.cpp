@@ -52,9 +52,9 @@ int main(int argc , char **argv)
 				color = protocol.get_color(move);
 				player.setColor(color);
 			}
-			player.makeMove(move);
+			player.board.makeMove(std::string(move));
 			protocol.recv(move,time);
-			player.makeMove(move);
+			player.board.makeMove(std::string(move));
 		}
 		else
 		{
@@ -64,7 +64,7 @@ int main(int argc , char **argv)
 				color = (protocol.get_color(move)==PCLR_BLACK)? PCLR_RED : PCLR_BLACK;
 				player.setColor(color);
 			}
-			player.makeMove(move);
+			player.board.makeMove(std::string(move));
 		}
 
 		while(1)
@@ -72,9 +72,9 @@ int main(int argc , char **argv)
 			player.generateMove(move);
 			protocol.send(move);
 			protocol.recv(move,time);
-			player.makeMove(move);
+			player.board.makeMove(std::string(move));
 			protocol.recv(move,time);
-			player.makeMove(move);
+			player.board.makeMove(std::string(move));
 		}
 	}
 	return 0;

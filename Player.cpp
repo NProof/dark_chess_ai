@@ -33,11 +33,6 @@ void Player::generateMove(char *move)
 	}
 }
 
-void Player::makeMove(char *move)
-{
-	this->board.makeMove(std::string(move));
-}
-
 bool Player::getColor()
 {
 	return color;
