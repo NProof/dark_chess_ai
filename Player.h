@@ -23,12 +23,12 @@ class Player
 	protected:
 
 	private:
-		std::vector<Board::SetBoard> multi_level(int); //one layer : level is 0
+		std::vector<SetBoard> multi_level(int); //one layer : level is 0
 
-		std::set<Board::SetBoard> next(Board);
-		std::map<Board, int> next(Board::SetBoard);
+		std::set<SetBoard> next(Board);
+		std::map<Board, int> next(SetBoard);
 		Score score(Board, int);
-		Score score(Board::SetBoard, int);
+		Score score(SetBoard, int);
 
 		PROTO_CLR color;
 		Board board;

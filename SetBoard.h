@@ -4,7 +4,7 @@
 #include <iostream>
 #include "Board.h"
 
-class Board::SetBoard
+class SetBoard
 {
 	public:
 		SetBoard(Board, std::string);

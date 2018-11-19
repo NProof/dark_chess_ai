@@ -20,15 +20,15 @@ void Player::generateMove(char *move)
 	std::cout << board.nD_red << " and Black : " << board.nD_black << std::endl;
 	if(board.nD_red+board.nD_black>0)
 	{
-		std::vector<Board::SetBoard> moves;
-		for(Board::SetBoard ptrMove : next(board)){
+		std::vector<SetBoard> moves;
+		for(SetBoard ptrMove : next(board)){
 			moves.push_back(ptrMove);
 		}
 		strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 	}
 	else
 	{
-		std::vector<Board::SetBoard> moves = multi_level(1);
+		std::vector<SetBoard> moves = multi_level(1);
 		strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 	}
 }
@@ -43,33 +43,33 @@ bool Player::getColor()
 	return color;
 }
 
-std::vector<Board::SetBoard> Player::multi_level(int level)
+std::vector<SetBoard> Player::multi_level(int level)
 {
-	std::map<Score, std::vector<Board::SetBoard> > mapRank;
-	for(Board::SetBoard ptrMove : next(board)){
+	std::map<Score, std::vector<SetBoard> > mapRank;
+	for(SetBoard ptrMove : next(board)){
 		mapRank[score(ptrMove, level)].push_back(ptrMove);
 	}
 	return mapRank.begin()->second;
 }
 
-std::set<Board::SetBoard> Player::next(Board board)
+std::set<SetBoard> Player::next(Board board)
 {
-		std::set<Board::SetBoard> temp;
+		std::set<SetBoard> temp;
 		std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
 		for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
 		{
-			temp.insert(Board::SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second));
+			temp.insert(SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second));
 		}
 		std::map<char, int> mapChessesDark = board.getDarkPieces();
 		std::set<std::string> setCheckDark = board.getSetCheckDark();
 		for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
 		{
-			temp.insert(Board::SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark));
+			temp.insert(SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark));
 		}
 		return temp;
 }
 
-std::map<Board, int> Player::next(Board::SetBoard mov)
+std::map<Board, int> Player::next(SetBoard mov)
 {
 	return mov.GetpossibleBoards();
 }
@@ -91,7 +91,7 @@ Score Player::score(Board board, int level)
 	}
 }
 
-Score Player::score(Board::SetBoard mov, int level)
+Score Player::score(SetBoard mov, int level)
 {
 	std::map<Board, int> nextMov = next(mov);
 	std::map<Board, int>::iterator it = nextMov.begin();
