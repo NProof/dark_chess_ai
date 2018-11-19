@@ -25,7 +25,7 @@ class Player
 	private:
 		std::vector<SetBoard> multi_level(int); //one layer : level is 0
 
-		std::set<SetBoard> next(Board);
+		std::map<std::string, SetBoard> next(Board);
 		std::map<Board, int> next(SetBoard);
 		Score score(Board, int);
 		Score score(SetBoard, int);

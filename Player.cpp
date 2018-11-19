@@ -22,7 +22,7 @@ void Player::generateMove(char *move)
 	{
 		std::vector<SetBoard> moves;
 		for(auto ptrMove : next(board)){
-			moves.push_back(ptrMove);
+			moves.push_back(ptrMove.second);
 		}
 		strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
 	}
@@ -42,24 +42,28 @@ std::vector<SetBoard> Player::multi_level(int level)
 {
 	std::map<Score, std::vector<SetBoard> > mapRank;
 	for(auto ptrMove : next(board)){
-		mapRank[score(ptrMove, level)].push_back(ptrMove);
+		mapRank[score(ptrMove.second, level)].push_back(ptrMove.second);
 	}
 	return mapRank.begin()->second;
 }
 
-std::set<SetBoard> Player::next(Board board)
+std::map<std::string, SetBoard> Player::next(Board board)
 {
-		std::set<SetBoard> temp;
+		std::map<std::string, SetBoard> temp;
 		std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
 		for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
 		{
-			temp.insert(SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second));
+			temp.insert(std::pair<std::string, SetBoard>
+			(pairmoveIt->first+'-'+pairmoveIt->second, SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second))
+		   );
 		}
 		std::map<char, int> mapChessesDark = board.getDarkPieces();
 		std::set<std::string> setCheckDark = board.getSetCheckDark();
 		for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
 		{
-			temp.insert(SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark));
+			temp.insert(std::pair<std::string, SetBoard>
+			   (*setCheckDarkIt+'-'+*setCheckDarkIt, SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark))
+			);
 		}
 		return temp;
 }
@@ -75,7 +79,7 @@ Score Player::score(Board board, int level)
 		Score bestScore = Score::minScore;
 		for(auto mov : next(board))
 		{
-			Score temp = -score(mov, level-1);
+			Score temp = -score(mov.second, level-1);
 			if(temp > bestScore)
 				bestScore = temp;
 		}
