@@ -2,22 +2,18 @@
 
 SetBoard::SetBoard(Board board, std::string strMove)
 {
-	originB = board;
 	this->strMove = strMove;
 	this->iDark = 0;
-	possibleKinds = std::map<char, int>();
 	board.makeMove(strMove);
 	possibleBoards[board] = 1;
 }
 
 SetBoard::SetBoard(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
 {
-	originB = board;
 	this->strMove = strMove+'-'+strMove;
 	this->iDark = iDark;
-	possibleKinds = possibleChar;
 	std::string strPos = strMove.substr(0,2);
-	for(std::map<char, int>::iterator it=possibleKinds.begin(); it!=possibleKinds.end(); it++)
+	for(std::map<char, int>::iterator it=possibleChar.begin(); it!=possibleChar.end(); it++)
 	{
 		Board possibleBoard(board);
 		possibleBoard.makeMove(strPos+'('+it->first+')');
@@ -34,16 +30,9 @@ bool SetBoard::operator<(const SetBoard& other) const
 {
 	if(iDark != other.iDark)
 		return iDark < other.iDark;
-	if(possibleKinds != other.possibleKinds)
-		return possibleKinds < other.possibleKinds;
-	if(originB != other.originB)
-		return originB < other.originB;
-	return strMove < other.strMove;
-}
-
-Board SetBoard::GetOringinB()
-{
-	return originB;
+	if(strMove != other.strMove)
+		return strMove < other.strMove;
+	return possibleBoards < other.possibleBoards;
 }
 
 std::string SetBoard::getStringMove()
@@ -54,11 +43,6 @@ std::string SetBoard::getStringMove()
 int SetBoard::GetiDark()
 {
 	return iDark;
-}
-
-std::map<char, int> SetBoard::GetpossibleKinds()
-{
-	return possibleKinds;
 }
 
 std::map<Board, int> SetBoard::GetpossibleBoards()

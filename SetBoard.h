@@ -13,18 +13,14 @@ class SetBoard
 
 		bool operator<(const SetBoard& other) const;
 
-		Board GetOringinB();
 		std::string getStringMove();
 		int GetiDark();
-		std::map<char, int> GetpossibleKinds();
 		std::map<Board, int> GetpossibleBoards();
 	protected:
 
 	private:
-		Board originB;
 		std::string strMove;
 		int iDark;
-		std::map<char, int> possibleKinds;
 		std::map<Board, int> possibleBoards;
 };
 
