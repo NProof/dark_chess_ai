@@ -4,14 +4,14 @@
 #include <iostream>
 #include "Board.h"
 
-class Board::Move
+class Board::SetBoard
 {
 	public:
-		Move(Board, std::string);
-		Move(Board, std::string, int, std::map<char, int>);
-		virtual ~Move();
+		SetBoard(Board, std::string);
+		SetBoard(Board, std::string, int, std::map<char, int>);
+		virtual ~SetBoard();
 
-		bool operator<(const Move& other) const;
+		bool operator<(const SetBoard& other) const;
 
 		Board GetOringinB();
 		std::string getStringMove();

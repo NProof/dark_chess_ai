@@ -1,6 +1,6 @@
-#include "Move.h"
+#include "SetBoard.h"
 
-Board::Move::Move(Board board, std::string strMove)
+Board::SetBoard::SetBoard(Board board, std::string strMove)
 {
 	originB = board;
 	this->strMove = strMove;
@@ -10,7 +10,7 @@ Board::Move::Move(Board board, std::string strMove)
 	possibleBoards[board] = 1;
 }
 
-Board::Move::Move(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
+Board::SetBoard::SetBoard(Board board, std::string strMove, int iDark, std::map<char, int> possibleChar)
 {
 	originB = board;
 	this->strMove = strMove+'-'+strMove;
@@ -25,12 +25,12 @@ Board::Move::Move(Board board, std::string strMove, int iDark, std::map<char, in
 	}
 }
 
-Board::Move::~Move()
+Board::SetBoard::~SetBoard()
 {
 	//dtor
 }
 
-bool Board::Move::operator<(const Move& other) const
+bool Board::SetBoard::operator<(const SetBoard& other) const
 {
 	if(iDark != other.iDark)
 		return iDark < other.iDark;
@@ -41,27 +41,27 @@ bool Board::Move::operator<(const Move& other) const
 	return strMove < other.strMove;
 }
 
-Board Board::Move::GetOringinB()
+Board Board::SetBoard::GetOringinB()
 {
 	return originB;
 }
 
-std::string Board::Move::getStringMove()
+std::string Board::SetBoard::getStringMove()
 {
 	return strMove;
 }
 
-int Board::Move::GetiDark()
+int Board::SetBoard::GetiDark()
 {
 	return iDark;
 }
 
-std::map<char, int> Board::Move::GetpossibleKinds()
+std::map<char, int> Board::SetBoard::GetpossibleKinds()
 {
 	return possibleKinds;
 }
 
-std::map<Board, int> Board::Move::GetpossibleBoards()
+std::map<Board, int> Board::SetBoard::GetpossibleBoards()
 {
 	return possibleBoards;
 }

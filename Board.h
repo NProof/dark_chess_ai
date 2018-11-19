@@ -18,7 +18,7 @@ class Board
 		bool operator==(const Board&) const;
 		bool operator!=(const Board&) const;
 
-		class Move;
+		class SetBoard;
 
 		Score * getScore();
 
