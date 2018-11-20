@@ -17,7 +17,6 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-	std::cout << board.d_red << " and Black : " << board.d_black << std::endl;
 	auto safe = board.safePlace();
 	if(safe.size() > 0)
 	{
