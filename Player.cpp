@@ -28,7 +28,7 @@ void Player::generateMove(char *move)
 	}
 	else
 	{
-		std::vector<std::pair<SetBoard, std::string> > options = multi_level(1);
+		std::vector<std::pair<SetBoard, std::string> > options = multi_level(2);
 		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
 	}
 }
