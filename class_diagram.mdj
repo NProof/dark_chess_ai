@@ -673,7 +673,7 @@
 											"top": 467,
 											"width": 343,
 											"height": 13,
-											"text": "+makeMove(: std::string): void",
+											"text": "+makeMove(move: std::string): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -729,23 +729,6 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAFnG84qKO3/KoY=",
-											"_parent": {
-												"$ref": "AAAAAAFnGhWjfeAjWDI="
-											},
-											"model": {
-												"$ref": "AAAAAAFnG84pm+38+pk="
-											},
-											"font": "Arial;13;0",
-											"left": 69,
-											"top": 527,
-											"width": 343,
-											"height": 13,
-											"text": "-makeMove(mov): void",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
 											"_id": "AAAAAAFnG89ATO8LYtU=",
 											"_parent": {
 												"$ref": "AAAAAAFnGhWjfeAjWDI="
@@ -755,7 +738,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 69,
-											"top": 542,
+											"top": 527,
 											"width": 343,
 											"height": 13,
 											"text": "-getLightPieces(): std::map<char, int>",
@@ -772,10 +755,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 69,
-											"top": 557,
+											"top": 542,
 											"width": 343,
 											"height": 13,
-											"text": "-jumpTo(src, path): std::string",
+											"text": "-jumpTo(src: std::string, path: Path): std::string",
 											"horizontalAlignment": 0
 										},
 										{
@@ -789,10 +772,10 @@
 											},
 											"font": "Arial;13;0",
 											"left": 69,
-											"top": 572,
+											"top": 557,
 											"width": 343,
 											"height": 13,
-											"text": "-momentum(hig, low): bool",
+											"text": "-momentum(hig: char, low: char): bool",
 											"horizontalAlignment": 0
 										},
 										{
@@ -806,7 +789,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 69,
-											"top": 587,
+											"top": 572,
 											"width": 343,
 											"height": 13,
 											"text": "-method(): int",
@@ -823,7 +806,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 69,
-											"top": 602,
+											"top": 587,
 											"width": 343,
 											"height": 13,
 											"text": "-power(): int",
@@ -834,7 +817,7 @@
 									"left": 64,
 									"top": 462,
 									"width": 353,
-									"height": 158
+									"height": 143
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -2234,6 +2217,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFnGsshXeIUwAE="
 									},
+									"name": "move",
 									"type": "std::string"
 								},
 								{
@@ -2286,34 +2270,6 @@
 						},
 						{
 							"_type": "UMLOperation",
-							"_id": "AAAAAAFnG84pm+38+pk=",
-							"_parent": {
-								"$ref": "AAAAAAFnGhWje+Aac+w="
-							},
-							"name": "makeMove",
-							"visibility": "private",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFnG87dqO6i/f4=",
-									"_parent": {
-										"$ref": "AAAAAAFnG84pm+38+pk="
-									},
-									"name": "mov"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFnLtuxYpYaoPY=",
-									"_parent": {
-										"$ref": "AAAAAAFnG84pm+38+pk="
-									},
-									"type": "void",
-									"direction": "return"
-								}
-							]
-						},
-						{
-							"_type": "UMLOperation",
 							"_id": "AAAAAAFnG88/wu8IL+c=",
 							"_parent": {
 								"$ref": "AAAAAAFnGhWje+Aac+w="
@@ -2347,7 +2303,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFnG8967+9phRU="
 									},
-									"name": "src"
+									"name": "src",
+									"type": "std::string"
 								},
 								{
 									"_type": "UMLParameter",
@@ -2355,7 +2312,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFnG8967+9phRU="
 									},
-									"name": "path"
+									"name": "path",
+									"type": "Path"
 								},
 								{
 									"_type": "UMLParameter",
@@ -2383,7 +2341,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFnG8+qS+/FUKY="
 									},
-									"name": "hig"
+									"name": "hig",
+									"type": "char"
 								},
 								{
 									"_type": "UMLParameter",
@@ -2391,7 +2350,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFnG8+qS+/FUKY="
 									},
-									"name": "low"
+									"name": "low",
+									"type": "char"
 								},
 								{
 									"_type": "UMLParameter",
