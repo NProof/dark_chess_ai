@@ -18,7 +18,6 @@ class SetBoard
 	protected:
 
 	private:
-		std::string strMove;
 		int iDark;
 		std::map<Board, int> possibleBoards;
 };
