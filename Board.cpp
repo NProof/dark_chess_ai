@@ -3,6 +3,7 @@
 Board::Board()
 :n_red(16), n_black(16)
 ,nD_red(16), nD_black(16)
+,trun(PROTO_CLR::PCLR_UNKNOW)
 {
 	for(int i=0; i<32; i++)
 	{

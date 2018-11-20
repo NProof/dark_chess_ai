@@ -1,6 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include <cstring>
 #include <set>
 #include <map>
 #include "Protocol.h"
@@ -45,7 +46,7 @@ class Board
 
 		Score * score = NULL;
 
-		PROTO_CLR trun = PROTO_CLR::PCLR_UNKNOW;
+		PROTO_CLR trun;
 		std::map<char, int> darkPieces;
 		std::set<std::string> setCheckDark;
 		std::map<std::string, char> map_Char;
