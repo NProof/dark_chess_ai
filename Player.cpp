@@ -17,7 +17,6 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-	std::cout << board.d_red << " and Black : " << board.d_black << std::endl;
 	auto safe = board.safePlace();
 	if(safe.size() > 0)
 	{
@@ -49,23 +48,23 @@ std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 
 std::map<std::string, SetBoard> Player::next(Board board)
 {
-		std::map<std::string, SetBoard> temp;
-		std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
-		for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
-		{
-			temp.insert(std::pair<std::string, SetBoard>(
-				pairmoveIt->first+'-'+pairmoveIt->second, SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second))
-		   );
-		}
-		std::map<char, int> mapChessesDark = board.getDarkPieces();
-		std::set<std::string> setCheckDark = board.getSetCheckDark();
-		for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
-		{
-			temp.insert(std::pair<std::string, SetBoard>(
-				*setCheckDarkIt+'-'+*setCheckDarkIt, SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark))
-			);
-		}
-		return temp;
+	std::map<std::string, SetBoard> temp;
+	std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
+	for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
+	{
+		temp.insert(std::pair<std::string, SetBoard>(
+			pairmoveIt->first+'-'+pairmoveIt->second, SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second))
+	   );
+	}
+	std::map<char, int> mapChessesDark = board.getDarkPieces();
+	std::set<std::string> setCheckDark = board.getSetCheckDark();
+	for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
+	{
+		temp.insert(std::pair<std::string, SetBoard>(
+			*setCheckDarkIt+'-'+*setCheckDarkIt, SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark))
+		);
+	}
+	return temp;
 }
 
 Score Player::score(Board board, int level)
