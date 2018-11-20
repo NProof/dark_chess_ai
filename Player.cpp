@@ -74,9 +74,9 @@ Score Player::score(Board board, int level)
 {
 	if(level){
 		Score bestScore = Score::minScore;
-		for(auto mov : next(board))
+		for(auto options : next(board))
 		{
-			Score temp = -score(mov.second, level-1);
+			Score temp = -score(options.second, level-1);
 			if(temp > bestScore)
 				bestScore = temp;
 		}
@@ -87,15 +87,15 @@ Score Player::score(Board board, int level)
 	}
 }
 
-Score Player::score(SetBoard mov, int level)
+Score Player::score(SetBoard option, int level)
 {
 	Score mean;
-	std::map<Board, int> nextMov = mov.GetpossibleBoards();
+	std::map<Board, int> nextMov = option.GetpossibleBoards();
 	for(std::map<Board, int>::iterator it = nextMov.begin(); it != nextMov.end(); it++)
 	{
 		Score addend = score(it->first, level);
 		addend *= it->second;
 		mean += addend;
 	}
-	return mean /= mov.GetiDark();
+	return mean /= option.GetiDark();
 }
