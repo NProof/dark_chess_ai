@@ -20,16 +20,16 @@ void Player::generateMove(char *move)
 	std::cout << board.d_red << " and Black : " << board.d_black << std::endl;
 	if(board.d_red+board.d_black>0)
 	{
-		std::vector<SetBoard> moves;
+		std::vector<SetBoard> options;
 		for(auto ptrMove : next(board)){
-			moves.push_back(ptrMove.second);
+			options.push_back(ptrMove.second);
 		}
-		strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
+		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].getStringMove().c_str());
 	}
 	else
 	{
-		std::vector<SetBoard> moves = multi_level(1);
-		strcpy(move, (moves.empty()) ? "NAN" : moves[rand()%moves.size()].getStringMove().c_str());
+		std::vector<SetBoard> options = multi_level(1);
+		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].getStringMove().c_str());
 	}
 }
 
