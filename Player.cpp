@@ -18,17 +18,15 @@ void Player::setColor(PROTO_CLR color)
 void Player::generateMove(char *move)
 {
 	std::cout << board.d_red << " and Black : " << board.d_black << std::endl;
-	if(board.d_red+board.d_black>0)
+	auto safe = board.safePlace();
+	if(safe.size() > 0)
 	{
-		std::vector<std::pair<SetBoard, std::string> > options;
-		for(auto ptrMove : next(board)){
-			options.push_back(std::pair<SetBoard, std::string>( ptrMove.second, ptrMove.first ));
-		}
-		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
+		std::string onePosition = safe[rand()%safe.size()];
+		strcpy(move, (onePosition+"-"+onePosition).c_str());
 	}
 	else
 	{
-		std::vector<std::pair<SetBoard, std::string> > options = multi_level(1);
+		std::vector<std::pair<SetBoard, std::string> > options = multi_level(0);
 		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
 	}
 }

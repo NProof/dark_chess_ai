@@ -2,6 +2,7 @@
 #define BOARD_H
 
 #include <cstring>
+#include <vector>
 #include <set>
 #include <map>
 #include "Protocol.h"
@@ -31,6 +32,7 @@ class Board
 		int n_black;
 		int d_red;
 		int d_black;
+		std::vector<std::string> safePlace();
 	protected:
 
 	private:
