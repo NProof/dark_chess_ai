@@ -20,16 +20,16 @@ void Player::generateMove(char *move)
 	std::cout << board.d_red << " and Black : " << board.d_black << std::endl;
 	if(board.d_red+board.d_black>0)
 	{
-		std::vector<SetBoard> options;
+		std::vector<std::pair<SetBoard, std::string> > options;
 		for(auto ptrMove : next(board)){
-			options.push_back(ptrMove.second);
+			options.push_back(std::pair<SetBoard, std::string>( ptrMove.second, ptrMove.first ));
 		}
-		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].getStringMove().c_str());
+		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
 	}
 	else
 	{
-		std::vector<SetBoard> options = multi_level(1);
-		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].getStringMove().c_str());
+		std::vector<std::pair<SetBoard, std::string> > options = multi_level(1);
+		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
 	}
 }
 
@@ -38,11 +38,13 @@ bool Player::getColor()
 	return color;
 }
 
-std::vector<SetBoard> Player::multi_level(int level)
+std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 {
-	std::map<Score, std::vector<SetBoard> > mapRank;
+	std::map<Score, std::vector<std::pair<SetBoard, std::string> > > mapRank;
 	for(auto ptrMove : next(board)){
-		mapRank[score(ptrMove.second, level)].push_back(ptrMove.second);
+		mapRank[score(ptrMove.second, level)].push_back(
+			std::pair<SetBoard, std::string>(ptrMove.second, ptrMove.first)
+		);
 	}
 	return mapRank.begin()->second;
 }

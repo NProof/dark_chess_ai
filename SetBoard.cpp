@@ -35,11 +35,6 @@ bool SetBoard::operator<(const SetBoard& other) const
 	return possibleBoards < other.possibleBoards;
 }
 
-std::string SetBoard::getStringMove()
-{
-	return strMove;
-}
-
 int SetBoard::GetiDark()
 {
 	return iDark;

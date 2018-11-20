@@ -13,7 +13,6 @@ class SetBoard
 
 		bool operator<(const SetBoard& other) const;
 
-		std::string getStringMove();
 		int GetiDark();
 		std::map<Board, int> GetpossibleBoards();
 	protected:
