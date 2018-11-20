@@ -70,11 +70,6 @@ std::map<std::string, SetBoard> Player::next(Board board)
 		return temp;
 }
 
-std::map<Board, int> Player::next(SetBoard mov)
-{
-	return mov.GetpossibleBoards();
-}
-
 Score Player::score(Board board, int level)
 {
 	if(level){
@@ -94,7 +89,7 @@ Score Player::score(Board board, int level)
 
 Score Player::score(SetBoard mov, int level)
 {
-	std::map<Board, int> nextMov = next(mov);
+	std::map<Board, int> nextMov = mov.GetpossibleBoards();
 	std::map<Board, int>::iterator it = nextMov.begin();
 	Score mean = (score(it->first, level) *= it->second);
 	for(; it != nextMov.end(); it++)

@@ -242,23 +242,6 @@
 										},
 										{
 											"_type": "UMLOperationView",
-											"_id": "AAAAAAFnG8nYZemUVXU=",
-											"_parent": {
-												"$ref": "AAAAAAFnGhRN+N/5rrs="
-											},
-											"model": {
-												"$ref": "AAAAAAFnG8nYK+mR5q8="
-											},
-											"font": "Arial;13;0",
-											"left": 45,
-											"top": 168,
-											"width": 387.283203125,
-											"height": 13,
-											"text": "-next(mov: SetBoard): std::map<Board, int>",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
 											"_id": "AAAAAAFnG8oK+OpSxgo=",
 											"_parent": {
 												"$ref": "AAAAAAFnGhRN+N/5rrs="
@@ -268,7 +251,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 183,
+											"top": 168,
 											"width": 387.283203125,
 											"height": 13,
 											"text": "-score(board: Board, level: int): Score",
@@ -285,7 +268,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 198,
+											"top": 183,
 											"width": 387.283203125,
 											"height": 13,
 											"text": "-score(mov: SetBoard, level: int): Score",
@@ -296,7 +279,7 @@
 									"left": 40,
 									"top": 103,
 									"width": 397.283203125,
-									"height": 113
+									"height": 98
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -336,7 +319,7 @@
 							"left": 40,
 							"top": 40,
 							"width": 397.283203125,
-							"height": 177,
+							"height": 161,
 							"nameCompartment": {
 								"$ref": "AAAAAAFnGhRN9t/zDhA="
 							},
@@ -857,7 +840,7 @@
 							"left": 40,
 							"top": 248,
 							"width": 353,
-							"height": 356,
+							"height": 341,
 							"nameCompartment": {
 								"$ref": "AAAAAAFnGhWjfOAdEC0="
 							},
@@ -1547,7 +1530,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 244,
-									"top": 226,
+									"top": 218,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -1568,7 +1551,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 259,
-									"top": 227,
+									"top": 219,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -1589,7 +1572,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 215,
-									"top": 225,
+									"top": 217,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -1609,8 +1592,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 244,
-									"top": 237,
+									"left": 245,
+									"top": 221,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -1630,8 +1613,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 257,
-									"top": 241,
+									"left": 258,
+									"top": 225,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -1651,8 +1634,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 217,
-									"top": 231,
+									"left": 218,
+									"top": 215,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -1758,7 +1741,7 @@
 								"$ref": "AAAAAAFnGhRN9t/yhi8="
 							},
 							"lineStyle": 1,
-							"points": "231:217;229:247",
+							"points": "232:201;229:247",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFnG7mUB+KCkuQ="
@@ -1968,37 +1951,6 @@
 										"$ref": "AAAAAAFnG8myfulAGjI="
 									},
 									"type": "std::map<std::string, SetBoard>",
-									"direction": "return"
-								}
-							]
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAFnG8nYK+mR5q8=",
-							"_parent": {
-								"$ref": "AAAAAAFnGhRN8t/wRSM="
-							},
-							"name": "next",
-							"visibility": "private",
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFnG8ns8OnF9aY=",
-									"_parent": {
-										"$ref": "AAAAAAFnG8nYK+mR5q8="
-									},
-									"name": "mov",
-									"type": {
-										"$ref": "AAAAAAFnGhXEGeBE4QA="
-									}
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFnLKj5IY1e5BQ=",
-									"_parent": {
-										"$ref": "AAAAAAFnG8nYK+mR5q8="
-									},
-									"type": "std::map<Board, int>",
 									"direction": "return"
 								}
 							]
