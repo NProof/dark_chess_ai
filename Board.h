@@ -29,8 +29,8 @@ class Board
 		std::map<char, int> getLightPieces();
 		int n_red;
 		int n_black;
-		int nD_red;
-		int nD_black;
+		int d_red;
+		int d_black;
 	protected:
 
 	private:

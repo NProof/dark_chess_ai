@@ -17,8 +17,8 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-	std::cout << board.nD_red << " and Black : " << board.nD_black << std::endl;
-	if(board.nD_red+board.nD_black>0)
+	std::cout << board.d_red << " and Black : " << board.d_black << std::endl;
+	if(board.d_red+board.d_black>0)
 	{
 		std::vector<SetBoard> moves;
 		for(auto ptrMove : next(board)){

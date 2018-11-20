@@ -2,7 +2,7 @@
 
 Board::Board()
 :n_red(16), n_black(16)
-,nD_red(16), nD_black(16)
+,d_red(16), d_black(16)
 ,trun(PROTO_CLR::PCLR_UNKNOW)
 {
 	for(int i=0; i<32; i++)
@@ -105,8 +105,8 @@ void Board::makeMove(std::string move)
 	    doLight(src, move[3]);
 
 	    if(islower(move[3]))
-			nD_red--;
-		else nD_black--;
+			d_red--;
+		else d_black--;
 
 	    switch(trun){
 		case PROTO_CLR::PCLR_RED :
