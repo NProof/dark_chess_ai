@@ -7,6 +7,7 @@
 class Score
 {
 	public:
+		Score();
 		Score(int, int, int, int, int);
 		~Score();
 
