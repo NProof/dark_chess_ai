@@ -182,6 +182,34 @@ std::map<char, int> Board::getLightPieces()
 	return lightPieces;
 }
 
+std::vector<std::string> Board::safePlace()
+{
+	std::vector<std::string> safe;
+	for(auto dark : setCheckDark)
+	{
+		bool isSafe = true;
+		for(auto adj : pathTo[dark])
+			if(isLight(adj.second))
+			{
+				isSafe = false;
+				break;
+			}
+		Path allpath[] = {Path::Up, Path::Down, Path::Left, Path::Right};
+		for(Path apath : allpath)
+		{
+			std::string jumpStr = jumpTo(dark, apath);
+			if(jumpStr != "outer" && isLight(jumpStr))
+			{
+				isSafe = false;
+				break;
+			}
+		}
+		if(isSafe)
+			safe.push_back(dark);
+	}
+	return safe;
+}
+
 std::string Board::jumpTo(std::string src, Path path)
 {
 	while(this->pathTo[src].count(path)&&isEmpty(pathTo[src][path]))
