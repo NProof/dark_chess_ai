@@ -1,5 +1,9 @@
 #include "Score.h"
 
+Score::Score()
+:denominator(1)
+{}
+
 Score::Score(int n_own, int n_opp, int n_method, int n_powers, int iDark)
 {
 	this->n_own = n_own;

@@ -89,12 +89,13 @@ Score Player::score(Board board, int level)
 
 Score Player::score(SetBoard mov, int level)
 {
+	Score mean;
 	std::map<Board, int> nextMov = mov.GetpossibleBoards();
-	std::map<Board, int>::iterator it = nextMov.begin();
-	Score mean = (score(it->first, level) *= it->second);
-	for(it++; it != nextMov.end(); it++)
+	for(std::map<Board, int>::iterator it = nextMov.begin(); it != nextMov.end(); it++)
 	{
-		mean += (score(it->first, level) *= it->second);
+		Score addend = score(it->first, level);
+		addend *= it->second;
+		mean += addend;
 	}
 	return mean /= mov.GetiDark();
 }
