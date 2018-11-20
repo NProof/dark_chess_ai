@@ -55,16 +55,16 @@ std::map<std::string, SetBoard> Player::next(Board board)
 		std::set<std::pair<std::string, std::string>> mValid = board.getMoveValid();
 		for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
 		{
-			temp.insert(std::pair<std::string, SetBoard>
-			(pairmoveIt->first+'-'+pairmoveIt->second, SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second))
+			temp.insert(std::pair<std::string, SetBoard>(
+				pairmoveIt->first+'-'+pairmoveIt->second, SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second))
 		   );
 		}
 		std::map<char, int> mapChessesDark = board.getDarkPieces();
 		std::set<std::string> setCheckDark = board.getSetCheckDark();
 		for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
 		{
-			temp.insert(std::pair<std::string, SetBoard>
-			   (*setCheckDarkIt+'-'+*setCheckDarkIt, SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark))
+			temp.insert(std::pair<std::string, SetBoard>(
+				*setCheckDarkIt+'-'+*setCheckDarkIt, SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark))
 			);
 		}
 		return temp;
