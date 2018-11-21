@@ -144,7 +144,7 @@ std::map<std::string, TYPEOFMOVE> Board::SetMoveValid()
 				std::string strj = it->second;
 				if(isEmpty(strj))
 				{
-					mValid[stri + "-" + strj] = TYPEOFMOVE::EAT;
+					mValid[stri + "-" + strj] = TYPEOFMOVE::MOVE;
 				}
 				if(cho=='c'||cho=='C')
 				{
