@@ -127,9 +127,9 @@ PROTO_CLR Board::getTrun()
 	return trun;
 }
 
-std::vector<Mov> Board::SetMoveValid()
+std::vector<Mov *> Board::SetMoveValid()
 {
-	std::vector<Mov> mValid;
+	std::vector<Mov *> mValid;
 	std::map<std::string, char>::iterator light;
 	for(light=map_Char.begin(); light!=map_Char.end(); light++)
 	{
@@ -145,9 +145,9 @@ std::vector<Mov> Board::SetMoveValid()
 				if(isEmpty(strj))
 				{
 					// mValid[stri + "-" + strj] = TYPEOFMOVE::MOVE;
-					Mov temp;
-					temp.str = stri + "-" + strj;
-					temp.type = TYPEOFMOVE::MOVE;
+					Mov * temp = new Mov();
+					temp->str = stri + "-" + strj;
+					temp->type = TYPEOFMOVE::MOVE;
 					mValid.push_back(temp);
 				}
 				if(cho=='c'||cho=='C')
@@ -156,9 +156,9 @@ std::vector<Mov> Board::SetMoveValid()
 					if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
 					{
 						// mValid[stri + "-" + sJump] = TYPEOFMOVE::JUMP;
-						Mov temp;
-						temp.str = stri + "-" + sJump;
-						temp.type = TYPEOFMOVE::JUMP;
+						Mov * temp = new Mov();
+						temp->str = stri + "-" + sJump;
+						temp->type = TYPEOFMOVE::JUMP;
 						mValid.push_back(temp);
 					}
 				}
@@ -167,9 +167,9 @@ std::vector<Mov> Board::SetMoveValid()
 					if(momentum(cho, map_Char[strj]))
 					{
 						// mValid[stri + "-" + strj] = TYPEOFMOVE::EAT;
-						Mov temp;
-						temp.str = stri + "-" + strj;
-						temp.type = TYPEOFMOVE::EAT;
+						Mov * temp = new Mov();
+						temp->str = stri + "-" + strj;
+						temp->type = TYPEOFMOVE::EAT;
 						mValid.push_back(temp);
 					}
 				}

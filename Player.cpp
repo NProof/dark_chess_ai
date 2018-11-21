@@ -40,27 +40,30 @@ std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 	std::map<Score, std::vector<std::pair<SetBoard, std::string> > > mapRank;
 	for(auto ptrMove : next(board)){
 		mapRank[score(ptrMove.second, level)].push_back(
-			std::pair<SetBoard, std::string>(ptrMove.second, ptrMove.first)
+			std::pair<SetBoard, std::string>(ptrMove.second, ptrMove.first->str)
 		);
 	}
 	return mapRank.begin()->second;
 }
 
-std::map<std::string, SetBoard> Player::next(Board board)
+std::map<Mov *, SetBoard> Player::next(Board board)
 {
-	std::map<std::string, SetBoard> temp;
+	std::map<Mov *, SetBoard> temp;
 	for(auto mov : board.SetMoveValid())
 	{
-		temp.insert(std::pair<std::string, SetBoard>(
-			mov.str, SetBoard(board, mov.str))
+		temp.insert(std::pair<Mov *, SetBoard>(
+			mov, SetBoard(board, mov->str))
 		);
 	}
 	std::map<char, int> mapChessesDark = board.getDarkPieces();
 	std::set<std::string> setCheckDark = board.getSetCheckDark();
 	for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
 	{
-		temp.insert(std::pair<std::string, SetBoard>(
-			*setCheckDarkIt+'-'+*setCheckDarkIt, SetBoard(board, *setCheckDarkIt, setCheckDark.size(), mapChessesDark))
+		Mov * mov = new Mov();
+		mov->str = *setCheckDarkIt+'-'+*setCheckDarkIt;
+		mov->type = TYPEOFMOVE::FLIP;
+		temp.insert(std::pair<Mov *, SetBoard>(
+			mov, SetBoard(board, mov->str, setCheckDark.size(), mapChessesDark))
 		);
 	}
 	return temp;
