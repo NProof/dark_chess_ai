@@ -23,7 +23,7 @@ Board::Board()
 		{'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
 		,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}
 	};
-	moveValid = std::set<std::pair<std::string, std::string>>();
+	moveValid = std::set<std::pair<std::string, std::string> >();
 }
 
 Board::~Board()
@@ -133,9 +133,9 @@ std::map<TYPEOFMOVE, std::vector<std::string> > nextMoveClas()
 	return std::map<TYPEOFMOVE, std::vector<std::string> >();
 }
 
-std::set<std::pair<std::string, std::string>> Board::getMoveValid()
+std::map<TYPEOFMOVE, std::vector<std::pair<std::string, std::string> > > Board::getMoveValid()
 {
-	std::set<std::pair<std::string, std::string>> mValid;
+	std::set<std::pair<std::string, std::string> > mValid;
 	std::map<std::string, char>::iterator light;
 	for(light=map_Char.begin(); light!=map_Char.end(); light++)
 	{
