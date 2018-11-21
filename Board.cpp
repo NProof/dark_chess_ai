@@ -128,12 +128,7 @@ PROTO_CLR Board::getTrun()
 	return trun;
 }
 
-std::map<TYPEOFMOVE, std::vector<std::string> > nextMoveClas()
-{
-	return std::map<TYPEOFMOVE, std::vector<std::string> >();
-}
-
-std::map<TYPEOFMOVE, std::vector<std::pair<std::string, std::string> > > Board::getMoveValid()
+std::set<std::pair<std::string, std::string>> Board::getMoveValid()
 {
 	std::set<std::pair<std::string, std::string> > mValid;
 	std::map<std::string, char>::iterator light;
