@@ -26,6 +26,7 @@ class Board
 
 		void makeMove(std::string);
 		PROTO_CLR getTrun();
+		std::vector<std::string> GetMoveValid(TYPEOFMOVE);
 		std::map<std::string, TYPEOFMOVE> SetMoveValid();
 		std::map<char, int> getDarkPieces();
 		std::set<std::string> getSetCheckDark();
