@@ -49,7 +49,7 @@ std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 std::map<std::string, SetBoard> Player::next(Board board)
 {
 	std::map<std::string, SetBoard> temp;
-	std::set<std::pair<std::string, std::string> > mValid = board.getMoveValid();
+	std::vector<std::pair<std::string, std::string> > mValid = board.getMoveValid();
 	for(auto pairmoveIt=mValid.begin(); pairmoveIt!=mValid.end(); pairmoveIt++)
 	{
 		temp.insert(std::pair<std::string, SetBoard>(

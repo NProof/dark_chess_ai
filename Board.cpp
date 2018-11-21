@@ -23,7 +23,7 @@ Board::Board()
 		{'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
 		,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}
 	};
-	moveValid = std::set<std::pair<std::string, std::string> >();
+	moveValid = std::vector<std::pair<std::string, std::string> >();
 }
 
 Board::~Board()
@@ -128,9 +128,9 @@ PROTO_CLR Board::getTrun()
 	return trun;
 }
 
-std::set<std::pair<std::string, std::string>> Board::getMoveValid()
+std::vector<std::pair<std::string, std::string> > Board::getMoveValid()
 {
-	std::set<std::pair<std::string, std::string> > mValid;
+	std::vector<std::pair<std::string, std::string> > mValid;
 	std::map<std::string, char>::iterator light;
 	for(light=map_Char.begin(); light!=map_Char.end(); light++)
 	{
@@ -145,18 +145,18 @@ std::set<std::pair<std::string, std::string>> Board::getMoveValid()
 				std::string strj = it->second;
 				if(isEmpty(strj))
 				{
-					mValid.insert(std::pair<std::string, std::string>(stri, strj));
+					mValid.push_back(std::pair<std::string, std::string>(stri, strj));
 				}
 				if(cho=='c'||cho=='C')
 				{
 					std::string sJump = jumpTo(stri, it->first);
 					if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
-						mValid.insert(std::pair<std::string, std::string>(stri, sJump));
+						mValid.push_back(std::pair<std::string, std::string>(stri, sJump));
 				}
 				else if(isLight(strj))
 				{
 					if(momentum(cho, map_Char[strj]))
-						mValid.insert(std::pair<std::string, std::string>(stri, strj));
+						mValid.push_back(std::pair<std::string, std::string>(stri, strj));
 				}
 			}
 		}

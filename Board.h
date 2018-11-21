@@ -26,7 +26,8 @@ class Board
 
 		void makeMove(std::string);
 		PROTO_CLR getTrun();
-		std::set<std::pair<std::string, std::string>> getMoveValid();std::map<char, int> getDarkPieces();
+		std::vector<std::pair<std::string, std::string> > getMoveValid();
+		std::map<char, int> getDarkPieces();
 		std::set<std::string> getSetCheckDark();
 		std::map<char, int> getLightPieces();
 		int n_red;
@@ -53,7 +54,7 @@ class Board
 		std::map<char, int> darkPieces;
 		std::set<std::string> setCheckDark;
 		std::map<std::string, char> map_Char;
-		std::set<std::pair<std::string, std::string> > moveValid;
+		std::vector<std::pair<std::string, std::string> > moveValid;
 		std::map<std::string, std::map<Path, std::string> > pathTo;
 };
 
