@@ -22,8 +22,8 @@ void Player::generateMove(char *move)
 	{
 		std::string onePosition = safe[rand()%safe.size()];
 		strcpy(move, (onePosition+"-"+onePosition).c_str());
+		return;
 	}
-	else
 	{
 		std::vector<std::pair<SetBoard, std::string> > options = multi_level(0);
 		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
