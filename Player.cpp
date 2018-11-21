@@ -49,10 +49,10 @@ std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 std::map<std::string, SetBoard> Player::next(Board board)
 {
 	std::map<std::string, SetBoard> temp;
-	for(std::string mov : board.getMoveValid())
+	for(auto mov : board.SetMoveValid())
 	{
 		temp.insert(std::pair<std::string, SetBoard>(
-			mov, SetBoard(board, mov))
+			mov.first, SetBoard(board, mov.first))
 		);
 	}
 	std::map<char, int> mapChessesDark = board.getDarkPieces();
