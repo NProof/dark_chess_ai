@@ -52,7 +52,7 @@ std::map<std::string, SetBoard> Player::next(Board board)
 	for(auto mov : board.SetMoveValid())
 	{
 		temp.insert(std::pair<std::string, SetBoard>(
-			mov.first, SetBoard(board, mov.first))
+			mov.str, SetBoard(board, mov.str))
 		);
 	}
 	std::map<char, int> mapChessesDark = board.getDarkPieces();

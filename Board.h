@@ -12,6 +12,12 @@ enum class Path{Up, Down, Left, Right};
 
 enum class TYPEOFMOVE{FLIP, EAT, JUMP, MOVE};
 
+struct Mov
+{
+	std::string str;
+	TYPEOFMOVE type;
+};
+
 class Board
 {
 	public:
@@ -26,7 +32,7 @@ class Board
 
 		void makeMove(std::string);
 		PROTO_CLR getTrun();
-		std::map<std::string, TYPEOFMOVE> SetMoveValid();
+		std::vector<Mov> SetMoveValid();
 		std::map<char, int> getDarkPieces();
 		std::set<std::string> getSetCheckDark();
 		std::map<char, int> getLightPieces();
@@ -54,7 +60,7 @@ class Board
 		std::map<char, int> darkPieces;
 		std::set<std::string> setCheckDark;
 		std::map<std::string, char> map_Char;
-		std::map<std::string, TYPEOFMOVE> moveValid;
+		std::vector<Mov> moveValid;
 		std::map<std::string, std::map<Path, std::string> > pathTo;
 };
 
