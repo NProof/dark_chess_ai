@@ -127,17 +127,6 @@ PROTO_CLR Board::getTrun()
 	return trun;
 }
 
-std::vector<std::string> Board::GetMoveValid(TYPEOFMOVE type)
-{
-	std::vector<std::string> moves;
-	for(auto mov : moveValid)
-	{
-		if(mov.second == type)
-			moves.push_back(mov.first);
-	}
-	return moves;
-}
-
 std::map<std::string, TYPEOFMOVE> Board::SetMoveValid()
 {
 	std::map<std::string, TYPEOFMOVE> mValid;
