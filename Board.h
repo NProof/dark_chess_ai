@@ -10,6 +10,8 @@
 
 enum class Path{Up, Down, Left, Right};
 
+enum class TYPEOFMOVE{EAT, FLIP, MOVE};
+
 class Board
 {
 	public:
