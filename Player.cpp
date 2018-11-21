@@ -54,7 +54,7 @@ std::map<std::string, SetBoard> Player::next(Board board)
 	{
 		temp.insert(std::pair<std::string, SetBoard>(
 			pairmoveIt->first+'-'+pairmoveIt->second, SetBoard(board, pairmoveIt->first+'-'+pairmoveIt->second))
-	   );
+		);
 	}
 	std::map<char, int> mapChessesDark = board.getDarkPieces();
 	std::set<std::string> setCheckDark = board.getSetCheckDark();
