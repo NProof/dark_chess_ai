@@ -712,6 +712,23 @@
 										},
 										{
 											"_type": "UMLOperationView",
+											"_id": "AAAAAAFnNQH3Tf9RAFM=",
+											"_parent": {
+												"$ref": "AAAAAAFnGhWjfeAjWDI="
+											},
+											"model": {
+												"$ref": "AAAAAAFnNQH3Dv9OZGU="
+											},
+											"font": "Arial;13;0",
+											"left": 45,
+											"top": 511,
+											"width": 334.5595703125,
+											"height": 13,
+											"text": "+GetMoveValid(: TYPEOFMOVE): std::vector<std::string>",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
 											"_id": "AAAAAAFnNPlVM/60HkQ=",
 											"_parent": {
 												"$ref": "AAAAAAFnGhWjfeAjWDI="
@@ -721,7 +738,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 511,
+											"top": 526,
 											"width": 334.5595703125,
 											"height": 13,
 											"text": "+SetMoveValid(): std::map<std::string, TYPEOFMOVE>",
@@ -738,7 +755,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 526,
+											"top": 541,
 											"width": 334.5595703125,
 											"height": 13,
 											"text": "-getLightPieces(): std::map<char, int>",
@@ -755,7 +772,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 541,
+											"top": 556,
 											"width": 334.5595703125,
 											"height": 13,
 											"text": "-jumpTo(src: std::string, path: Path): std::string",
@@ -772,7 +789,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 556,
+											"top": 571,
 											"width": 334.5595703125,
 											"height": 13,
 											"text": "-momentum(hig: char, low: char): bool",
@@ -789,7 +806,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 571,
+											"top": 586,
 											"width": 334.5595703125,
 											"height": 13,
 											"text": "-method(): int",
@@ -806,7 +823,7 @@
 											},
 											"font": "Arial;13;0",
 											"left": 45,
-											"top": 586,
+											"top": 601,
 											"width": 334.5595703125,
 											"height": 13,
 											"text": "-power(): int",
@@ -817,7 +834,7 @@
 									"left": 40,
 									"top": 446,
 									"width": 344.5595703125,
-									"height": 158
+									"height": 173
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -857,7 +874,7 @@
 							"left": 40,
 							"top": 248,
 							"width": 344.5595703125,
-							"height": 356,
+							"height": 371,
 							"nameCompartment": {
 								"$ref": "AAAAAAFnGhWjfOAdEC0="
 							},
@@ -2233,6 +2250,33 @@
 										"$ref": "AAAAAAFnG82a6+z2cvE="
 									},
 									"type": "Score *",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAFnNQH3Dv9OZGU=",
+							"_parent": {
+								"$ref": "AAAAAAFnGhWje+Aac+w="
+							},
+							"name": "GetMoveValid",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFnNQ08XgAYsOw=",
+									"_parent": {
+										"$ref": "AAAAAAFnNQH3Dv9OZGU="
+									},
+									"type": "TYPEOFMOVE"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAFnNQJGu/9w+ZM=",
+									"_parent": {
+										"$ref": "AAAAAAFnNQH3Dv9OZGU="
+									},
+									"type": "std::vector<std::string>",
 									"direction": "return"
 								}
 							]
