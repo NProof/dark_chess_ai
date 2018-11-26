@@ -8,8 +8,6 @@
 #include "Score.h"
 #include "SetBoard.h"
 
-enum class TYPEOFMOVE;
-
 class Player
 {
 	public:
