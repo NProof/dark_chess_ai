@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	this->board = Board();
+	
 }
 
 Player::~Player()
@@ -17,7 +17,7 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
-	auto safe = board.safePlace();
+	auto safe = board->safePlace();
 	if(safe.size() > 0)
 	{
 		std::string onePosition = safe[rand()%safe.size()];
@@ -38,7 +38,7 @@ bool Player::getColor()
 std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 {
 	std::map<Score, std::vector<std::pair<SetBoard, std::string> > > mapRank;
-	for(auto ptrMove : next(board)){
+	for(auto ptrMove : next(*board)){
 		mapRank[score(ptrMove.second, level)].push_back(
 			std::pair<SetBoard, std::string>(ptrMove.second, ptrMove.first->str)
 		);
@@ -82,7 +82,7 @@ Score Player::score(Board board, int level)
 		return bestScore;
 	}
 	else{
-		return *board.getScore();
+		return *(board.getScore());
 	}
 }
 

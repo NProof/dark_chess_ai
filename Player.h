@@ -21,7 +21,7 @@ class Player
 
 		bool getColor();
 
-		Board board;
+		Board * board;
 	protected:
 
 	private:

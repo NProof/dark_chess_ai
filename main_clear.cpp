@@ -27,7 +27,9 @@ int main(int argc , char **argv)
 	if(argc==3||argc==2)
 	{
 		protocol.init_board(piece_count, current_position, history,time);
+		Board board;
 		Player player;
+		player.board = &board;
 
 		if(history.number_of_moves != 0)
 		{
@@ -52,9 +54,9 @@ int main(int argc , char **argv)
 				color = protocol.get_color(move);
 				player.setColor(color);
 			}
-			player.board.makeMove(std::string(move));
+			board.makeMove(std::string(move));
 			protocol.recv(move,time);
-			player.board.makeMove(std::string(move));
+			board.makeMove(std::string(move));
 		}
 		else
 		{
@@ -64,7 +66,7 @@ int main(int argc , char **argv)
 				color = (protocol.get_color(move)==PCLR_BLACK)? PCLR_RED : PCLR_BLACK;
 				player.setColor(color);
 			}
-			player.board.makeMove(std::string(move));
+			board.makeMove(std::string(move));
 		}
 
 		while(1)
@@ -72,9 +74,9 @@ int main(int argc , char **argv)
 			player.generateMove(move);
 			protocol.send(move);
 			protocol.recv(move,time);
-			player.board.makeMove(std::string(move));
+			board.makeMove(std::string(move));
 			protocol.recv(move,time);
-			player.board.makeMove(std::string(move));
+			board.makeMove(std::string(move));
 		}
 	}
 	return 0;
