@@ -144,7 +144,6 @@ std::vector<Mov *> Board::SetMoveValid()
 				std::string strj = it->second;
 				if(isEmpty(strj))
 				{
-					// mValid[stri + "-" + strj] = TYPEOFMOVE::MOVE;
 					Mov * temp = new Mov();
 					temp->str = stri + "-" + strj;
 					temp->type = TYPEOFMOVE::MOVE;
@@ -155,7 +154,6 @@ std::vector<Mov *> Board::SetMoveValid()
 					std::string sJump = jumpTo(stri, it->first);
 					if(isLight(sJump)&&momentum(cho, map_Char[sJump]))
 					{
-						// mValid[stri + "-" + sJump] = TYPEOFMOVE::JUMP;
 						Mov * temp = new Mov();
 						temp->str = stri + "-" + sJump;
 						temp->type = TYPEOFMOVE::JUMP;
@@ -166,7 +164,6 @@ std::vector<Mov *> Board::SetMoveValid()
 				{
 					if(momentum(cho, map_Char[strj]))
 					{
-						// mValid[stri + "-" + strj] = TYPEOFMOVE::EAT;
 						Mov * temp = new Mov();
 						temp->str = stri + "-" + strj;
 						temp->type = TYPEOFMOVE::EAT;
