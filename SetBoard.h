@@ -4,6 +4,8 @@
 #include <iostream>
 #include "Board.h"
 
+class Board;
+
 class SetBoard
 {
 	public:

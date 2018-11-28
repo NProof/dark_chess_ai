@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "Protocol.h"
 #include "Player.h"
+#include "NBoard.h"
 
 int main(int argc , char **argv)
 {
@@ -27,7 +28,7 @@ int main(int argc , char **argv)
 	if(argc==3||argc==2)
 	{
 		protocol.init_board(piece_count, current_position, history,time);
-		Board board;
+		NBoard board;
 		Player player;
 		player.board = &board;
 

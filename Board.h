@@ -6,7 +6,10 @@
 #include <set>
 #include <map>
 #include "Protocol.h"
+#include "SetBoard.h"
 #include "Score.h"
+
+class SetBoard;
 
 enum class Path{Up, Down, Left, Right};
 
@@ -30,6 +33,7 @@ class Board
 
 		Score * getScore();
 
+		std::map<Mov *, SetBoard> next();
 		void makeMove(std::string);
 		PROTO_CLR getTrun();
 		std::vector<Mov *> SetMoveValid();
@@ -41,9 +45,9 @@ class Board
 		int d_red;
 		int d_black;
 		std::vector<std::string> safePlace();
-	protected:
+	// protected:
 
-	private:
+	// private:
 		std::string jumpTo(std::string, Path);
 		bool momentum(char, char);
 		bool isDark(std::string);

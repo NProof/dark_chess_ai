@@ -6,7 +6,6 @@
 #include "Protocol.h"
 #include "Board.h"
 #include "Score.h"
-#include "SetBoard.h"
 
 class Player
 {
