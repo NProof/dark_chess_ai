@@ -60,7 +60,6 @@ class NBoard : public Board
 		bool isomorphism_kinds();
 		bool isomorphism_piece();
 		
-		PROTO_CLR trun;
 		unsigned int own_l:5; //(Light Own)
 		unsigned int own_d:5; //(Dark Own)
 		unsigned int opp_l:5; // (Light Opp)

@@ -35,8 +35,10 @@ class Board
 
 		std::map<Mov *, SetBoard> next();
 		void makeMove(std::string);
-		PROTO_CLR getTrun();
+		
+		PROTO_CLR getTurn();
 		std::vector<Mov *> SetMoveValid();
+		std::map<char, int> light;
 		std::map<char, int> getLightPieces();
 		int n_red;
 		int n_black;
@@ -58,7 +60,7 @@ class Board
 
 		Score * score = NULL;
 
-		PROTO_CLR trun;
+		PROTO_CLR turn;
 		std::map<char, int> darkPieces;
 		std::set<std::string> setCheckDark;
 		std::map<std::string, char> map_Char;

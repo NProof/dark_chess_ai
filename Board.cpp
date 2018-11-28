@@ -3,7 +3,7 @@
 Board::Board()
 :n_red(16), n_black(16)
 ,d_red(16), d_black(16)
-,trun(PROTO_CLR::PCLR_UNKNOW)
+,turn(PROTO_CLR::PCLR_UNKNOW)
 {
 	for(int i=0; i<32; i++)
 	{
@@ -33,8 +33,8 @@ Board::~Board()
 
 bool Board::operator<(const Board& other) const
 {
-	if(trun != other.trun)
-		return trun < other.trun;
+	if(turn != other.turn)
+		return turn < other.turn;
 	if(n_red != other.n_red)
 		return n_red < other.n_red;
 	if(n_black != other.n_black)
@@ -62,7 +62,7 @@ Score * Board::getScore()
 {
 	if(score == NULL)
 	{
-		if(trun == PROTO_CLR::PCLR_RED)
+		if(turn == PROTO_CLR::PCLR_RED)
 		   score = new Score(n_red, n_black, method(), powers(), 1);
 		else
 		   score = new Score(n_black, n_red, method(), powers(), 1);
@@ -109,12 +109,12 @@ void Board::makeMove(std::string move)
 		map_Char[dst] = map_Char[src];
 		map_Char.erase(src);
 
-		switch(trun){
+		switch(turn){
 		case PROTO_CLR::PCLR_RED :
-			trun = PROTO_CLR::PCLR_BLACK;
+			turn = PROTO_CLR::PCLR_BLACK;
 			break;
 		case PROTO_CLR::PCLR_BLACK :
-			trun = PROTO_CLR::PCLR_RED;
+			turn = PROTO_CLR::PCLR_RED;
 			break;
 		case PROTO_CLR::PCLR_UNKNOW :
 			exit(9);
@@ -128,24 +128,24 @@ void Board::makeMove(std::string move)
 			d_black--;
 		else d_red--;
 
-	    switch(trun){
+	    switch(turn){
 		case PROTO_CLR::PCLR_RED :
-			trun = PROTO_CLR::PCLR_BLACK;
+			turn = PROTO_CLR::PCLR_BLACK;
 			break;
 		case PROTO_CLR::PCLR_BLACK :
-			trun = PROTO_CLR::PCLR_RED;
+			turn = PROTO_CLR::PCLR_RED;
 			break;
 		case PROTO_CLR::PCLR_UNKNOW :
-			trun = !islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
+			turn = !islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
 			break;
 		};
 	}
 	moveValid = SetMoveValid();
 }
 
-PROTO_CLR Board::getTrun()
+PROTO_CLR Board::getTurn()
 {
-	return trun;
+	return turn;
 }
 
 std::vector<Mov *> Board::SetMoveValid()
@@ -157,7 +157,7 @@ std::vector<Mov *> Board::SetMoveValid()
 		std::string stri = light->first;
 		char cho = light->second;
 		bool color = islower(cho);
-		if( (trun == PROTO_CLR::PCLR_UNKNOW) ? false : ((trun == PROTO_CLR::PCLR_RED) == color) )
+		if( (turn == PROTO_CLR::PCLR_UNKNOW) ? false : ((turn == PROTO_CLR::PCLR_RED) == color) )
 		{
 			std::map<Path, std::string>::iterator it;
 			for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
@@ -316,7 +316,7 @@ int Board::powers()
 		+light['c']*(light['P']) // -light['K']-light['G']-light['M']-light['R']-light['N'])
 		+light['p']*(light['K']-light['G']-light['M']-light['R']-light['N']-light['C'])
 	);
-	switch(getTrun()){
+	switch(getTurn()){
 	case PROTO_CLR::PCLR_RED:
 		return val;
 	case PROTO_CLR::PCLR_BLACK:

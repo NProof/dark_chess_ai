@@ -2,7 +2,6 @@
 
 NBoard::NBoard()
 :Board()
-,trun(PROTO_CLR::PCLR_UNKNOW)
 ,own_l(0), opp_l(0), own_d(16), opp_d(16)
 {
 	owndk.k = 1;
@@ -29,7 +28,7 @@ int NBoard::indexOfStr(string str)
 
 bool NBoard::isomorphism_number()
 {
-	cout << "Board::trun : " << Board::trun << endl;
+	cout << "Board::turn : " << Board::turn << endl;
 	cout << "Board::n_red : " << Board::n_red << endl;
 	cout << "Board::n_black : " << Board::n_black << endl;
 	cout << "Board::d_red : " << Board::d_red << endl;
@@ -40,19 +39,19 @@ bool NBoard::isomorphism_number()
 	cout << "opp_d : " << opp_d << endl;
 	cout << " --- " << endl;
 	
-	if(Board::trun == PROTO_CLR::PCLR_UNKNOW)
+	if(Board::turn == PROTO_CLR::PCLR_UNKNOW)
 	{
 		assert(own_d == 16);
 		assert(opp_d == 16);
 	}
-	else if(Board::trun != PROTO_CLR::PCLR_RED)
+	else if(Board::turn != PROTO_CLR::PCLR_RED)
 	{
 		assert(own_l + own_d == Board::n_red);
 		assert(own_d == Board::d_black);
 		assert(opp_l + opp_d == Board::n_black);
 		assert(opp_d == Board::d_red);
 	}
-	else if(Board::trun != PROTO_CLR::PCLR_BLACK)
+	else if(Board::turn != PROTO_CLR::PCLR_BLACK)
 	{
 		assert(own_l + own_d == Board::n_black);
 		assert(own_d == Board::d_red);
@@ -64,14 +63,14 @@ bool NBoard::isomorphism_number()
 
 bool NBoard::isomorphism_kinds()
 {
-	if(Board::trun == PROTO_CLR::PCLR_UNKNOW)
+	if(Board::turn == PROTO_CLR::PCLR_UNKNOW)
 	{}
 	else
 	{
 		Kinds ownTestDKinds, oppTestDKinds;
 		for(auto typeInt : Board::darkPieces)
 		{
-			if(islower(typeInt.first) == (trun == PROTO_CLR::PCLR_RED))
+			if(islower(typeInt.first) == (turn == PROTO_CLR::PCLR_RED))
 			{
 				switch(typeInt.first)
 				{
@@ -117,7 +116,7 @@ bool NBoard::isomorphism_kinds()
 		Kinds ownTestKinds, oppTestKinds;
 		for(auto chaU : Board::map_Char)
 		{
-			if(islower(chaU.second) == (trun == PROTO_CLR::PCLR_RED))
+			if(islower(chaU.second) == (turn == PROTO_CLR::PCLR_RED))
 			{
 				switch(chaU.second)
 				{
@@ -169,7 +168,7 @@ bool NBoard::isomorphism_piece()
 	for(auto chaU : Board::map_Char)
 	{
 		int index = indexOfStr(chaU.first);
-		if(islower(chaU.second) == (trun == PROTO_CLR::PCLR_RED))
+		if(islower(chaU.second) == (turn == PROTO_CLR::PCLR_RED))
 		{
 			ownTest ^= (1<<index);
 		}	
