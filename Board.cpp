@@ -70,6 +70,29 @@ Score * Board::getScore()
 	return score;
 }
 
+std::map<Mov *, SetBoard> Board::next()
+{
+	std::map<Mov *, SetBoard> temp;
+	for(auto mov : SetMoveValid())
+	{
+		temp.insert(std::pair<Mov *, SetBoard>(
+			mov, SetBoard(*this, mov->str))
+		);
+	}
+	std::map<char, int> mapChessesDark = getDarkPieces();
+	std::set<std::string> setCheckDark = getSetCheckDark();
+	for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
+	{
+		Mov * mov = new Mov();
+		mov->str = *setCheckDarkIt+'-'+*setCheckDarkIt;
+		mov->type = TYPEOFMOVE::FLIP;
+		temp.insert(std::pair<Mov *, SetBoard>(
+			mov, SetBoard(*this, mov->str, setCheckDark.size(), mapChessesDark))
+		);
+	}
+	return temp;
+}
+
 void Board::makeMove(std::string move)
 {
 	std::string src, dst;

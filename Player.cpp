@@ -48,25 +48,7 @@ std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 
 std::map<Mov *, SetBoard> Player::next(Board board)
 {
-	std::map<Mov *, SetBoard> temp;
-	for(auto mov : board.SetMoveValid())
-	{
-		temp.insert(std::pair<Mov *, SetBoard>(
-			mov, SetBoard(board, mov->str))
-		);
-	}
-	std::map<char, int> mapChessesDark = board.getDarkPieces();
-	std::set<std::string> setCheckDark = board.getSetCheckDark();
-	for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
-	{
-		Mov * mov = new Mov();
-		mov->str = *setCheckDarkIt+'-'+*setCheckDarkIt;
-		mov->type = TYPEOFMOVE::FLIP;
-		temp.insert(std::pair<Mov *, SetBoard>(
-			mov, SetBoard(board, mov->str, setCheckDark.size(), mapChessesDark))
-		);
-	}
-	return temp;
+	return board.next();
 }
 
 Score Player::score(Board board, int level)
