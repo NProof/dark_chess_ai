@@ -79,15 +79,13 @@ std::map<Mov *, SetBoard> Board::next()
 			mov, SetBoard(*this, mov->str))
 		);
 	}
-	std::map<char, int> mapChessesDark = getDarkPieces();
-	std::set<std::string> setCheckDark = getSetCheckDark();
 	for(auto setCheckDarkIt=setCheckDark.begin(); setCheckDarkIt!=setCheckDark.end(); setCheckDarkIt++)
 	{
 		Mov * mov = new Mov();
 		mov->str = *setCheckDarkIt+'-'+*setCheckDarkIt;
 		mov->type = TYPEOFMOVE::FLIP;
 		temp.insert(std::pair<Mov *, SetBoard>(
-			mov, SetBoard(*this, mov->str, setCheckDark.size(), mapChessesDark))
+			mov, SetBoard(*this, mov->str, setCheckDark.size(), darkPieces))
 		);
 	}
 	return temp;
@@ -197,16 +195,6 @@ std::vector<Mov *> Board::SetMoveValid()
 		}
 	}
 	return mValid;
-}
-
-std::map<char, int> Board::getDarkPieces()
-{
-	return darkPieces;
-}
-
-std::set<std::string> Board::getSetCheckDark()
-{
-	return setCheckDark;
 }
 
 std::map<char, int> Board::getLightPieces()
