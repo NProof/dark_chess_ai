@@ -10,6 +10,11 @@ Player::~Player()
 	//dtor
 }
 
+bool Player::getColor()
+{
+	return color;
+}
+
 void Player::setColor(PROTO_CLR color)
 {
 	this->color = color ; // =islower()
@@ -28,11 +33,6 @@ void Player::generateMove(char *move)
 		std::vector<std::pair<SetBoard, std::string> > options = multi_level(0);
 		strcpy(move, (options.empty()) ? "NAN" : options[rand()%options.size()].second.c_str());
 	}
-}
-
-bool Player::getColor()
-{
-	return color;
 }
 
 std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
