@@ -45,9 +45,9 @@ class Board
 		int d_red;
 		int d_black;
 		std::vector<std::string> safePlace();
-	protected:
+	// protected:
 
-	private:
+	// private:
 		std::string jumpTo(std::string, Path);
 		bool momentum(char, char);
 		bool isDark(std::string);
