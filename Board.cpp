@@ -3,7 +3,7 @@
 Board::Board()
 :n_red(16), n_black(16)
 ,d_red(16), d_black(16)
-,turn(PROTO_CLR::PCLR_UNKNOW)
+,turnPlay(PROTO_CLR::PCLR_UNKNOW)
 {
 	for(int i=0; i<32; i++)
 	{
@@ -22,7 +22,7 @@ Board::Board()
 	darkPieces = std::map<char, int> {
 		{'k',1},{'g',2},{'m',2},{'r',2},{'n',2},{'c',2},{'p',5}
 		,{'K',1},{'G',2},{'M',2},{'R',2},{'N',2},{'C',2},{'P',5}
-	};	
+	};
 }
 
 Board::~Board()
@@ -33,8 +33,8 @@ Board::~Board()
 
 bool Board::operator<(const Board& other) const
 {
-	if(turn != other.turn)
-		return turn < other.turn;
+	if(turnPlay != other.turnPlay)
+		return turnPlay < other.turnPlay;
 	if(n_red != other.n_red)
 		return n_red < other.n_red;
 	if(n_black != other.n_black)
@@ -62,7 +62,7 @@ Score * Board::getScore()
 {
 	if(score == NULL)
 	{
-		if(turn == PROTO_CLR::PCLR_RED)
+		if(turnPlay == PROTO_CLR::PCLR_RED)
 		   score = new Score(n_red, n_black, method(), powers(), 1);
 		else
 		   score = new Score(n_black, n_red, method(), powers(), 1);
@@ -109,12 +109,12 @@ void Board::makeMove(std::string move)
 		map_Char[dst] = map_Char[src];
 		map_Char.erase(src);
 
-		switch(turn){
+		switch(turnPlay){
 		case PROTO_CLR::PCLR_RED :
-			turn = PROTO_CLR::PCLR_BLACK;
+			turnPlay = PROTO_CLR::PCLR_BLACK;
 			break;
 		case PROTO_CLR::PCLR_BLACK :
-			turn = PROTO_CLR::PCLR_RED;
+			turnPlay = PROTO_CLR::PCLR_RED;
 			break;
 		case PROTO_CLR::PCLR_UNKNOW :
 			exit(9);
@@ -128,24 +128,24 @@ void Board::makeMove(std::string move)
 			d_black--;
 		else d_red--;
 
-	    switch(turn){
+	    switch(turnPlay){
 		case PROTO_CLR::PCLR_RED :
-			turn = PROTO_CLR::PCLR_BLACK;
+			turnPlay = PROTO_CLR::PCLR_BLACK;
 			break;
 		case PROTO_CLR::PCLR_BLACK :
-			turn = PROTO_CLR::PCLR_RED;
+			turnPlay = PROTO_CLR::PCLR_RED;
 			break;
 		case PROTO_CLR::PCLR_UNKNOW :
-			turn = !islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
+			turnPlay = !islower(move[3]) ? PROTO_CLR::PCLR_RED : PROTO_CLR::PCLR_BLACK ;
 			break;
 		};
 	}
 	moveValid = SetMoveValid();
 }
 
-PROTO_CLR Board::getTurn()
+PROTO_CLR Board::getturnPlay()
 {
-	return turn;
+	return turnPlay;
 }
 
 std::vector<Mov *> Board::SetMoveValid()
@@ -157,7 +157,7 @@ std::vector<Mov *> Board::SetMoveValid()
 		std::string stri = light->first;
 		char cho = light->second;
 		bool color = islower(cho);
-		if( (turn == PROTO_CLR::PCLR_UNKNOW) ? false : ((turn == PROTO_CLR::PCLR_RED) == color) )
+		if( (turnPlay == PROTO_CLR::PCLR_UNKNOW) ? false : ((turnPlay == PROTO_CLR::PCLR_RED) == color) )
 		{
 			std::map<Path, std::string>::iterator it;
 			for(it=pathTo[stri].begin(); it!=pathTo[stri].end(); it++)
@@ -316,7 +316,7 @@ int Board::powers()
 		+light['c']*(light['P']) // -light['K']-light['G']-light['M']-light['R']-light['N'])
 		+light['p']*(light['K']-light['G']-light['M']-light['R']-light['N']-light['C'])
 	);
-	switch(getTurn()){
+	switch(getturnPlay()){
 	case PROTO_CLR::PCLR_RED:
 		return val;
 	case PROTO_CLR::PCLR_BLACK:

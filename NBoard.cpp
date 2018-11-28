@@ -28,7 +28,7 @@ int NBoard::indexOfStr(string str)
 
 void NBoard::isomorphism_number()
 {
-	cout << "Board::turn : " << Board::turn << endl;
+	cout << "Board::turnPlay : " << Board::turnPlay << endl;
 	cout << "Board::n_red : " << Board::n_red << endl;
 	cout << "Board::n_black : " << Board::n_black << endl;
 	cout << "Board::d_red : " << Board::d_red << endl;
@@ -39,19 +39,19 @@ void NBoard::isomorphism_number()
 	cout << "opp_d : " << opp_d << endl;
 	cout << " --- " << endl;
 
-	if(Board::turn == PROTO_CLR::PCLR_UNKNOW)
+	if(Board::turnPlay == PROTO_CLR::PCLR_UNKNOW)
 	{
 		assert(own_d == 16);
 		assert(opp_d == 16);
 	}
-	else if(Board::turn != PROTO_CLR::PCLR_RED)
+	else if(Board::turnPlay != PROTO_CLR::PCLR_RED)
 	{
 		assert(own_l + own_d == Board::n_red);
 		assert(own_d == Board::d_black);
 		assert(opp_l + opp_d == Board::n_black);
 		assert(opp_d == Board::d_red);
 	}
-	else if(Board::turn != PROTO_CLR::PCLR_BLACK)
+	else if(Board::turnPlay != PROTO_CLR::PCLR_BLACK)
 	{
 		assert(own_l + own_d == Board::n_black);
 		assert(own_d == Board::d_red);
@@ -63,14 +63,14 @@ void NBoard::isomorphism_number()
 
 void NBoard::isomorphism_kinds()
 {
-	if(Board::turn == PROTO_CLR::PCLR_UNKNOW)
+	if(Board::turnPlay == PROTO_CLR::PCLR_UNKNOW)
 	{}
 	else
 	{
 		Kinds ownTestDKinds, oppTestDKinds;
 		for(auto typeInt : Board::darkPieces)
 		{
-			if(islower(typeInt.first) == (turn == PROTO_CLR::PCLR_RED))
+			if(islower(typeInt.first) == (turnPlay == PROTO_CLR::PCLR_RED))
 			{
 				switch(typeInt.first)
 				{
@@ -116,7 +116,7 @@ void NBoard::isomorphism_kinds()
 		Kinds ownTestKinds, oppTestKinds;
 		for(auto chaU : Board::map_Char)
 		{
-			if(islower(chaU.second) == (turn == PROTO_CLR::PCLR_RED))
+			if(islower(chaU.second) == (turnPlay == PROTO_CLR::PCLR_RED))
 			{
 				switch(chaU.second)
 				{
@@ -168,7 +168,7 @@ void NBoard::isomorphism_piece()
 	for(auto chaU : Board::map_Char)
 	{
 		int index = indexOfStr(chaU.first);
-		if(islower(chaU.second) == (turn == PROTO_CLR::PCLR_RED))
+		if(islower(chaU.second) == (turnPlay == PROTO_CLR::PCLR_RED))
 		{
 			ownTest ^= (1<<index);
 		}
