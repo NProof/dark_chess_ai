@@ -104,8 +104,8 @@ void Board::makeMove(std::string move)
 		if(map_Char.count(dst))
 		{
 			if(islower(map_Char[dst]))
-				n_red--;
-			else n_black--;
+				n_black--;
+			else n_red--;
 		}
 
 		map_Char[dst] = map_Char[src];
@@ -127,8 +127,8 @@ void Board::makeMove(std::string move)
 	    doLight(src, move[3]);
 
 	    if(islower(move[3]))
-			d_red--;
-		else d_black--;
+			d_black--;
+		else d_red--;
 
 	    switch(trun){
 		case PROTO_CLR::PCLR_RED :

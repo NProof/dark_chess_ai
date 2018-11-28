@@ -2,7 +2,8 @@
 
 NBoard::NBoard()
 :Board()
-,own_d(16), opp_d(16)
+,trun(PROTO_CLR::PCLR_UNKNOW)
+,own_l(0), opp_l(0), own_d(16), opp_d(16)
 {
 	owndk.k = 1;
 	owndk.g = 2;
@@ -21,21 +22,6 @@ NBoard::NBoard()
 	oppdk.p = 5;
 }
 
-void NBoard::makeMove(std::string move)
-{
-	Board::makeMove(move);
-	std::string src = move.substr(0, 2);
-	if(move[2] == '-')
-	{
-		std::string dst = move.substr(3,2);
-	}
-	else
-	{
-		
-	}
-	// isomorphism_number();
-}
-
 int NBoard::indexOfStr(string str)
 {
 	return ( 'd' - str[0] ) + 4 * ( '8' - str[1] );
@@ -43,24 +29,35 @@ int NBoard::indexOfStr(string str)
 
 bool NBoard::isomorphism_number()
 {
+	cout << "Board::trun : " << Board::trun << endl;
+	cout << "Board::n_red : " << Board::n_red << endl;
+	cout << "Board::n_black : " << Board::n_black << endl;
+	cout << "Board::d_red : " << Board::d_red << endl;
+	cout << "Board::d_black : " << Board::d_black << endl;
+	cout << "own_l : " << own_l << endl;
+	cout << "own_d : " << own_d << endl;
+	cout << "opp_l : " << opp_l << endl;
+	cout << "opp_d : " << opp_d << endl;
+	cout << " --- " << endl;
+	
 	if(Board::trun == PROTO_CLR::PCLR_UNKNOW)
 	{
 		assert(own_d == 16);
 		assert(opp_d == 16);
 	}
-	else if(Board::trun == PROTO_CLR::PCLR_RED)
+	else if(Board::trun != PROTO_CLR::PCLR_RED)
 	{
 		assert(own_l + own_d == Board::n_red);
-		assert(own_d == Board::n_black);
-		assert(opp_l + opp_d == Board::d_red);
-		assert(opp_d == Board::d_black);
+		assert(own_d == Board::d_black);
+		assert(opp_l + opp_d == Board::n_black);
+		assert(opp_d == Board::d_red);
 	}
-	else if(Board::trun == PROTO_CLR::PCLR_BLACK)
+	else if(Board::trun != PROTO_CLR::PCLR_BLACK)
 	{
 		assert(own_l + own_d == Board::n_black);
-		assert(own_d == Board::n_red);
-		assert(opp_l + opp_d == Board::d_black);
-		assert(opp_d == Board::d_red);
+		assert(own_d == Board::d_red);
+		assert(opp_l + opp_d == Board::n_red);
+		assert(opp_d == Board::d_black);
 	}
 }
 
