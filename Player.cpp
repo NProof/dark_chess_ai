@@ -2,7 +2,7 @@
 
 Player::Player()
 {
-	
+
 }
 
 Player::~Player()
@@ -38,7 +38,7 @@ bool Player::getColor()
 std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 {
 	std::map<Score, std::vector<std::pair<SetBoard, std::string> > > mapRank;
-	for(auto ptrMove : next(*board)){
+	for(auto ptrMove : board->next()){
 		mapRank[score(ptrMove.second, level)].push_back(
 			std::pair<SetBoard, std::string>(ptrMove.second, ptrMove.first->str)
 		);
@@ -46,16 +46,11 @@ std::vector<std::pair<SetBoard, std::string> > Player::multi_level(int level)
 	return mapRank.begin()->second;
 }
 
-std::map<Mov *, SetBoard> Player::next(Board board)
-{
-	return board.next();
-}
-
 Score Player::score(Board board, int level)
 {
 	if(level){
 		Score bestScore = Score::minScore;
-		for(auto options : next(board))
+		for(auto options : board.next())
 		{
 			Score temp = -score(options.second, level-1);
 			if(temp > bestScore)
