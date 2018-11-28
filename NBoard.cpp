@@ -11,7 +11,7 @@ NBoard::NBoard()
 	owndk.n = 2;
 	owndk.c = 2;
 	owndk.p = 5;
-	
+
 	oppdk.k = 1;
 	oppdk.g = 2;
 	oppdk.m = 2;
@@ -26,7 +26,7 @@ int NBoard::indexOfStr(string str)
 	return ( 'd' - str[0] ) + 4 * ( '8' - str[1] );
 }
 
-bool NBoard::isomorphism_number()
+void NBoard::isomorphism_number()
 {
 	cout << "Board::turn : " << Board::turn << endl;
 	cout << "Board::n_red : " << Board::n_red << endl;
@@ -38,7 +38,7 @@ bool NBoard::isomorphism_number()
 	cout << "opp_l : " << opp_l << endl;
 	cout << "opp_d : " << opp_d << endl;
 	cout << " --- " << endl;
-	
+
 	if(Board::turn == PROTO_CLR::PCLR_UNKNOW)
 	{
 		assert(own_d == 16);
@@ -61,7 +61,7 @@ bool NBoard::isomorphism_number()
 }
 
 
-bool NBoard::isomorphism_kinds()
+void NBoard::isomorphism_kinds()
 {
 	if(Board::turn == PROTO_CLR::PCLR_UNKNOW)
 	{}
@@ -104,7 +104,7 @@ bool NBoard::isomorphism_kinds()
 		assert(owndk.n == ownTestDKinds.n);
 		assert(owndk.c == ownTestDKinds.c);
 		assert(owndk.p == ownTestDKinds.p);
-		
+
 		assert(oppdk.k == oppTestDKinds.k);
 		assert(oppdk.g == oppTestDKinds.g);
 		assert(oppdk.m == oppTestDKinds.m);
@@ -112,7 +112,7 @@ bool NBoard::isomorphism_kinds()
 		assert(oppdk.n == oppTestDKinds.n);
 		assert(oppdk.c == oppTestDKinds.c);
 		assert(oppdk.p == oppTestDKinds.p);
-		
+
 		Kinds ownTestKinds, oppTestKinds;
 		for(auto chaU : Board::map_Char)
 		{
@@ -128,7 +128,7 @@ bool NBoard::isomorphism_kinds()
 				case 'c' : ownTestKinds.c++; break;
 				case 'p' : ownTestKinds.p++; break;
 				};
-			}	
+			}
 			else
 			{
 				switch(chaU.second)
@@ -150,7 +150,7 @@ bool NBoard::isomorphism_kinds()
 		assert(ownlk.n == ownTestKinds.n);
 		assert(ownlk.c == ownTestKinds.c);
 		assert(ownlk.p == ownTestKinds.p);
-		
+
 		assert(opplk.k == oppTestKinds.k);
 		assert(opplk.g == oppTestKinds.g);
 		assert(opplk.m == oppTestKinds.m);
@@ -161,7 +161,7 @@ bool NBoard::isomorphism_kinds()
 	}
 }
 
-bool NBoard::isomorphism_piece()
+void NBoard::isomorphism_piece()
 {
 	unsigned __int32 ownTest = 0x0;
 	unsigned __int32 oppTest = 0x0;
@@ -171,7 +171,7 @@ bool NBoard::isomorphism_piece()
 		if(islower(chaU.second) == (turn == PROTO_CLR::PCLR_RED))
 		{
 			ownTest ^= (1<<index);
-		}	
+		}
 		else
 		{
 			oppTest ^= (1<<index);
@@ -179,7 +179,7 @@ bool NBoard::isomorphism_piece()
 	}
 	assert(ownTest == ownlp);
 	assert(oppTest == opplp);
-	
+
 	unsigned __int32 darTest = 0x0;
 	for(auto pos : Board::setCheckDark)
 	{

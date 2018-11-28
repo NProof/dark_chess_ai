@@ -53,17 +53,17 @@ class NBoard : public Board
 {
 	public:
 		NBoard();
-		
+
 		int indexOfStr(string);
-		
-		bool isomorphism_number();
-		bool isomorphism_kinds();
-		bool isomorphism_piece();
-		
+
+		void isomorphism_number();
+		void isomorphism_kinds();
+		void isomorphism_piece();
+
 		unsigned int own_l:5; //(Light Own)
 		unsigned int own_d:5; //(Dark Own)
 		unsigned int opp_l:5; // (Light Opp)
-		unsigned int opp_d:5; ; // (Dark Own)
+		unsigned int opp_d:5; // (Dark Own)
 		Kinds ownlk; // (Light Own Kinds)
 		Kinds opplk; // (Light Opp Kinds)
 		Kinds owndk; // (Dark Own Kinds)
