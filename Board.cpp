@@ -87,6 +87,34 @@ void Board::makeMove(std::string move)
 	}
 }
 
+std::vector<std::string> Board::safePlace()
+{
+	std::vector<std::string> safe;
+	for(auto dark : setCheckDark)
+	{
+		bool isSafe = true;
+		for(auto adj : pathTo[dark])
+			if(isLight(adj.second))
+			{
+				isSafe = false;
+				break;
+			}
+		Path allpath[] = {Path::Up, Path::Down, Path::Left, Path::Right};
+		for(Path apath : allpath)
+		{
+			std::string jumpStr = jumpTo(dark, apath);
+			if(jumpStr != "outer" && isLight(jumpStr))
+			{
+				isSafe = false;
+				break;
+			}
+		}
+		if(isSafe)
+			safe.push_back(dark);
+	}
+	return safe;
+}
+
 std::set<std::pair<std::string, std::string>> Board::getMoveValid()
 {
     std::set<std::pair<std::string, std::string>> mValid;

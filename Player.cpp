@@ -17,6 +17,13 @@ void Player::setColor(PROTO_CLR color)
 
 void Player::generateMove(char *move)
 {
+	auto safe = board->safePlace();
+	if(safe.size() > 0)
+	{
+		std::string onePosition = safe[rand()%safe.size()];
+		strcpy(move, (onePosition+"-"+onePosition).c_str());
+		return;
+	}
     std::map<Score, std::vector<Move> > mapRank;
     for(Move * ptrMove : next(*board))
         mapRank[score(ptrMove)].push_back(*ptrMove);
