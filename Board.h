@@ -3,6 +3,7 @@
 
 #include <set>
 #include <map>
+#include <vector>
 #include "Protocol.h"
 #include "Score.h"
 
@@ -23,6 +24,9 @@ class Board
         Score * getScore();
 
         void makeMove(std::string);
+
+		std::vector<std::string> safePlace();
+
         PROTO_CLR getTrun();
         std::set<std::pair<std::string, std::string>> getMoveValid();
         std::map<char, int> getDarkPieces();
