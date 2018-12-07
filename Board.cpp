@@ -221,7 +221,7 @@ std::vector<std::string> Board::safePlace()
 		for(Path apath : allpath)
 		{
 			std::string jumpStr = jumpTo(dark, apath);
-			if(jumpStr != "outer" && isLight(jumpStr))
+			if(jumpStr != "outer" || isLight(jumpStr))
 			{
 				isSafe = false;
 				break;
